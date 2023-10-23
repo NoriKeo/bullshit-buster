@@ -9,10 +9,10 @@ window.addEventListener('load', function () {
 	canvas.height = 620;
 	startscreenhintergrund.style.width = canvas.width + 'px';
 	startscreenhintergrund.style.height = canvas.height + 'px';
-	let enemies = [];
+	let coins = [];
 	let ghosts = [];
-	let ghosts2 = [];
-	let ghosts3 = [];
+	// let ghosts2 = [];
+	// let ghosts3 = [];
 
 	let score = 0;
 	let life = 100;
@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
 		constructor() {
 			this.keys = [];
 			this.touchY = '';
-			this.touchTreshold = 30;
+			this.touchThreshold = 30;
 			window.addEventListener('keydown', (e) => {
 				if (
 					(e.key === 's' ||
@@ -64,12 +64,12 @@ window.addEventListener('load', function () {
 			window.addEventListener('touchmove', (e) => {
 				const swipeDistance = e.changedTouches[0].pageY - this.touchY;
 				if (
-					swipeDistance < -this.touchTreshold &&
+					swipeDistance < -this.touchThreshold &&
 					this.keys.indexOf('swipe up ') === -1
 				)
 					this.keys.splice(this.keys.indexOf('swipe up'), 1, 'swipe up');
 				else if (
-					swipeDistance > this.touchTreshold &&
+					swipeDistance > this.touchThreshold &&
 					this.keys.indexOf('swipe down ') === -1
 				)
 					this.keys.splice(this.keys.indexOf('swipe down'), 1, 'swipe down');
@@ -118,7 +118,7 @@ window.addEventListener('load', function () {
             context.stroke(); */
 			//context.drawImage(this.image, 0 * this.width, 0 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
 
-			//für frames animierte bewegung
+			// für frames animierte bewegung
 			context.drawImage(
 				this.image,
 				this.frameX * this.width,
@@ -132,15 +132,15 @@ window.addEventListener('load', function () {
 			);
 			this.shoot();
 		}
-		update(input, enemies) {
-			enemies.forEach((enemy) => {
+		update(input, coins, ghosts) {
+			coins.forEach((enemy) => {
 				const dx = enemy.x + enemy.width / 2 - (this.x + this.width / 2);
 				const dy = enemy.y + enemy.height / 2 - (this.y + this.height / 2);
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < enemy.width / 2 + this.width / 2) {
 					score++;
-					const index = enemies.indexOf(enemy);
-					enemies.splice(index, 1);
+					const index = coins.indexOf(enemy);
+					coins.splice(index, 1);
 					//enemy.drawImage = false;
 					//removeImage();
 				}
@@ -158,31 +158,31 @@ window.addEventListener('load', function () {
 				}
 			});
 
-			ghosts2.forEach((ghost2) => {
-				const dx = ghost2.x + ghost2.width / 2 - (this.x + this.width / 2);
-				const dy = ghost2.y + ghost2.height / 2 - (this.y + this.height / 2);
-				const distance = Math.sqrt(dx * dx + dy * dy);
-				if (distance < ghost2.width / 2 + this.width / 2) {
-					life -= 1;
-					console.log(life + ' leben');
-					if (life == 0) {
-						gameOver = true;
-					}
-				}
-			});
+			// ghosts2.forEach((ghost2) => {
+			// 	const dx = ghost2.x + ghost2.width / 2 - (this.x + this.width / 2);
+			// 	const dy = ghost2.y + ghost2.height / 2 - (this.y + this.height / 2);
+			// 	const distance = Math.sqrt(dx * dx + dy * dy);
+			// 	if (distance < ghost2.width / 2 + this.width / 2) {
+			// 		life -= 1;
+			// 		console.log(life + ' leben');
+			// 		if (life == 0) {
+			// 			gameOver = true;
+			// 		}
+			// 	}
+			// });
 
-			ghosts3.forEach((ghost3) => {
-				const dx = ghost3.x + ghost3.width / 2 - (this.x + this.width / 2);
-				const dy = ghost3.y + ghost3.height / 2 - (this.y + this.height / 2);
-				const distance = Math.sqrt(dx * dx + dy * dy);
-				if (distance < ghost3.width / 2 + this.width / 2) {
-					life -= 1;
-					console.log(life + ' leben');
-					if (life == 0) {
-						gameOver = true;
-					}
-				}
-			});
+			// ghosts3.forEach((ghost3) => {
+			// 	const dx = ghost3.x + ghost3.width / 2 - (this.x + this.width / 2);
+			// 	const dy = ghost3.y + ghost3.height / 2 - (this.y + this.height / 2);
+			// 	const distance = Math.sqrt(dx * dx + dy * dy);
+			// 	if (distance < ghost3.width / 2 + this.width / 2) {
+			// 		life -= 1;
+			// 		console.log(life + ' leben');
+			// 		if (life == 0) {
+			// 			gameOver = true;
+			// 		}
+			// 	}
+			// });
 
 			/*  if(this.frameTimer > this.frameInterval){
                  if(this.frameX >= this.maxFrame)this.frameX = 0;
@@ -307,7 +307,7 @@ window.addEventListener('load', function () {
 			this.x = 0;
 		}
 	}
-	class Enemy {
+	class Coin {
 		constructor(gameWidth, gameHeight) {
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
@@ -357,19 +357,31 @@ window.addEventListener('load', function () {
         }  */
 	}
 
+	class GhostType {
+		constructor(health, speed, flightHeigh, image) {
+			this.health = health;
+			this.speed = speed;
+			this.flightHeigh = flightHeigh;
+			this.image = image;
+		}
+	}
+
 	class Ghost {
-		constructor(gameWidth, gameHeight) {
+		constructor(gameWidth, gameHeight, ghostType) {
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
+
 			this.width = 160;
 			this.height = 150;
-			this.image = document.getElementById('ghost1Image');
-			this.image.classList.add('scroll-animation');
+
+			this.image = ghostType.image;
+
 			this.x = this.gameWidth;
-			this.y = this.gameHeight - this.height;
+			this.y = this.gameHeight - this.height - ghostType.flightHeigh;
+
 			this.frameX = 0;
-			this.speed = 4;
-			this.health = 5;
+			this.speed = ghostType.speed;
+			this.health = ghostType.health;
 			this.markedForDeletion = false;
 		}
 		draw(context) {
@@ -416,97 +428,97 @@ window.addEventListener('load', function () {
        }  */
 	}
 
-	class Ghost2 {
-		constructor(gameWidth, gameHeight) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
-			this.width = 160;
-			this.height = 200;
-			this.image = document.getElementById('ghost2Image');
-			this.x = this.gameWidth;
-			this.y = this.gameHeight - this.height;
-			this.frameX = 0;
-			this.speed = 4;
-			this.health = 1;
-			this.markedForDeletion = false;
-		}
-		draw(context) {
-			context.drawImage(
-				this.image,
-				this.frameX * this.width,
-				0,
-				this.width,
-				this.height,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-			if (this.health > 1) {
-				ctx.strockStyle = 'white';
-			} else {
-				ctx.strockStyle = this.color;
-			}
-		}
-		update() {
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) {
-				this.markedForDeletion = true;
-				console.log('markedForDeletion2 ' + this.markedForDeletion);
-				//score++;
-			}
-		}
+	// class Ghost2 {
+	// 	constructor(gameWidth, gameHeight) {
+	// 		this.gameWidth = gameWidth;
+	// 		this.gameHeight = gameHeight;
+	// 		this.width = 160;
+	// 		this.height = 200;
+	// 		this.image = document.getElementById('ghost2Image');
+	// 		this.x = this.gameWidth;
+	// 		this.y = this.gameHeight - this.height;
+	// 		this.frameX = 0;
+	// 		this.speed = 4;
+	// 		this.health = 1;
+	// 		this.markedForDeletion = false;
+	// 	}
+	// 	draw(context) {
+	// 		context.drawImage(
+	// 			this.image,
+	// 			this.frameX * this.width,
+	// 			0,
+	// 			this.width,
+	// 			this.height,
+	// 			this.x,
+	// 			this.y,
+	// 			this.width,
+	// 			this.height
+	// 		);
+	// 		if (this.health > 1) {
+	// 			ctx.strockStyle = 'white';
+	// 		} else {
+	// 			ctx.strockStyle = this.color;
+	// 		}
+	// 	}
+	// 	update() {
+	// 		this.x -= this.speed;
+	// 		if (this.x < 0 - this.width) {
+	// 			this.markedForDeletion = true;
+	// 			console.log('markedForDeletion2 ' + this.markedForDeletion);
+	// 			//score++;
+	// 		}
+	// 	}
 
-		takeDamage(damage) {
-			this.health -= damage;
-		}
-	}
+	// 	takeDamage(damage) {
+	// 		this.health -= damage;
+	// 	}
+	// }
 
-	class Ghost3 {
-		constructor(gameWidth, gameHeight) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
-			this.width = 250;
-			this.height = 250;
-			this.image = document.getElementById('ghost3Image');
-			this.x = this.gameWidth;
-			this.y = this.gameHeight - this.height;
-			this.frameX = 0;
-			this.speed = 2;
-			this.health = 10;
-			this.markedForDeletion = false;
-		}
-		draw(context) {
-			context.drawImage(
-				this.image,
-				this.frameX * this.width,
-				0,
-				this.width,
-				this.height,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-			if (this.health > 1) {
-				ctx.strockStyle = 'white';
-			} else {
-				ctx.strockStyle = this.color;
-			}
-		}
-		update() {
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) {
-				this.markedForDeletion = true;
-				console.log('markedForDeletion2 ' + this.markedForDeletion);
-				//score++;
-			}
-		}
+	// class Ghost3 {
+	// 	constructor(gameWidth, gameHeight) {
+	// 		this.gameWidth = gameWidth;
+	// 		this.gameHeight = gameHeight;
+	// 		this.width = 250;
+	// 		this.height = 250;
+	// 		this.image = document.getElementById('ghost3Image');
+	// 		this.x = this.gameWidth;
+	// 		this.y = this.gameHeight - this.height;
+	// 		this.frameX = 0;
+	// 		this.speed = 2;
+	// 		this.health = 10;
+	// 		this.markedForDeletion = false;
+	// 	}
+	// 	draw(context) {
+	// 		context.drawImage(
+	// 			this.image,
+	// 			this.frameX * this.width,
+	// 			0,
+	// 			this.width,
+	// 			this.height,
+	// 			this.x,
+	// 			this.y,
+	// 			this.width,
+	// 			this.height
+	// 		);
+	// 		if (this.health > 1) {
+	// 			ctx.strockStyle = 'white';
+	// 		} else {
+	// 			ctx.strockStyle = this.color;
+	// 		}
+	// 	}
+	// 	update() {
+	// 		this.x -= this.speed;
+	// 		if (this.x < 0 - this.width) {
+	// 			this.markedForDeletion = true;
+	// 			console.log('markedForDeletion2 ' + this.markedForDeletion);
+	// 			//score++;
+	// 		}
+	// 	}
 
-		takeDamage(damage) {
-			this.health -= damage;
-		}
-	}
+	// 	takeDamage(damage) {
+	// 		this.health -= damage;
+	// 	}
+	// }
 
 	class Bullet {
 		color = ['blue', 'purple', 'yellow', 'orange', 'pink'];
@@ -597,27 +609,42 @@ window.addEventListener('load', function () {
 		}
 	}
 
-	function handleEnemies(deltaTime) {
-		if (enemyTimer > enemyInterval + randomEnemyInterval) {
-			enemies.push(new Enemy(canvas.width, canvas.height));
-			console.log(enemies);
-			randomEnemyInterval = Math.random() * 1000 + 500;
+	function handleCoins(deltaTime) {
+		if (enemyTimer > coinInterval + randomCoinInterval) {
+			coins.push(new Coin(canvas.width, canvas.height));
+			console.log(coins);
+			randomCoinInterval = Math.random() * 1000 + 500;
 			enemyTimer = 0;
 		} else {
 			enemyTimer += deltaTime;
 		}
 
-		enemies.forEach((enemy) => {
+		coins.forEach((enemy) => {
 			enemy.draw(ctx);
 			enemy.update();
 		});
-		enemies = enemies.filter((enemy) => !enemy.markedForDeletion);
+		coins = coins.filter((enemy) => !enemy.markedForDeletion);
 	}
 
-	function handleGostes(deltaTime) {
+	// different ghost types
+
+	const ghostTypes = [
+		new GhostType(1, 4, 40, document.getElementById('ghost1Image')),
+		new GhostType(2, 3, -20, document.getElementById('ghost2Image')),
+		new GhostType(3, 2, 45, document.getElementById('ghost3Image')),
+	];
+
+	function handleGhosts(deltaTime) {
 		if (ghostTimer > ghostInterval + randomGhostInterval) {
-			ghosts.push(new Ghost(canvas.width, canvas.height));
-			console.log(ghosts);
+			// spawn neuen Geist!
+			ghosts.push(
+				new Ghost(
+					canvas.width,
+					canvas.height,
+					ghostTypes[Math.floor(Math.random() * ghostTypes.length)]
+				)
+			);
+
 			randomGhostInterval = Math.random() * 1000 + 500;
 			ghostTimer = 0;
 		} else {
@@ -626,31 +653,32 @@ window.addEventListener('load', function () {
 
 		ghosts = ghosts.filter((ghost) => !ghost.markedForDeletion);
 	}
-	function handleGostes2(deltaTime) {
-		if (ghost2Timer > ghost2Interval + randomGhost2Interval) {
-			ghosts2.push(new Ghost2(canvas.width, canvas.height));
-			console.log(ghosts2);
-			randomGhost2Interval = Math.random() * 1000 + 500;
-			ghost2Timer = 0;
-		} else {
-			ghost2Timer += deltaTime;
-		}
 
-		ghosts2 = ghosts2.filter((ghost2) => !ghost2.markedForDeletion);
-	}
+	// function handleGhosts2(deltaTime) {
+	// 	if (ghost2Timer > ghost2Interval + randomGhost2Interval) {
+	// 		ghosts2.push(new Ghost2(canvas.width, canvas.height));
+	// 		console.log(ghosts2);
+	// 		randomGhost2Interval = Math.random() * 1000 + 500;
+	// 		ghost2Timer = 0;
+	// 	} else {
+	// 		ghost2Timer += deltaTime;
+	// 	}
 
-	function handleGostes3(deltaTime) {
-		if (ghost3Timer > ghost3Interval + randomGhost3Interval) {
-			ghosts3.push(new Ghost3(canvas.width, canvas.height));
-			console.log(ghosts2);
-			randomGhost3Interval = Math.random() * 1000 + 500;
-			ghost3Timer = 0;
-		} else {
-			ghost3Timer += deltaTime;
-		}
+	// 	ghosts2 = ghosts2.filter((ghost2) => !ghost2.markedForDeletion);
+	// }
 
-		ghosts2 = ghosts2.filter((ghost3) => !ghost3.markedForDeletion);
-	}
+	// function handleGhosts3(deltaTime) {
+	// 	if (ghost3Timer > ghost3Interval + randomGhost3Interval) {
+	// 		ghosts3.push(new Ghost3(canvas.width, canvas.height));
+	// 		console.log(ghosts3);
+	// 		randomGhost3Interval = Math.random() * 1000 + 500;
+	// 		ghost3Timer = 0;
+	// 	} else {
+	// 		ghost3Timer += deltaTime;
+	// 	}
+
+	// 	ghosts3 = ghosts3.filter((ghost3) => !ghost3.markedForDeletion);
+	// }
 
 	// function drawLife(context) {
 	//     context.fillStyle = 'red';
@@ -705,7 +733,7 @@ window.addEventListener('load', function () {
 	function restartGame() {
 		player.restart();
 		background.restart();
-		enemies = [];
+		coins = [];
 		ghosts = [];
 		ghosts2 = [];
 		ghosts3 = [];
@@ -722,18 +750,21 @@ window.addEventListener('load', function () {
 	const background = new Background(canvas.width, canvas.height);
 
 	let lastTime = 0;
+
 	let enemyTimer = 0;
-	let enemyInterval = 280;
-	let randomEnemyInterval = Math.random() * 1000 + 500;
+	let coinInterval = 280;
+	let randomCoinInterval = Math.random() * 1000 + 500;
+
 	let ghostTimer = 0;
 	let ghostInterval = 7780;
 	let randomGhostInterval = Math.random() * 1080 + 470;
-	let ghost2Timer = 0;
-	let ghost2Interval = 1780;
-	let randomGhost2Interval = Math.random() * 1080 + 470;
-	let ghost3Timer = 0;
-	let ghost3Interval = 15780;
-	let randomGhost3Interval = Math.random() * 1080 + 470;
+
+	// let ghost2Timer = 0;
+	// let ghost2Interval = 1780;
+	// let randomGhost2Interval = Math.random() * 1080 + 470;
+	// let ghost3Timer = 0;
+	// let ghost3Interval = 15780;
+	// let randomGhost3Interval = Math.random() * 1080 + 470;
 
 	// video.onended = function() {
 	//     button.style.display = 'block';
@@ -748,8 +779,10 @@ window.addEventListener('load', function () {
 		background.update(input);
 		bulletController.draw(ctx);
 		player.draw(ctx);
-		player.update(input, enemies);
+		player.update(input, coins, ghosts);
+
 		ghosts.forEach((ghost) => {
+			console.log(ghost);
 			if (bulletController.collideWith(ghost)) {
 				if (ghost.health <= 0) {
 					const index = ghosts.indexOf(ghost);
@@ -761,30 +794,31 @@ window.addEventListener('load', function () {
 				ghost.update();
 			}
 		});
-		ghosts2.forEach((ghost2) => {
-			if (bulletController.collideWith(ghost2)) {
-				if (ghost2.health <= 0) {
-					const index = ghosts2.indexOf(ghost2);
-					ghosts2.splice(index, 1);
-					geistertot++;
-				}
-			} else {
-				ghost2.draw(ctx);
-				ghost2.update();
-			}
-		});
-		ghosts3.forEach((ghost3) => {
-			if (bulletController.collideWith(ghost3)) {
-				if (ghost3.health <= 0) {
-					const index = ghosts3.indexOf(ghost3);
-					ghosts3.splice(index, 1);
-					geistertot++;
-				}
-			} else {
-				ghost3.draw(ctx);
-				ghost3.update();
-			}
-		});
+
+		// ghosts2.forEach((ghost2) => {
+		// 	if (bulletController.collideWith(ghost2)) {
+		// 		if (ghost2.health <= 0) {
+		// 			const index = ghosts2.indexOf(ghost2);
+		// 			ghosts2.splice(index, 1);
+		// 			geistertot++;
+		// 		}
+		// 	} else {
+		// 		ghost2.draw(ctx);
+		// 		ghost2.update();
+		// 	}
+		// });
+		// ghosts3.forEach((ghost3) => {
+		// 	if (bulletController.collideWith(ghost3)) {
+		// 		if (ghost3.health <= 0) {
+		// 			const index = ghosts3.indexOf(ghost3);
+		// 			ghosts3.splice(index, 1);
+		// 			geistertot++;
+		// 		}
+		// 	} else {
+		// 		ghost3.draw(ctx);
+		// 		ghost3.update();
+		// 	}
+		// });
 		/* enemies.forEach(enemy => {
            if(player.collideWith(enemy)){
             const index = enemies.indexOf(enemy)
@@ -802,10 +836,10 @@ window.addEventListener('load', function () {
 			endGame();
 		}
 
-		handleEnemies(deltaTime);
-		handleGostes(deltaTime);
-		handleGostes2(deltaTime);
-		handleGostes3(deltaTime);
+		handleCoins(deltaTime);
+		handleGhosts(deltaTime);
+		// handleGhosts2(deltaTime);
+		// handleGhosts3(deltaTime);
 
 		if (!gameOver) requestAnimationFrame(animate);
 	}

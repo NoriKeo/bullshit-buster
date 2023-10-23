@@ -7,5 +7,3 @@ if ($score_exists == true && $name_exists == true)
     echo 'Die Score für ' . $_POST['name'] . ' ist ' . $_POST['score'];
 else
     echo 'Keine Score oder Name angegeben!';
-
-?>
