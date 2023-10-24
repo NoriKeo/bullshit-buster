@@ -346,7 +346,7 @@ window.addEventListener('load', function () {
     }
 
     class Geistertyp{
-        constructor(health, speed, spanhoehe, image){
+        constructor(health, speed,  image, spanhoehe){
             this.health = health;
             this.speed = speed;
             this.spanhoehe = spanhoehe;
@@ -532,9 +532,13 @@ window.addEventListener('load', function () {
     }
     let geistertyp = [
         new Geistertyp(3,4,this.document.getElementById('ghost1Image'),40),
-        new Geistertyp(1,2,this.document.getElementById('ghost2Image'),45),
+        new Geistertyp(1,3,this.document.getElementById('ghost2Image'),45),
         new Geistertyp(3,4,this.document.getElementById('ghost3Image'),50),
-        new Geistertyp(1,2,this.document.getElementById('ghost4Image'),55),
+        new Geistertyp(1,10,this.document.getElementById('ghost4Image'),60),
+        new Geistertyp(1,6,this.document.getElementById('ghost5Image'),43),
+        new Geistertyp(3,4,this.document.getElementById('ghost6Image'),51),
+        new Geistertyp(1,1,this.document.getElementById('ghost7Image'),75),
+        new Geistertyp(1,2,this.document.getElementById('ghost8Image'),55),
     ];
 
     function handleGostes(deltaTime) {
@@ -632,7 +636,7 @@ window.addEventListener('load', function () {
     let enemyInterval = 280;
     let randomEnemyInterval = Math.random() * 1000 + 500;
     let ghostTimer = 0;
-    let ghostInterval = 780;
+    let ghostInterval = 2780;
     let randomGhostInterval = Math.random() * 1080 + 470;
    
     // video.onended = function() {
