@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: black;
+}
+#canvas1{
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    outline: 5px solid white;
+    max-width: 100%;
+    max-height: 100%;
+}
+#playerImage,#backgroundImage,#enemyImage,#geldImage,#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image{
+    display: none;
+}
+#startButton{
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    position: absolute; 
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+    height: 500px;
+    width: 800px;
+    max-width: 100%;
+    max-height: 100%;
+}
+    
+#starthintergrund{
+    opacity: 0.8;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1300px;
+    height: 620px;
+    max-width: 100%;
+    max-height: 100%;
+
+}
+.video-container {
+    opacity: 0.8;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    outline: 5px solid white;
+    width: 1300px;
+    height: 620px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.video-container video {
+    opacity: 0.8;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 1300px;
+    height: 620px;
+    max-width: 100%;
+    max-height: 100%;
+}
+    
+
+
+#highScoreDisplay{
+    font-size: 20px;
+    color: #ff0000;
+    font-weight: bold;
+
+}
+
+@keyframes scroll {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  .scroll-animation {
+    animation: scroll 5s infinite;
+  }
