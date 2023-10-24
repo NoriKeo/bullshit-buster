@@ -16,20 +16,20 @@ body{
     max-width: 100%;
     max-height: 100%;
 }
-#playerImage,#backgroundImage,#enemyImage,#geldImage,#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image{
+#playerImage,#backgroundImage,#enemyImage,#geldImage,#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image,#steueranleitung{
     display: none;
 }
 #startButton{
-    background-color: transparent;
+    background-color: transparent; 
     border: none;
-    color: rgb(255, 255, 255);
+    color: rgb(187, 29, 29);
     position: absolute; 
-    top: 60%;
-    left: 50%;
+    top: 50%;
+    left: 72.6%;
     transform: translate(-50%,-50%);
     font-size: 30px;
-    height: 500px;
-    width: 800px;
+    height: 80px;
+    width: 178px;
     max-width: 100%;
     max-height: 100%;
 }

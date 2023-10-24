@@ -626,6 +626,13 @@ window.addEventListener('load', function () {
         animate(0);
 
     }
+    function showImageForSeconds(imageId, seconds) {
+        let steueranleitung = document.getElementById('steueranleitung');
+        steueranleitung.style.display = "block";
+        setTimeout(function() {
+            steueranleitung.style.display = "none";
+        }, seconds * 1000);
+      }
     const input = new InputHandler();
     const bulletController = new BulletController(canvas);
     const player = new Player(canvas.width, canvas.height, bulletController);
@@ -705,6 +712,7 @@ window.addEventListener('load', function () {
     }
     document.getElementById('startButton').addEventListener('click', function () {
         // Insert game start logic here
+        showImageForSeconds("steueranleitung", 5);
         animate(0);
         console.log('Game Started!');
         this.disabled = true; // Disables the button after one click
