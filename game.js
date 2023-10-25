@@ -481,12 +481,12 @@ window.addEventListener('load', function () {
 
         shoot(x, y, speed, damage, delay) {
             if (this.timerTillNextBullet <= 0) {
-                if (this.bullets.length < 3) {
+               
                     if (score > 0) {
                         this.bullets.push(new Bullet(x, y, speed, damage));
                         score -= 1;
                     }
-                }
+                
 
                 this.timerTillNextBullet = delay;
             }
@@ -648,8 +648,10 @@ window.addEventListener('load', function () {
         background.restart();
         enemies = [];
         ghosts = [];
-        
+        document.getElementById('startsound').play();
         document.getElementById('hintergrunsound').play();
+        document.getElementById('startsound').volume=50;
+        
         
         score = 0;
         life = 100;
@@ -746,6 +748,7 @@ window.addEventListener('load', function () {
     document.getElementById('startButton').addEventListener('click', function () {
         // Insert game start logic here
         showImageForSeconds("steueranleitung", 5);
+        document.getElementById('startsound').play();
         document.getElementById('hintergrunsound').play();
         animate(0);
         console.log('Game Started!');
