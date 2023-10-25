@@ -25,17 +25,7 @@ body{
    
 
 }
-@keyframes upAndDown {
-    0% {
-      top: 0;
-    }
-    50% {
-      top: 100px;
-    }
-    100% {
-      top: 0;
-    }
-}
+
 #steueranleitung{
     display: none;
     position: absolute; 
