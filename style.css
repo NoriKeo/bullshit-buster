@@ -16,8 +16,25 @@ body{
     max-width: 100%;
     max-height: 100%;
 }
-#playerImage,#backgroundImage,#enemyImage,#geldImage,#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image{
+#playerImage,#backgroundImage,#enemyImage,#geldImage{
     display: none;
+}
+#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image{
+    animation: upAndDown 2s infinite;
+    display: none;
+   
+
+}
+@keyframes upAndDown {
+    0% {
+      top: 0;
+    }
+    50% {
+      top: 100px;
+    }
+    100% {
+      top: 0;
+    }
 }
 #steueranleitung{
     display: none;
@@ -122,15 +139,5 @@ body{
 
 }
 
-@keyframes scroll {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
-  }
+
   
-  .scroll-animation {
-    animation: scroll 5s infinite;
-  }
