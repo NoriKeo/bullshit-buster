@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
     const startscreenhintergrund = document.getElementById('starthintergrund');
     const highScore = localStorage.getItem('highScore') || 0;
     const ctx = canvas.getContext('2d');
+    
     // canvas.width = window.innerWidth;
     // canvas.height = window.innerHeight; 
     canvas.width = 1300;
@@ -77,7 +78,15 @@ window.addEventListener('load', function () {
                 if (swipeDistance < -this.touchTreshold && this.keys.indexOf('swipe up ') === -1) this.keys.splice(this.keys.indexOf('swipe up'), 1, 'swipe up');
                 else if (swipeDistance > this.touchTreshold && this.keys.indexOf('swipe down ') === -1) this.keys.splice(this.keys.indexOf('swipe down'), 1, 'swipe down');
 
-                    if (gameOver) restartGame();
+                    if (gameOver) {
+
+                       
+                       
+                            restartGame();
+
+                       
+                    }
+                    
                 
                 console.log('moving');
             });
@@ -161,7 +170,9 @@ window.addEventListener('load', function () {
                 const dy = (ghost.y + ghost.height / 2) - (this.y + this.height / 2);
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < ghost.width / 2 + this.width / 2) {
+                    
                     life--;
+                    document.getElementById('au').play();
                     if (life == 0) {
                         gameOver = true;
                     }
@@ -556,7 +567,6 @@ window.addEventListener('load', function () {
     }
     
 
-
     // function drawLife(context) {
     //     context.fillStyle = 'red';
     //     context.fillRect(0, 0, life, 10);
@@ -587,9 +597,31 @@ window.addEventListener('load', function () {
         context.fillRect(52, 87, life, 20);
 
         if (gameOver) {
-            context.textAlign = 'center';
+            let endscrem  = document.getElementById('gameend');
+            endscrem.style.display = "block";
+            var gameOverButton = document.getElementById("spenden");
+            gameOverButton.style.display = "block";
+            
+                document.getElementById('hintergrunsound').pause();
+                var restartbild= document.getElementById('restartbild');
+                restartbild.style.display = "block";
+                var restartButton = document.getElementById('reststart');
+                restartButton.style.display = "block";
+                
+                document.getElementById('restart').addEventListener('click', function () {
+                    restartGame();
+                    restartButton.style.display = "none";
+                    restartbild.style.display = "none";
+                    endscrem.style.display = "none";
+                    gameOverButton.style.display = "none";
+
+                });
+                
+            
+          
+            /* context.textAlign = 'center';
             context.fillStyle = 'white';
-            context.fillText('GAME OVER', canvas.width / 2, 200);
+            context.fillText('GAME OVER', canvas.width / 2, 200); */
 
         }
 
@@ -617,8 +649,8 @@ window.addEventListener('load', function () {
         enemies = [];
         ghosts = [];
         
-
-
+        document.getElementById('hintergrunsound').play();
+        
         score = 0;
         life = 100;
         geistertot = 0;
@@ -667,6 +699,7 @@ window.addEventListener('load', function () {
                 if (ghost.health <= 0) {
                     const index = ghosts.indexOf(ghost)
                     ghosts.splice(index, 1);
+                    document.getElementById('geistertot').play();
                     geistertot++;
                 }
             } else {
@@ -695,10 +728,10 @@ window.addEventListener('load', function () {
 
 
         displayStatusText(ctx);
-
+/* 
         if (gameOver) {
             endGame();
-        }
+        } */
 
         handleEnemies(deltaTime);
         handleGostes(deltaTime);
@@ -713,6 +746,7 @@ window.addEventListener('load', function () {
     document.getElementById('startButton').addEventListener('click', function () {
         // Insert game start logic here
         showImageForSeconds("steueranleitung", 5);
+        document.getElementById('hintergrunsound').play();
         animate(0);
         console.log('Game Started!');
         this.disabled = true; // Disables the button after one click

@@ -27,6 +27,62 @@ body{
     height: 300px;
     width: 350px;
     outline: 5px solid white;
+    max-width: 100%;
+    max-height: 100%;
+    
+     
+    justify-content: center;   
+    align-items: center;
+}
+#gameend{
+    display: none;
+    position: absolute; 
+    top: 30%;
+    left: 35%;
+    height: 300px;
+    width: 350px;
+    
+    max-width: 100%;
+    max-height: 100%;
+    
+}
+#spenden{
+    background-color: transparent; 
+    display: none;
+    position: absolute; 
+    top: 30%;
+    left: 35%;
+    height: 300px;
+    width: 350px;
+    
+    max-width: 100%;
+    max-height: 100%;
+   
+}
+#restartbild{
+    display: none;
+    position: absolute; 
+    top: 70%;
+    left: 35%;
+    height: 70px;
+    width: 350px;
+    
+    max-width: 100%;
+    max-height: 100%;
+
+}
+#restart{
+    background-color: transparent; 
+    display: none;
+    position: absolute; 
+    top: 70%;
+    left: 35%;
+    height: 70px;
+    width: 350px;
+    
+    max-width: 100%;
+    max-height: 100%;
+
 }
 #startButton{
     background-color: transparent; 
@@ -55,31 +111,7 @@ body{
     max-height: 100%;
 
 }
-.video-container {
-    opacity: 0.8;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    outline: 5px solid white;
-    width: 1300px;
-    height: 620px;
-    max-width: 100%;
-    max-height: 100%;
-}
 
-
-.video-container video {
-    opacity: 0.8;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 1300px;
-    height: 620px;
-    max-width: 100%;
-    max-height: 100%;
-}
     
 
 
