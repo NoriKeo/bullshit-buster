@@ -393,6 +393,7 @@ window.addEventListener('load', function () {
 
         }
         update() {
+            this.initialY = this.initialY;
             // var step = -1 
             this.x -= this.speed;
             if (this.x < 0 - this.width) {
@@ -400,9 +401,12 @@ window.addEventListener('load', function () {
                 console.log('markedForDeletion2 ' + this.markedForDeletion);
                 //score++;
             }
-            if (self.y > 40 || self.y < -40) {
-                self.y = -self.y;
-              }
+           
+            console.log("y: " + self.y);
+             if (self.y > 40 || self.y < -40) {
+                //self.y = -self.y;
+                this.y = this.initialY + Math.sin(this.x / 200) * 25;
+              } 
         }
 
         takeDamage(damage) {
