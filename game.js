@@ -152,10 +152,10 @@ window.addEventListener('load', function () {
         update(input, enemies) {
 
             enemies.forEach(enemy => {
-                const dx = (enemy.x + enemy.width / 2) - (this.x + this.width / 2);
-                const dy = (enemy.y + enemy.height / 2) - (this.y + this.height / 2);
+                const dx = (enemy.x + enemy.width / 12 ) - (this.x + this.width / 12 );
+                const dy = (enemy.y + enemy.height / 12 ) - (this.y + this.height / 12 );
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < enemy.width / 2 + this.width / 2) {
+                if (distance < enemy.width / 12  + this.width / 12) {
                     score++;
                     const index = enemies.indexOf(enemy)
                     enemies.splice(index, 1);
@@ -166,10 +166,10 @@ window.addEventListener('load', function () {
             });
 
             ghosts.forEach(ghost => {
-                const dx = (ghost.x + ghost.width / 2) - (this.x + this.width / 2);;
-                const dy = (ghost.y + ghost.height / 2) - (this.y + this.height / 2);
+                const dx = (ghost.x + ghost.width / 12) - (this.x + this.width / 12);;
+                const dy = (ghost.y + ghost.height / 12) - (this.y + this.height / 12);
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < ghost.width / 2 + this.width / 2) {
+                if (distance < ghost.width / 12 + this.width / 12) {
                     
                     life--;
                     document.getElementById('au').play();
@@ -393,16 +393,16 @@ window.addEventListener('load', function () {
 
         }
         update() {
-            var step = -1 
+            // var step = -1 
             this.x -= this.speed;
             if (this.x < 0 - this.width) {
                 this.markedForDeletion = true;
                 console.log('markedForDeletion2 ' + this.markedForDeletion);
                 //score++;
             }
-            if(geistertyp.spanhoehe  === 10|| geistertyp.spanhoehe  === 0) step*=-1       
-            geistertyp.spanhoehe += step;
-            ghosts.style = geistertyp.spanhoehe  + "px" 
+            if (self.y > 40 || self.y < -40) {
+                self.y = -self.y;
+              }
         }
 
         takeDamage(damage) {
