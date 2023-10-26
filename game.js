@@ -379,6 +379,7 @@ window.addEventListener('load', function () {
             this.speed = geistertyp.speed;
             this.health = geistertyp.health;
             this.markedForDeletion = false;
+            
         }
         draw(context) {
 
@@ -392,17 +393,22 @@ window.addEventListener('load', function () {
 
         }
         update() {
+            var step = -1 
             this.x -= this.speed;
             if (this.x < 0 - this.width) {
                 this.markedForDeletion = true;
                 console.log('markedForDeletion2 ' + this.markedForDeletion);
                 //score++;
             }
+            if(geistertyp.spanhoehe  === 10|| geistertyp.spanhoehe  === 0) step*=-1       
+            geistertyp.spanhoehe += step;
+            ghosts.style = geistertyp.spanhoehe  + "px" 
         }
 
         takeDamage(damage) {
             this.health -= damage;
         }
+       
         /* collideWith(sprite){
            if(
                this.x < sprite.x + sprite.width &&
@@ -565,7 +571,8 @@ window.addEventListener('load', function () {
 
         ghosts = ghosts.filter(ghost => !ghost.markedForDeletion);
     }
-    
+
+   
 
     // function drawLife(context) {
     //     context.fillStyle = 'red';
@@ -605,7 +612,7 @@ window.addEventListener('load', function () {
                 document.getElementById('hintergrunsound').pause();
                 var restartbild= document.getElementById('restartbild');
                 restartbild.style.display = "block";
-                var restartButton = document.getElementById('reststart');
+                var restartButton = document.getElementById('restart');
                 restartButton.style.display = "block";
                 
                 document.getElementById('restart').addEventListener('click', function () {
@@ -614,8 +621,9 @@ window.addEventListener('load', function () {
                     restartbild.style.display = "none";
                     endscrem.style.display = "none";
                     gameOverButton.style.display = "none";
+                    
 
-                });
+                },{once: true});
                 
             
           
@@ -650,7 +658,7 @@ window.addEventListener('load', function () {
         ghosts = [];
         document.getElementById('startsound').play();
         document.getElementById('hintergrunsound').play();
-        document.getElementById('startsound').volume=50;
+        //document.getElementById('startsound').volume=50;
         
         
         score = 0;
