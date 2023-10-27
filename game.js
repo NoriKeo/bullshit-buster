@@ -14,7 +14,8 @@ window.addEventListener('load', function () {
     let ghosts = [];
     
     
-    
+    let gametimer;
+    let gametimerstart = 0;
     
 
 
@@ -152,10 +153,10 @@ window.addEventListener('load', function () {
         update(input, enemies) {
 
             enemies.forEach(enemy => {
-                const dx = (enemy.x + enemy.width / 12 ) - (this.x + this.width / 12 );
-                const dy = (enemy.y + enemy.height / 12 ) - (this.y + this.height / 12 );
+                const dx = (enemy.x + enemy.width / 4 ) - (this.x + this.width / 4 );
+                const dy = (enemy.y + enemy.height / 4 ) - (this.y + this.height / 4 );
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < enemy.width / 12  + this.width / 12) {
+                if (distance < enemy.width / 4  + this.width / 4) {
                     score++;
                     const index = enemies.indexOf(enemy)
                     enemies.splice(index, 1);
@@ -379,6 +380,7 @@ window.addEventListener('load', function () {
             this.speed = geistertyp.speed;
             this.health = geistertyp.health;
             this.markedForDeletion = false;
+            this.initialY = this.y;
             
         }
         draw(context) {
@@ -403,10 +405,10 @@ window.addEventListener('load', function () {
             }
            
             console.log("y: " + self.y);
-             if (self.y > 40 || self.y < -40) {
+             
                 //self.y = -self.y;
                 this.y = this.initialY + Math.sin(this.x / 200) * 25;
-              } 
+              
         }
 
         takeDamage(damage) {
@@ -606,7 +608,9 @@ window.addEventListener('load', function () {
         context.fillRect(50, 85, 105, 25);
         context.fillStyle = 'red';
         context.fillRect(52, 87, life, 20);
-
+        context.fillText(gametimerstart, 500, 50);
+        context.fillStyle = 'black';
+       
         if (gameOver) {
             let endscrem  = document.getElementById('gameend');
             endscrem.style.display = "block";
@@ -663,7 +667,7 @@ window.addEventListener('load', function () {
         document.getElementById('startsound').play();
         document.getElementById('hintergrunsound').play();
         //document.getElementById('startsound').volume=50;
-        
+        gametimerstart = 0;
         
         score = 0;
         life = 100;
@@ -671,6 +675,12 @@ window.addEventListener('load', function () {
         gameOver = false;
         animate(0);
 
+    }
+    function updateTimer(){
+        gametimerstart = gametimerstart + 1;
+        if(gametimerstart >= 60000){
+            ghostInterval - 500;
+        }
     }
     function showImageForSeconds(imageId, seconds) {
         let steueranleitung = document.getElementById('steueranleitung');
@@ -700,8 +710,8 @@ window.addEventListener('load', function () {
     function animate(timeStamp) {
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
-
-
+        gametimer = setInterval(updateTimer, 1000);
+        updateTimer();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         background.draw(ctx);
         background.update(input);
