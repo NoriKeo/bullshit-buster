@@ -195,9 +195,9 @@ window.addEventListener('load', function () {
              } */
 
             if (input.keys.indexOf('d') > -1) {
-                this.speed = 5;
+                this.speed = 3;
             } else if (input.keys.indexOf('a') > -1) {
-                this.speed = -5;
+                this.speed = -3;
                 //&& this.onGround()
             } else if (input.keys.indexOf('s',) > -1) {
                 this.vy = this.vy + 1;
@@ -298,7 +298,7 @@ window.addEventListener('load', function () {
             this.y = 0;
             this.width = 1200;
             this.height = 620;
-            this.speed = 2;
+            this.speed = 3;
         }
         draw(context) {
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -608,8 +608,19 @@ window.addEventListener('load', function () {
         context.fillRect(50, 85, 105, 25);
         context.fillStyle = 'red';
         context.fillRect(52, 87, life, 20);
-        context.fillText(gametimerstart, 500, 50);
         context.fillStyle = 'black';
+        
+
+        ctx.font = 'bold 40px pixel';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText(gametimerstart,500, 50, 200/2, 50 / 2);
+
+
+
+
+
+        
        
         if (gameOver) {
             let endscrem  = document.getElementById('gameend');
@@ -678,9 +689,21 @@ window.addEventListener('load', function () {
     }
     function updateTimer(){
         gametimerstart = gametimerstart + 1;
-        if(gametimerstart >= 60000){
-            ghostInterval - 500;
+        if(gametimerstart >= 50000){
+            ghostInterval -= Math.floor(gametimerstart / 10)
+            if (ghostInterval <= 50){
+                ghostInterval = 50;
+               
         }
+        if(gametimerstart >= 70000){
+            ghostInterval -= 400;
+        }
+        if(gametimerstart >= 100000){
+            ghostInterval -= 10000;
+        }
+        }
+       
+        console.log("intervale: " + ghostInterval);
     }
     function showImageForSeconds(imageId, seconds) {
         let steueranleitung = document.getElementById('steueranleitung');
@@ -696,11 +719,12 @@ window.addEventListener('load', function () {
 
     let lastTime = 0;
     let enemyTimer = 0;
-    let enemyInterval = 280;
+    let enemyInterval = 80;
     let randomEnemyInterval = Math.random() * 1000 + 500;
     let ghostTimer = 0;
     let ghostInterval = 2780;
     let randomGhostInterval = Math.random() * 1080 + 470;
+    
    
     // video.onended = function() {
     //     button.style.display = 'block';
