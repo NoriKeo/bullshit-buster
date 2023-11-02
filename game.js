@@ -3,20 +3,27 @@ window.addEventListener('load', function () {
     const startscreenhintergrund = document.getElementById('starthintergrund');
     const highScore = localStorage.getItem('highScore') || 0;
     const ctx = canvas.getContext('2d');
-    
+
     // canvas.width = window.innerWidth;
     // canvas.height = window.innerHeight; 
     canvas.width = 1300;
     canvas.height = 620;
+    
+    steueranleitung.width = 250;
+    steueranleitung.height = 200;
+    gameend.weight = 350;
+    gameend.height = 300;
+    restartbild.weight = 250;
+    restartbild.height = 50;
     startscreenhintergrund.style.width = canvas.width + 'px';
     startscreenhintergrund.style.height = canvas.height + 'px';
     let enemies = [];
     let ghosts = [];
-    
-    
+
+
     let gametimer;
     let gametimerstart = 0;
-    
+
 
 
     let score = 0;
@@ -72,34 +79,35 @@ window.addEventListener('load', function () {
             window.addEventListener('touchstart', e => {
                 console.log('start');
                 this.touchY = e.changedTouches[0].pageY
-                
+
             });
             window.addEventListener('touchmove', e => {
                 const swipeDistance = e.changedTouches[0].pageY - this.touchY;
                 if (swipeDistance < -this.touchTreshold && this.keys.indexOf('swipe up ') === -1) this.keys.splice(this.keys.indexOf('swipe up'), 1, 'swipe up');
                 else if (swipeDistance > this.touchTreshold && this.keys.indexOf('swipe down ') === -1) this.keys.splice(this.keys.indexOf('swipe down'), 1, 'swipe down');
 
-                    if (gameOver) {
+                if (gameOver) {
 
-                       
-                       
-                            restartGame();
 
-                       
-                    }
-                    
-                
+
+                    restartGame();
+
+
+                }
+
+
                 console.log('moving');
             });
+            
             window.addEventListener('touchend', e => {
-                
+
                 console.log(this.keys);
                 console.log('end');
                 this.keys.splice(this.keys.indexOf('swipe up'), 1)
                 this.keys.splice(this.keys.indexOf('swipe down'), 1);
 
             });
-            
+
 
 
 
@@ -153,10 +161,10 @@ window.addEventListener('load', function () {
         update(input, enemies) {
 
             enemies.forEach(enemy => {
-                const dx = (enemy.x + enemy.width / 4 ) - (this.x + this.width / 4 );
-                const dy = (enemy.y + enemy.height / 4 ) - (this.y + this.height / 4 );
+                const dx = (enemy.x + enemy.width / 4) - (this.x + this.width / 4);
+                const dy = (enemy.y + enemy.height / 4) - (this.y + this.height / 4);
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < enemy.width / 4  + this.width / 4) {
+                if (distance < enemy.width / 4 + this.width / 4) {
                     score++;
                     const index = enemies.indexOf(enemy)
                     enemies.splice(index, 1);
@@ -171,16 +179,17 @@ window.addEventListener('load', function () {
                 const dy = (ghost.y + ghost.height / 12) - (this.y + this.height / 12);
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 if (distance < ghost.width / 12 + this.width / 12) {
-                    
+
                     life--;
-                    document.getElementById('au').play();
+                    document.getElementById('damage').play();
                     if (life == 0) {
+                        document.getElementById('au').play();
                         gameOver = true;
                     }
                 }
             });
 
-           
+
 
 
 
@@ -204,7 +213,7 @@ window.addEventListener('load', function () {
 
 
                 // && score > 0
-            } else if (input.keys.indexOf('e') > - 1 ) {
+            } /* else if (input.keys.indexOf('e') > - 1 || input.keys.indexOf('touchstart') > - 1) {
                 this.shootPressed = true;
                 //score -= 1;
                 //score--;
@@ -215,13 +224,25 @@ window.addEventListener('load', function () {
 
 
 
-            }
+            } */
+            else if (input.keys.includes('e') ) {
+                this.shootPressed = true;
+
+                if (score < 0) {
+                    score = 0;
+                }
+              }
             else {
                 this.speed = 0;
                 this.shootPressed = false;
 
                 //this.vy = 0;
             }
+            document.addEventListener('touchstart', function(event) {
+                // Handle touchstart event for shooting
+                this.shootPressed = true;
+              }.bind(this));
+           
 
             this.x += this.speed;
             if (this.x < 0) this.x = 0;
@@ -357,13 +378,13 @@ window.addEventListener('load', function () {
 
     }
 
-    class Geistertyp{
-        constructor(health, speed,  image, spanhoehe){
+    class Geistertyp {
+        constructor(health, speed, image, spanhoehe) {
             this.health = health;
             this.speed = speed;
             this.spanhoehe = spanhoehe;
             this.image = image;
-            
+
         }
     }
 
@@ -381,11 +402,11 @@ window.addEventListener('load', function () {
             this.health = geistertyp.health;
             this.markedForDeletion = false;
             this.initialY = this.y;
-            
+
         }
         draw(context) {
 
-            
+
             context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
             if (this.health > 1) {
                 ctx.strockStyle = "white";
@@ -403,18 +424,18 @@ window.addEventListener('load', function () {
                 console.log('markedForDeletion2 ' + this.markedForDeletion);
                 //score++;
             }
-           
+
             console.log("y: " + self.y);
-             
-                //self.y = -self.y;
-                this.y = this.initialY + Math.sin(this.x / 200) * 25;
-              
+
+            //self.y = -self.y;
+            this.y = this.initialY + Math.sin(this.x / 200) * 25;
+
         }
 
         takeDamage(damage) {
             this.health -= damage;
         }
-       
+
         /* collideWith(sprite){
            if(
                this.x < sprite.x + sprite.width &&
@@ -431,9 +452,9 @@ window.addEventListener('load', function () {
 
     }
 
-    
 
-    
+
+
 
     class Bullet {
 
@@ -457,12 +478,15 @@ window.addEventListener('load', function () {
             this.color = this.color[Math.floor(Math.random() * this.color.length)];
         }
         draw(ctx) {
+            
             ctx.fillStyle = this.color;
             this.x += this.speed;
             /* ctx.shadowBlur = 20;
             ctx.shadowColor = "red"; */
 
             ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.shadowColor = "#ffffff";
+            ctx.shadowBlur = 20;
             /* ctx.shadowColor = "#d53";
             ctx.shadowBlur = 20;
             ctx.lineJoin = "bevel";
@@ -493,12 +517,12 @@ window.addEventListener('load', function () {
 
         shoot(x, y, speed, damage, delay) {
             if (this.timerTillNextBullet <= 0) {
-               
-                    if (score > 0) {
-                        this.bullets.push(new Bullet(x, y, speed, damage));
-                        score -= 1;
-                    }
-                
+
+                if (score > 0) {
+                    this.bullets.push(new Bullet(x, y, speed, damage));
+                    score -= 1;
+                }
+
 
                 this.timerTillNextBullet = delay;
             }
@@ -554,19 +578,19 @@ window.addEventListener('load', function () {
 
     }
     let geistertyp = [
-        new Geistertyp(3,4,this.document.getElementById('ghost1Image'),40),
-        new Geistertyp(1,3,this.document.getElementById('ghost2Image'),45),
-        new Geistertyp(3,4,this.document.getElementById('ghost3Image'),50),
-        new Geistertyp(1,10,this.document.getElementById('ghost4Image'),60),
-        new Geistertyp(1,6,this.document.getElementById('ghost5Image'),43),
-        new Geistertyp(3,4,this.document.getElementById('ghost6Image'),51),
-        new Geistertyp(1,1,this.document.getElementById('ghost7Image'),75),
-        new Geistertyp(1,2,this.document.getElementById('ghost8Image'),55),
+        new Geistertyp(3, 4, this.document.getElementById('ghost1Image'), 40),
+        new Geistertyp(1, 3, this.document.getElementById('ghost2Image'), 45),
+        new Geistertyp(3, 4, this.document.getElementById('ghost3Image'), 50),
+        new Geistertyp(1, 10, this.document.getElementById('ghost4Image'), 60),
+        new Geistertyp(1, 6, this.document.getElementById('ghost5Image'), 43),
+        new Geistertyp(3, 4, this.document.getElementById('ghost6Image'), 51),
+        new Geistertyp(1, 1, this.document.getElementById('ghost7Image'), 75),
+        new Geistertyp(1, 2, this.document.getElementById('ghost8Image'), 55),
     ];
 
     function handleGostes(deltaTime) {
         if (ghostTimer > ghostInterval + randomGhostInterval) {
-            ghosts.push(new Ghost(canvas.width, canvas.height,geistertyp[Math.floor(Math.random() * geistertyp.length)]));
+            ghosts.push(new Ghost(canvas.width, canvas.height, geistertyp[Math.floor(Math.random() * geistertyp.length)]));
             console.log(ghosts);
             randomGhostInterval = Math.random() * 1000 + 500;
             ghostTimer = 0;
@@ -578,7 +602,7 @@ window.addEventListener('load', function () {
         ghosts = ghosts.filter(ghost => !ghost.markedForDeletion);
     }
 
-   
+
 
     // function drawLife(context) {
     //     context.fillStyle = 'red';
@@ -587,65 +611,120 @@ window.addEventListener('load', function () {
 
 
     function displayStatusText(context) {
-        context.font = '40px Helvetica';
-        context.fillStyle = 'white';
-        context.fillText('Waffenladung: ' + score, 20, 50);
-        context.fillStyle = 'black';
-        context.fillText('Waffenladung: ' + score, 22, 52);
-        context.font = '40px Helvetica';
-        context.fillStyle = 'white';
-        /* context.fillText('life: ' + life, 50, 85);
-        context.fillStyle = 'black';
-        context.fillText('life: ' + life, 52, 87);
-        context.font = '40px Helvetica';
-        context.fillStyle = 'white'; */
-        context.fillText(geistertot + ' Geister', 1000, 50);
-        context.fillStyle = 'black';
-        context.fillText(geistertot + ' Geister', 1002, 52);
-        context.fillStyle = 'white';
-        context.clearRect(50, 85, 105, 25);
-        context.fillStyle = "white";
-        context.fillRect(50, 85, 105, 25);
-        context.fillStyle = 'red';
-        context.fillRect(52, 87, life, 20);
-        context.fillStyle = 'black';
-        
+        const font = new FontFace('CustomFont', 'url(PixelGamer/Web-TT/PixelGamer-Extrude.woff2)');
+        font.load().then(() => {
+        document.fonts.add(font);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
+        const font2 = new FontFace('CustomFont2', 'url(PixelGamer/Web-TT/PixelGamer-Half.woff2)');
+        font2.load().then(() => {
+        document.fonts.add(font2);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
+        const font3 = new FontFace('CustomFont3', 'url(PixelGamer/Web-TT/PixelGamer-Regular.woff2)');
+        font3.load().then(() => {
+        document.fonts.add(font3);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
 
-        ctx.font = 'bold 40px pixel';
+        context.font = '30px CustomFont';
+        context.fillStyle = 'white';
+        context.fillText('AMMO: ' , 120, 70);
+        context.font = '30px CustomFont3';
+        context.fillStyle = '#867ade';
+        context.fillText('AMMO: ' , 120, 70);
+        context.font = '30px CustomFont2';
+        context.fillStyle = '#ae51b6';
+        context.fillText('AMMO: ', 120, 70);
+
+        context.font = '30px CustomFont';
+        context.fillStyle = 'white';
+        context.fillText('HEALTH: ' , 120, 105);
+        context.font = '30px CustomFont3';
+        context.fillStyle = '#867ade';
+        context.fillText('HEALTH: ' , 120, 105);
+        context.font = '30px CustomFont2';
+        context.fillStyle = '#ae51b6';
+        context.fillText('HEALTH: ', 120, 105);
+
+
+        context.font = '40px CustomFont';
+        context.fillStyle = 'white';
+        context.fillText(geistertot + ' Geister', 1000, 50);
+        context.font = '40px CustomFont2';
+        context.fillStyle = 'black';
+        context.fillText(geistertot + ' Geister', 1000, 50);
+        context.font = '40px CustomFont3';
+        context.fillStyle = 'black';
+        context.fillText(geistertot + ' Geister', 1000, 50);
+
+
+       context.fillStyle = 'white';
+        context.clearRect(200, 85, 105, 25); 
+        context.fillStyle = "white";
+        context.fillRect(200, 85, 105, 25);
+        context.fillStyle = '#c18178';
+        context.fillRect(202, 87, life, 20);
+        context.fillStyle = 'black';
+
+        
+       /*  context.fillStyle = 'white';
+        context.clearRect(200, 48, 105, 25);   */
+        /* context.fillStyle = "white";
+        context.fillRect(200, 48, 105, 25); */
+        context.lineJoin = "bevel";
+        context.lineWidth = 3;
+        context.strokeStyle = "white";
+        context.strokeRect(202, 50, 100, 20);
+        context.fillStyle = '#867ade';
+        context.lineJoin = "bevel";
+        context.fillRect(202, 50, score, 20);
+        
+        context.fillStyle = 'black';
+       
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.fillText(gametimerstart,500, 50, 200/2, 50 / 2);
+        ctx.fillText(gametimerstart, 500, 50, 200 / 2, 50 / 2);
 
 
 
 
 
-        
-       
+
+
         if (gameOver) {
-            let endscrem  = document.getElementById('gameend');
+            let endscrem = document.getElementById('gameend');
             endscrem.style.display = "block";
             var gameOverButton = document.getElementById("spenden");
+            gameOverButton.style.width = "200px";
+            gameOverButton.style.height = "50px";
+            gameOverButton.style.top = "65%";
             gameOverButton.style.display = "block";
-            
-                document.getElementById('hintergrunsound').pause();
-                var restartbild= document.getElementById('restartbild');
-                restartbild.style.display = "block";
-                var restartButton = document.getElementById('restart');
-                restartButton.style.display = "block";
-                
-                document.getElementById('restart').addEventListener('click', function () {
-                    restartGame();
-                    restartButton.style.display = "none";
-                    restartbild.style.display = "none";
-                    endscrem.style.display = "none";
-                    gameOverButton.style.display = "none";
-                    
 
-                },{once: true});
-                
-            
-          
+            document.getElementById('hintergrunsound').pause();
+            var restartbild = document.getElementById('restartbild');
+            restartbild.style.display = "block";
+            var restartButton = document.getElementById('restart');
+            restartButton.style.display = "block";
+
+            document.getElementById('restart').addEventListener('click', function () {
+                restartGame();
+                restartButton.style.display = "none";
+                restartbild.style.display = "none";
+                endscrem.style.display = "none";
+                gameOverButton.style.display = "none";
+
+
+            }, { once: true });
+
+
+
             /* context.textAlign = 'center';
             context.fillStyle = 'white';
             context.fillText('GAME OVER', canvas.width / 2, 200); */
@@ -679,7 +758,7 @@ window.addEventListener('load', function () {
         document.getElementById('hintergrunsound').play();
         //document.getElementById('startsound').volume=50;
         gametimerstart = 0;
-        
+
         score = 0;
         life = 100;
         geistertot = 0;
@@ -687,31 +766,34 @@ window.addEventListener('load', function () {
         animate(0);
 
     }
-    function updateTimer(){
+    function updateTimer() {
         gametimerstart = gametimerstart + 1;
-        if(gametimerstart >= 50000){
-            ghostInterval -= Math.floor(gametimerstart / 10)
-            if (ghostInterval <= 50){
+        if (gametimerstart >= 50000) {
+            ghostInterval -= Math.floor(gametimerstart / 10)
+            if (ghostInterval <= 50) {
                 ghostInterval = 50;
-               
+
+            }
+            if (gametimerstart >= 70000) {
+                ghostInterval -= 400;
+            }
+            if (gametimerstart >= 100000) {
+                ghostInterval -= 10000;
+                if(gameOver){
+                    ghostInterval = 0;
+                }
+            }
         }
-        if(gametimerstart >= 70000){
-            ghostInterval -= 400;
-        }
-        if(gametimerstart >= 100000){
-            ghostInterval -= 10000;
-        }
-        }
-       
+
         console.log("intervale: " + ghostInterval);
     }
     function showImageForSeconds(imageId, seconds) {
         let steueranleitung = document.getElementById('steueranleitung');
         steueranleitung.style.display = "block";
-        setTimeout(function() {
+        setTimeout(function () {
             steueranleitung.style.display = "none";
         }, seconds * 1000);
-      }
+    }
     const input = new InputHandler();
     const bulletController = new BulletController(canvas);
     const player = new Player(canvas.width, canvas.height, bulletController);
@@ -724,8 +806,8 @@ window.addEventListener('load', function () {
     let ghostTimer = 0;
     let ghostInterval = 2780;
     let randomGhostInterval = Math.random() * 1080 + 470;
-    
-   
+
+
     // video.onended = function() {
     //     button.style.display = 'block';
     // };
@@ -756,8 +838,8 @@ window.addEventListener('load', function () {
             }
 
         });
-        
-        
+
+
         /* enemies.forEach(enemy => {
            if(player.collideWith(enemy)){
             const index = enemies.indexOf(enemy)
@@ -776,14 +858,14 @@ window.addEventListener('load', function () {
 
 
         displayStatusText(ctx);
-/* 
-        if (gameOver) {
-            endGame();
-        } */
+        /* 
+                if (gameOver) {
+                    endGame();
+                } */
 
         handleEnemies(deltaTime);
         handleGostes(deltaTime);
-        
+
 
 
         if (!gameOver) requestAnimationFrame(animate);
