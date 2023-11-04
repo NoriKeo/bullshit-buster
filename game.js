@@ -695,7 +695,7 @@ window.addEventListener('load', function () {
        
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.fillText(gametimerstart, 500, 50, 200 / 2, 50 / 2);
+        ctx.fillText(gametimerstart , 500, 50, 200 , 50 );
 
 
 
