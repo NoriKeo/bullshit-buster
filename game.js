@@ -225,7 +225,7 @@ window.addEventListener('load', function () {
 
 
             } */
-            else if (input.keys.includes('e') ) {
+            else if (input.keys.includes('e') || input.keys.includes('e') && input.keys.includes('w') ) {
                 this.shootPressed = true;
 
                 if (score < 0) {
@@ -335,14 +335,14 @@ window.addEventListener('load', function () {
 
     }
     class Enemy {
-        constructor(gameWidth, gameHeight) {
+        constructor(gameWidth, gameHeight, spawheigt) {
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;
             this.width = 160;
             this.height = 170;
             this.image = document.getElementById('enemyImage');
             this.x = this.gameWidth;
-            this.y = this.gameHeight - this.height;
+            this.y = this.gameHeight - this.height - Math.random() * 467;
             this.frameX = 0;
             this.speed = 4;
             this.markedForDeletion = false;
