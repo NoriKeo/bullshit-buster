@@ -485,8 +485,7 @@ window.addEventListener('load', function () {
             ctx.shadowColor = "red"; */
 
             ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.shadowColor = "#ffffff";
-            ctx.shadowBlur = 20;
+           
             /* ctx.shadowColor = "#d53";
             ctx.shadowBlur = 20;
             ctx.lineJoin = "bevel";
@@ -634,44 +633,50 @@ window.addEventListener('load', function () {
         });
 
         context.font = '30px CustomFont';
+        context.textAlign = 'left';
         context.fillStyle = 'white';
-        context.fillText('AMMO: ' , 120, 70);
+        context.fillText('AMMO: ' , 120, 50);
         context.font = '30px CustomFont3';
         context.fillStyle = '#867ade';
-        context.fillText('AMMO: ' , 120, 70);
+        context.fillText('AMMO: ' , 120, 50);
         context.font = '30px CustomFont2';
         context.fillStyle = '#ae51b6';
-        context.fillText('AMMO: ', 120, 70);
+        context.fillText('AMMO: ', 120, 50);
 
         context.font = '30px CustomFont';
+        context.textAlign = 'left';
         context.fillStyle = 'white';
-        context.fillText('HEALTH: ' , 120, 105);
+        context.fillText('HEALTH: ' , 120, 80);
         context.font = '30px CustomFont3';
         context.fillStyle = '#867ade';
-        context.fillText('HEALTH: ' , 120, 105);
+        context.fillText('HEALTH: ' , 120, 80);
         context.font = '30px CustomFont2';
         context.fillStyle = '#ae51b6';
-        context.fillText('HEALTH: ', 120, 105);
+        context.fillText('HEALTH: ', 120, 80);
 
 
-        context.font = '40px CustomFont';
+        
+        context.textAlign = 'right';
+        context.font = '30px CustomFont';
         context.fillStyle = 'white';
-        context.fillText(geistertot + ' Geister', 1000, 50);
-        context.font = '40px CustomFont2';
-        context.fillStyle = 'black';
-        context.fillText(geistertot + ' Geister', 1000, 50);
-        context.font = '40px CustomFont3';
-        context.fillStyle = 'black';
-        context.fillText(geistertot + ' Geister', 1000, 50);
+        context.fillText('ENEMIES: '+ geistertot, 1120, 50);
+        context.font = '30px CustomFont3';
+        context.fillStyle = '#867ade';
+        context.fillText('ENEMIES: '+ geistertot, 1120, 50);
+        context.font = '30px CustomFont2';
+        context.fillStyle = '#ae51b6';
+        context.fillText('ENEMIES: '+ geistertot, 1120, 50);
 
 
-       context.fillStyle = 'white';
-        context.clearRect(200, 85, 105, 25); 
-        context.fillStyle = "white";
-        context.fillRect(200, 85, 105, 25);
+       
+        context.lineJoin = "bevel";
+        context.lineWidth = 3.5;
+        context.strokeStyle = "white";
+        context.strokeRect(242, 60, 104, 21);
         context.fillStyle = '#c18178';
-        context.fillRect(202, 87, life, 20);
-        context.fillStyle = 'black';
+        context.lineJoin = "bevel";
+        context.fillRect(242, 60, life, 20);
+       
 
         
        /*  context.fillStyle = 'white';
@@ -679,12 +684,12 @@ window.addEventListener('load', function () {
         /* context.fillStyle = "white";
         context.fillRect(200, 48, 105, 25); */
         context.lineJoin = "bevel";
-        context.lineWidth = 3;
+        context.lineWidth = 3.5;
         context.strokeStyle = "white";
-        context.strokeRect(202, 50, 100, 20);
+        context.strokeRect(242, 30, 104, 21);
         context.fillStyle = '#867ade';
         context.lineJoin = "bevel";
-        context.fillRect(202, 50, score, 20);
+        context.fillRect(242, 30, score, 20);
         
         context.fillStyle = 'black';
        
