@@ -8,6 +8,8 @@ window.addEventListener('load', function () {
     // canvas.height = window.innerHeight; 
     canvas.width = 1300;
     canvas.height = 620;
+
+    var timerInterval = null;
     
     steueranleitung.width = 250;
     steueranleitung.height = 200;
@@ -20,11 +22,33 @@ window.addEventListener('load', function () {
     let enemies = [];
     let ghosts = [];
 
+	const font = new FontFace('CustomFont', 'url(PixelGamer/Web-TT/PixelGamer-Extrude.woff2)');
+        font.load().then(() => {
+        document.fonts.add(font);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
+        const font2 = new FontFace('CustomFont2', 'url(PixelGamer/Web-TT/PixelGamer-Half.woff2)');
+        font2.load().then(() => {
+        document.fonts.add(font2);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
+        const font3 = new FontFace('CustomFont3', 'url(PixelGamer/Web-TT/PixelGamer-Regular.woff2)');
+        font3.load().then(() => {
+        document.fonts.add(font3);
+        console.log('Font loaded successfully!');
+        }).catch((error) => {
+        console.log('Error loading font:', error);
+        });
 
-    let gametimer;
-    let gametimerstart = 0;
 
-
+    let gametimer = 0;
+    let gametimerstart = gametimer * 60;
+	
+	const countdownEl = document.getElementById('countdown');
 
     let score = 0;
     let life = 100;
@@ -610,27 +634,7 @@ window.addEventListener('load', function () {
 
 
     function displayStatusText(context) {
-        const font = new FontFace('CustomFont', 'url(PixelGamer/Web-TT/PixelGamer-Extrude.woff2)');
-        font.load().then(() => {
-        document.fonts.add(font);
-        console.log('Font loaded successfully!');
-        }).catch((error) => {
-        console.log('Error loading font:', error);
-        });
-        const font2 = new FontFace('CustomFont2', 'url(PixelGamer/Web-TT/PixelGamer-Half.woff2)');
-        font2.load().then(() => {
-        document.fonts.add(font2);
-        console.log('Font loaded successfully!');
-        }).catch((error) => {
-        console.log('Error loading font:', error);
-        });
-        const font3 = new FontFace('CustomFont3', 'url(PixelGamer/Web-TT/PixelGamer-Regular.woff2)');
-        font3.load().then(() => {
-        document.fonts.add(font3);
-        console.log('Font loaded successfully!');
-        }).catch((error) => {
-        console.log('Error loading font:', error);
-        });
+        
 
         context.font = '30px CustomFont';
         context.textAlign = 'left';
@@ -695,7 +699,12 @@ window.addEventListener('load', function () {
        
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.fillText(gametimerstart , 500, 50, 200 , 50 );
+
+        const minutes = Math.floor(gametimerstart/60);
+		let seconds = gametimerstart % 60;
+
+        ctx.fillText(`${minutes}: ${seconds}` , 500, 50, 200 , 50 );
+
 
 
 
@@ -755,6 +764,8 @@ window.addEventListener('load', function () {
     }
      */
     function restartGame() {
+        clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
         player.restart();
         background.restart();
         enemies = [];
@@ -763,7 +774,6 @@ window.addEventListener('load', function () {
         document.getElementById('hintergrunsound').play();
         //document.getElementById('startsound').volume=50;
         gametimerstart = 0;
-
         score = 0;
         life = 100;
         geistertot = 0;
@@ -772,7 +782,10 @@ window.addEventListener('load', function () {
 
     }
     function updateTimer() {
-        gametimerstart = gametimerstart + 1;
+		const minutes = Math.floor(gametimerstart/60);
+		let seconds = gametimerstart % 60;
+		gametimerstart++;
+        /* gametimerstart = gametimerstart + 1;
         if (gametimerstart >= 50000) {
             ghostInterval -= Math.floor(gametimerstart / 10)
             if (ghostInterval <= 50) {
@@ -790,7 +803,7 @@ window.addEventListener('load', function () {
             }
         }
 
-        console.log("intervale: " + ghostInterval);
+        console.log("intervale: " + ghostInterval); */
     }
     function showImageForSeconds(imageId, seconds) {
         let steueranleitung = document.getElementById('steueranleitung');
@@ -821,7 +834,7 @@ window.addEventListener('load', function () {
     function animate(timeStamp) {
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
-        gametimer = setInterval(updateTimer, 1000);
+        
         updateTimer();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         background.draw(ctx);
@@ -863,7 +876,7 @@ window.addEventListener('load', function () {
 
 
         displayStatusText(ctx);
-        /* 
+        /* setInterval
                 if (gameOver) {
                     endGame();
                 } */
@@ -884,6 +897,7 @@ window.addEventListener('load', function () {
         document.getElementById('startsound').play();
         document.getElementById('hintergrunsound').play();
         animate(0);
+		timerInterval = setInterval(updateTimer, 1000);
         console.log('Game Started!');
         this.disabled = true; // Disables the button after one click
         this.style.display = 'none';
