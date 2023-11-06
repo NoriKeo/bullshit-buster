@@ -15,8 +15,8 @@ window.addEventListener('load', function () {
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
-	restartbild.weight = 250;
-	restartbild.height = 50;
+	//restartbild.weight = 250;
+	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
 	startscreenhintergrund.style.height = canvas.height + 'px';
 	let enemies = [];
@@ -86,10 +86,12 @@ window.addEventListener('load', function () {
 			window.addEventListener('keydown', (e) => {
 				if (
 					(e.key === 's' ||
-						e.key === 'w' ||
+						e.key === ' ' ||
 						e.key === 'a' ||
 						e.key === 'd' ||
-						e.key === 'e') &&
+						e.key === 'f' ||
+                        e.key === 'ArrowRight'||
+                        e.key === 'ArrowLeft') &&
 					this.keys.indexOf(e.key) === -1
 				) {
 					this.keys.push(e.key);
@@ -101,10 +103,12 @@ window.addEventListener('load', function () {
 			window.addEventListener('keyup', (e) => {
 				if (
 					e.key === 's' ||
-					e.key === 'w' ||
+					e.key === ' ' ||
 					e.key === 'a' ||
 					e.key === 'd' ||
-					e.key === 'e'
+					e.key === 'f' ||
+                    e.key === 'ArrowRight'||
+                    e.key === 'ArrowLeft'
 				) {
 					this.keys.splice(this.keys.indexOf(e.key), 1);
 				}
@@ -194,9 +198,12 @@ window.addEventListener('load', function () {
 				const dy = enemy.y + enemy.height / 4 - (this.y + this.height / 4);
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < enemy.width / 4 + this.width / 4) {
+                    
 					score++;
+					console.log('munition' + score);
 					const index = enemies.indexOf(enemy);
 					enemies.splice(index, 1);
+                    document.getElementById('item').play();
 					//enemy.drawImage = false;
 					//removeImage();
 				}
@@ -224,9 +231,9 @@ window.addEventListener('load', function () {
                  this.frameTimer += deltaTime;
              } */
 
-			if (input.keys.indexOf('d') > -1) {
+			if (input.keys.indexOf('d') > -1 || input.keys.indexOf('ArrowRight') > -1 ) {
 				this.speed = 3;
-			} else if (input.keys.indexOf('a') > -1) {
+			} else if (input.keys.indexOf('a') > -1 || input.keys.indexOf('ArrowLeft') > -1) {
 				this.speed = -3;
 				//&& this.onGround()
 			} else if (input.keys.indexOf('s') > -1) {
@@ -245,8 +252,8 @@ window.addEventListener('load', function () {
 
 
             } */ else if (
-				input.keys.includes('e') ||
-				(input.keys.includes('e') && input.keys.includes('w'))
+				input.keys.includes('f') ||
+				(input.keys.includes('f') && input.keys.includes(' ')) || input.keys.indexOf('d') > -1 && input.keys.includes('f') || input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('f')
 			) {
 				this.shootPressed = true;
 
@@ -278,7 +285,7 @@ window.addEventListener('load', function () {
 				this.vy += this.weight;
 				this.maxFrame = 5;
 			} else if (
-				input.keys.indexOf('w') > -1 ||
+				input.keys.indexOf(' ') > -1 ||
 				(input.keys.indexOf('swipe up') > -1 && this.onGround())
 			) {
 				this.vy -= 20;
@@ -300,7 +307,7 @@ window.addEventListener('load', function () {
 		}
 		shoot() {
 			if (this.shootPressed) {
-				console.log('shoot');
+				
 				const speed = 5;
 				const delay = 2;
 				const damage = 1;
@@ -651,6 +658,10 @@ window.addEventListener('load', function () {
 		// time
 		let minutes = Math.floor(gametimerstart / 60) % 60;
 		let seconds = Math.floor(gametimerstart) % 60;
+        
+        context.fillStyle = '40px CustomFont';
+        ctx.fillStyle = 'white';
+        //context.fillText('__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ', 1160,120);
 
 		if (seconds < 10) {
 			seconds = `0${seconds}`;
@@ -687,19 +698,27 @@ window.addEventListener('load', function () {
 
 		// timer
 
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            document.querySelector('body').style.overscrollBehaviorY = 'contain';
+            window.scrollTo(0,1);
+          }
+
 		if (gameOver) {
 			let endscrem = document.getElementById('gameend');
 			endscrem.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
-			gameOverButton.style.width = '200px';
-			gameOverButton.style.height = '50px';
-			gameOverButton.style.top = '65%';
+			gameOverButton.style.width = '320px';
+			gameOverButton.style.height = '300px';
+			
 			gameOverButton.style.display = 'block';
 
 			document.getElementById('hintergrunsound').pause();
-			var restartbild = document.getElementById('restartbild');
-			restartbild.style.display = 'block';
+			//var restartbild = document.getElementById('restartbild');
+			//restartbild.style.display = 'block';
 			var restartButton = document.getElementById('restart');
+            restartButton.style.width = '170px';
+            restartButton.style.height = '50px';
+            
 			restartButton.style.display = 'block';
 
 			document.getElementById('restart').addEventListener(
@@ -755,17 +774,17 @@ window.addEventListener('load', function () {
 	function updateTimer() {
 		console.log('tick');
 		gametimerstart++;
-		/* gametimerstart = gametimerstart + 1;
-        if (gametimerstart >= 50000) {
-            ghostInterval -= Math.floor(gametimerstart / 10)
-            if (ghostInterval <= 50) {
+		 gametimerstart = gametimerstart + 1;
+        if (geistertot >= 5) {
+            ghostInterval = 1000;
+            if (geistertot <= 15) {
                 ghostInterval = 50;
 
             }
-            if (gametimerstart >= 70000) {
+            if (geistertot >= 20) {
                 ghostInterval -= 400;
             }
-            if (gametimerstart >= 100000) {
+            if (geistertot >= 50) {
                 ghostInterval -= 10000;
                 if(gameOver){
                     ghostInterval = 0;
@@ -773,7 +792,7 @@ window.addEventListener('load', function () {
             }
         }
 
-        console.log("intervale: " + ghostInterval); */
+        //console.log("intervale: " + ghostInterval); 
 	}
 	function showImageForSeconds(imageId, seconds) {
 		let steueranleitung = document.getElementById('steueranleitung');
@@ -839,10 +858,12 @@ window.addEventListener('load', function () {
                 if (gameOver) {
                     endGame();
                 } */
-
-		handleCoins(deltaTime);
-		handleGhosts(deltaTime);
-
+                setTimeout(function() {
+                   
+                    handleGhosts(deltaTime);
+            
+                  }, 5000);
+                  handleCoins(deltaTime);
 		if (!gameOver) requestAnimationFrame(animate);
 	}
 	document.getElementById('startButton').addEventListener('click', function () {
@@ -850,7 +871,9 @@ window.addEventListener('load', function () {
 		showImageForSeconds('steueranleitung', 5);
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
+        
 		animate(0);
+        
 		timerInterval = setInterval(updateTimer, 1000);
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
