@@ -15,7 +15,7 @@ window.addEventListener('load', function () {
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
-    gameplay = false;
+	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
@@ -195,18 +195,21 @@ window.addEventListener('load', function () {
 			);
 			this.shoot();
 		}
-		update(input, enemies) {
-			enemies.forEach((enemy) => {
-				const dx = enemy.x + enemy.width / 4 - (this.x + this.width / 4);
-				const dy = enemy.y + enemy.height / 4 - (this.y + this.height / 4);
+		update(input, coins) {
+			coins.forEach((coin) => {
+				const dx = coin.x + coin.width / 4 - (this.x + this.width / 4);
+				const dy = coin.y + coin.height / 4 - (this.y + this.height / 4);
 				const distance = Math.sqrt(dx * dx + dy * dy);
-				if (distance < enemy.width / 4 + this.width / 4) {
+				if (distance < coin.width / 4 + this.width / 4) {
 					score++;
+
+					document.getElementById('item').pause();
+					document.getElementById('item').currentTime = 0;
 					document.getElementById('item').play();
 					console.log('munition' + score);
-					const index = enemies.indexOf(enemy);
-					enemies.splice(index, 1);
-					
+					const index = coins.indexOf(coin);
+					coins.splice(index, 1);
+
 					//enemy.drawImage = false;
 					//removeImage();
 				}
@@ -282,7 +285,6 @@ window.addEventListener('load', function () {
 				function (event) {
 					this.shootPressed = true;
 					// Handle touchstart event for shooting
-					
 				}.bind(this)
 			);
 
@@ -509,7 +511,7 @@ window.addEventListener('load', function () {
 			this.y = y;
 			this.speed = speed;
 			this.damage = damage;
-			
+
 			this.width = 15;
 			this.height = 5;
 			this.color = this.color[Math.floor(Math.random() * this.color.length)];
@@ -809,7 +811,7 @@ window.addEventListener('load', function () {
 
 		//console.log("intervale: " + ghostInterval);
 	}
-	
+
 	const input = new InputHandler();
 	const bulletController = new BulletController(canvas);
 	const player = new Player(canvas.width, canvas.height, bulletController);
@@ -885,35 +887,37 @@ window.addEventListener('load', function () {
 		if (
 			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 				navigator.userAgent
-			)){
-				steueranleitunghandy.style.display ='block';
-
-		}else{
-
-		steueranleitung.style.display = 'block';
+			)
+		) {
+			steueranleitunghandy.style.display = 'block';
+		} else {
+			steueranleitung.style.display = 'block';
 		}
-		
+
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
-        
-		document.addEventListener('keydown', function(event) {
-            if (event.code === 'Enter') {
-                steueranleitung.style.display = 'none';
-				steueranleitunghandy.style.display = 'none';
-				if(gameplay == false){
-					animate(0);
-				}
-				
-            }});
-			document.addEventListener('touchstart', function(event) {
+
+		document.addEventListener('keydown', function (event) {
+			if (event.code === 'Enter') {
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
-				
-				if(gameplay == false){
+				if (gameplay == false) {
 					animate(0);
 				}
-			  }.bind(this));
-            
+			}
+		});
+		document.addEventListener(
+			'touchstart',
+			function (event) {
+				steueranleitung.style.display = 'none';
+				steueranleitunghandy.style.display = 'none';
+
+				if (gameplay == false) {
+					animate(0);
+				}
+			}.bind(this)
+		);
+
 		timerInterval = setInterval(updateTimer, 1000);
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
