@@ -4,10 +4,10 @@ window.addEventListener('load', function () {
 	const highScore = localStorage.getItem('highScore') || 0;
 	const ctx = canvas.getContext('2d');
 
-	// canvas.width = window.innerWidth;
+	 //canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
-	canvas.width = 1300;
-	canvas.height = 620;
+	 canvas.width = 1300;
+	canvas.height = 620; 
 
 	var timerInterval = null;
 
@@ -15,6 +15,8 @@ window.addEventListener('load', function () {
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
+	
+	
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
@@ -707,7 +709,7 @@ window.addEventListener('load', function () {
 			let endscrem = document.getElementById('gameend');
 			endscrem.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
-			gameOverButton.style.width = '320px';
+			gameOverButton.style.width = '375px';
 			gameOverButton.style.height = '300px';
 			
 			gameOverButton.style.display = 'block';
@@ -866,6 +868,13 @@ window.addEventListener('load', function () {
                   handleCoins(deltaTime);
 		if (!gameOver) requestAnimationFrame(animate);
 	}
+	
+	
+	// Apply the new size and position to the button
+	var starten = document.getElementById('startButton');
+	starten.style.width = (canvas.widthb * 0.2) + 'px';
+	starten.style.height = (canvas.height * 0.1) + 'px';
+	
 	document.getElementById('startButton').addEventListener('click', function () {
 		// Insert game start logic here
 		showImageForSeconds('steueranleitung', 5);
