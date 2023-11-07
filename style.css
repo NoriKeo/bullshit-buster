@@ -35,7 +35,7 @@ body {
 	display: none;
 }
 
-#steueranleitung {
+#steueranleitung, #steueranleitunghandy {
 	display: none;
 	position: absolute;
 	top: 50%;

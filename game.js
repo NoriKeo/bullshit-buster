@@ -279,8 +279,9 @@ window.addEventListener('load', function () {
 			document.addEventListener(
 				'touchstart',
 				function (event) {
+					
 					// Handle touchstart event for shooting
-					this.shootPressed = true;
+					
 				}.bind(this)
 			);
 
@@ -878,17 +879,35 @@ window.addEventListener('load', function () {
 	document.getElementById('startButton').addEventListener('click', function () {
 		// Insert game start logic here
 		let steueranleitung = document.getElementById('steueranleitung');
+		let steueranleitunghandy = document.getElementById('steueranleitunghandy');
+
+		if (
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent
+			)){
+				steueranleitunghandy.style.display ='block';
+
+		}else{
+
 		steueranleitung.style.display = 'block';
+		}
 		
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
 		document.addEventListener('keydown', function(event) {
             if (event.code === 'Enter') {
                 steueranleitung.style.display = 'none';
+				steueranleitunghandy.style.display = 'none';
         
         
           animate(0);
             }});
+			document.addEventListener('touchstart', function(event) {
+				steueranleitung.style.display = 'none';
+				steueranleitunghandy.style.display = 'none';
+				// start playing game
+				animate(0);
+			  });
 		
 
 		timerInterval = setInterval(updateTimer, 1000);
