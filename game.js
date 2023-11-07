@@ -15,7 +15,7 @@ window.addEventListener('load', function () {
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
-
+    gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
@@ -202,10 +202,11 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < enemy.width / 4 + this.width / 4) {
 					score++;
+					document.getElementById('item').play();
 					console.log('munition' + score);
 					const index = enemies.indexOf(enemy);
 					enemies.splice(index, 1);
-					document.getElementById('item').play();
+					
 					//enemy.drawImage = false;
 					//removeImage();
 				}
@@ -279,7 +280,7 @@ window.addEventListener('load', function () {
 			document.addEventListener(
 				'touchstart',
 				function (event) {
-					
+					this.shootPressed = true;
 					// Handle touchstart event for shooting
 					
 				}.bind(this)
@@ -508,7 +509,7 @@ window.addEventListener('load', function () {
 			this.y = y;
 			this.speed = speed;
 			this.damage = damage;
-
+			
 			this.width = 15;
 			this.height = 5;
 			this.color = this.color[Math.floor(Math.random() * this.color.length)];
@@ -829,7 +830,7 @@ window.addEventListener('load', function () {
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
 		lastTime = timeStamp;
-
+		gameplay = true;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		background.draw(ctx);
 		background.update(input);
@@ -894,22 +895,25 @@ window.addEventListener('load', function () {
 		
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
+        
 		document.addEventListener('keydown', function(event) {
             if (event.code === 'Enter') {
                 steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
-        
-        
-          animate(0);
+				if(gameplay == false){
+					animate(0);
+				}
+				
             }});
 			document.addEventListener('touchstart', function(event) {
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
-				// start playing game
-				animate(0);
+				
+				if(gameplay == false){
+					animate(0);
+				}
 			  }.bind(this));
-		
-
+            
 		timerInterval = setInterval(updateTimer, 1000);
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
