@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
 
 	var timerInterval = null;
 
-	steueranleitung.width = 250;
+	steueranleitung.width = 350;
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
@@ -807,13 +807,7 @@ window.addEventListener('load', function () {
 
 		//console.log("intervale: " + ghostInterval);
 	}
-	function showImageForSeconds(imageId, seconds) {
-		let steueranleitung = document.getElementById('steueranleitung');
-		steueranleitung.style.display = 'block';
-		setTimeout(function () {
-			steueranleitung.style.display = 'none';
-		}, seconds * 1000);
-	}
+	
 	const input = new InputHandler();
 	const bulletController = new BulletController(canvas);
 	const player = new Player(canvas.width, canvas.height, bulletController);
@@ -883,11 +877,19 @@ window.addEventListener('load', function () {
 
 	document.getElementById('startButton').addEventListener('click', function () {
 		// Insert game start logic here
-		showImageForSeconds('steueranleitung');
+		let steueranleitung = document.getElementById('steueranleitung');
+		steueranleitung.style.display = 'block';
+		
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
-
-		animate(0);
+		document.addEventListener('keydown', function(event) {
+            if (event.code === 'Enter') {
+                steueranleitung.style.display = 'none';
+        
+        
+          animate(0);
+            }});
+		
 
 		timerInterval = setInterval(updateTimer, 1000);
 		console.log('Game Started!');
