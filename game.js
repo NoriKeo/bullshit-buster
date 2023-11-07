@@ -91,9 +91,10 @@ window.addEventListener('load', function () {
 						e.key === ' ' ||
 						e.key === 'a' ||
 						e.key === 'd' ||
-						e.key === 'f' ||
+						e.key === 'e' ||
                         e.key === 'ArrowRight'||
-                        e.key === 'ArrowLeft') &&
+                        e.key === 'ArrowLeft'||
+						e.key === 'Enter') &&
 					this.keys.indexOf(e.key) === -1
 				) {
 					this.keys.push(e.key);
@@ -108,9 +109,10 @@ window.addEventListener('load', function () {
 					e.key === ' ' ||
 					e.key === 'a' ||
 					e.key === 'd' ||
-					e.key === 'f' ||
+					e.key === 'e' ||
                     e.key === 'ArrowRight'||
-                    e.key === 'ArrowLeft'
+                    e.key === 'ArrowLeft' ||
+					e.key === 'Enter'
 				) {
 					this.keys.splice(this.keys.indexOf(e.key), 1);
 				}
@@ -254,8 +256,8 @@ window.addEventListener('load', function () {
 
 
             } */ else if (
-				input.keys.includes('f') ||
-				(input.keys.includes('f') && input.keys.includes(' ')) || input.keys.indexOf('d') > -1 && input.keys.includes('f') || input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('f')
+				input.keys.includes('e') ||
+				(input.keys.includes('e') && input.keys.includes(' ')) || input.keys.indexOf('d') > -1 && input.keys.includes('e') || input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e')
 			) {
 				this.shootPressed = true;
 
@@ -877,7 +879,7 @@ window.addEventListener('load', function () {
 	
 	document.getElementById('startButton').addEventListener('click', function () {
 		// Insert game start logic here
-		showImageForSeconds('steueranleitung', 5);
+		showImageForSeconds('steueranleitung');
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
         
