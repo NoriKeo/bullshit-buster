@@ -907,7 +907,7 @@ window.addEventListener('load', function () {
 				steueranleitunghandy.style.display = 'none';
 				// start playing game
 				animate(0);
-			  });
+			  }.bind(this));
 		
 
 		timerInterval = setInterval(updateTimer, 1000);
