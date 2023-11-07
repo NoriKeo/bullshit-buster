@@ -1,136 +1,130 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body{
-    background: black;
+body {
+	background: black;
 }
 
-#canvas1{
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    outline: 5px solid white;
-    max-width: 100%;
-    max-height: 100%;
+#canvas1 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	outline: 5px solid white;
+	max-width: 100%;
+	max-height: 100%;
 }
-#playerImage,#backgroundImage,#enemyImage,#geldImage{
-    display: none;
+#playerImage,
+#backgroundImage,
+#enemyImage,
+#geldImage {
+	display: none;
 }
-#ghost1Image,#ghost2Image,#ghost3Image,#ghost4Image,#ghost5Image,#ghost6Image,#ghost7Image,#ghost8Image{
-    animation: upAndDown 2s infinite;
-    display: none;
-   
+#ghost1Image,
+#ghost2Image,
+#ghost3Image,
+#ghost4Image,
+#ghost5Image,
+#ghost6Image,
+#ghost7Image,
+#ghost8Image {
+	animation: upAndDown 2s infinite;
+	display: none;
+}
 
-}
+#steueranleitung {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 
-#steueranleitung{
-    display: none;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-   
-    transform: translate(-50%,-50%);
-    outline: 5px solid white;
-    max-width: 100%;
-    max-height: 100%;
-    
-     
-   /*  justify-content: center;   
+	transform: translate(-50%, -50%);
+	outline: 5px solid white;
+	max-width: 100%;
+	max-height: 100%;
+
+	/*  justify-content: center;   
     align-items: center; */
 }
-#gameend{
-    display: none;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    
-    transform: translate(-50%,-50%);
-    max-width: 100%;
-    max-height: 100%;
-    
-}
-#spenden{
-    background-color: transparent; 
-    display: none;
-    outline: none;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-   
-    
-    transform: translate(-50%,-50%);
-    max-width: 100%;
-    max-height: 100%;
-   
-}
-#restartbild{
-    display: none;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    
-    transform: translate(-50%,-50%);
-    
-    max-width: 100%;
-    max-height: 100%;
+#gameend {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
 }
-#restart{
-    background-color: transparent; 
-    display: none;
-    position: absolute; 
-    top: 70%;
-    left: 50%;
-    
-    transform: translate(-50%,-50%);
-    max-width: 100%;
-    max-height: 100%;
+#spenden {
+	background-color: transparent;
+	display: none;
+	outline: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
 }
-#startButton{
-    background-color: transparent; 
-    border: none;
-    color: rgb(187, 29, 29);
-    position: absolute; 
-    width: 178px;
-	height: 80px; 
-    top: 52%;
-    left: 75%;
-    transform: translate(-50%,-50px);
-    
-   /*  height: 80px;
+#restartbild {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+	max-width: 100%;
+	max-height: 100%;
+}
+#restart {
+	background-color: transparent;
+	display: none;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+}
+#startButton {
+	background-color: transparent;
+	border: none;
+	color: rgb(187, 29, 29);
+	position: absolute;
+	width: 100vw;
+	height: 70vh;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	outline: rebeccapurple solid 5px;
+
+	/*  height: 80px;
     width: 178px; */
-    max-width: 100%;
-    max-height: 100%; 
+	max-width: 100%;
+	max-height: 100%;
 }
-    
-#starthintergrund{
-    opacity: 0.8;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    /* width: 1300px;
+
+#starthintergrund {
+	opacity: 0.8;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* width: 1300px;
     height: 620px; */
-    max-width: 100%;
-    max-height: 100%;
-
+	max-width: 100%;
+	max-height: 100%;
 }
 
-    
-
-
-#highScoreDisplay{
-    font-size: 20px;
-    color: #ff0000;
-    font-weight: bold;
-
+#highScoreDisplay {
+	font-size: 20px;
+	color: #ff0000;
+	font-weight: bold;
 }
-
-
-
-  

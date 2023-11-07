@@ -4,10 +4,10 @@ window.addEventListener('load', function () {
 	const highScore = localStorage.getItem('highScore') || 0;
 	const ctx = canvas.getContext('2d');
 
-	 //canvas.width = window.innerWidth;
+	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
-	 canvas.width = 1300;
-	canvas.height = 620; 
+	canvas.width = 1300;
+	canvas.height = 620;
 
 	var timerInterval = null;
 
@@ -15,13 +15,12 @@ window.addEventListener('load', function () {
 	steueranleitung.height = 200;
 	gameend.weight = 350;
 	gameend.height = 300;
-	
-	
+
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
 	startscreenhintergrund.style.height = canvas.height + 'px';
-	let enemies = [];
+	let coins = [];
 	let ghosts = [];
 
 	const font = new FontFace(
@@ -92,8 +91,8 @@ window.addEventListener('load', function () {
 						e.key === 'a' ||
 						e.key === 'd' ||
 						e.key === 'e' ||
-                        e.key === 'ArrowRight'||
-                        e.key === 'ArrowLeft'||
+						e.key === 'ArrowRight' ||
+						e.key === 'ArrowLeft' ||
 						e.key === 'Enter') &&
 					this.keys.indexOf(e.key) === -1
 				) {
@@ -110,8 +109,8 @@ window.addEventListener('load', function () {
 					e.key === 'a' ||
 					e.key === 'd' ||
 					e.key === 'e' ||
-                    e.key === 'ArrowRight'||
-                    e.key === 'ArrowLeft' ||
+					e.key === 'ArrowRight' ||
+					e.key === 'ArrowLeft' ||
 					e.key === 'Enter'
 				) {
 					this.keys.splice(this.keys.indexOf(e.key), 1);
@@ -202,12 +201,11 @@ window.addEventListener('load', function () {
 				const dy = enemy.y + enemy.height / 4 - (this.y + this.height / 4);
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < enemy.width / 4 + this.width / 4) {
-                    
 					score++;
 					console.log('munition' + score);
 					const index = enemies.indexOf(enemy);
 					enemies.splice(index, 1);
-                    document.getElementById('item').play();
+					document.getElementById('item').play();
 					//enemy.drawImage = false;
 					//removeImage();
 				}
@@ -235,9 +233,15 @@ window.addEventListener('load', function () {
                  this.frameTimer += deltaTime;
              } */
 
-			if (input.keys.indexOf('d') > -1 || input.keys.indexOf('ArrowRight') > -1 ) {
+			if (
+				input.keys.indexOf('d') > -1 ||
+				input.keys.indexOf('ArrowRight') > -1
+			) {
 				this.speed = 3;
-			} else if (input.keys.indexOf('a') > -1 || input.keys.indexOf('ArrowLeft') > -1) {
+			} else if (
+				input.keys.indexOf('a') > -1 ||
+				input.keys.indexOf('ArrowLeft') > -1
+			) {
 				this.speed = -3;
 				//&& this.onGround()
 			} else if (input.keys.indexOf('s') > -1) {
@@ -257,7 +261,9 @@ window.addEventListener('load', function () {
 
             } */ else if (
 				input.keys.includes('e') ||
-				(input.keys.includes('e') && input.keys.includes(' ')) || input.keys.indexOf('d') > -1 && input.keys.includes('e') || input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e')
+				(input.keys.includes('e') && input.keys.includes(' ')) ||
+				(input.keys.indexOf('d') > -1 && input.keys.includes('e')) ||
+				(input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e'))
 			) {
 				this.shootPressed = true;
 
@@ -311,7 +317,6 @@ window.addEventListener('load', function () {
 		}
 		shoot() {
 			if (this.shootPressed) {
-				
 				const speed = 5;
 				const delay = 2;
 				const damage = 1;
@@ -342,13 +347,13 @@ window.addEventListener('load', function () {
 
 	class Background {
 		constructor(gameWidth, gameHeight) {
-			this.gameWidth = canvas.width;
-			this.gameHeight = canvas.height;
+			this.gameWidth = gameWidth;
+			this.gameHeight = gameHeight;
 			this.image = document.getElementById('backgroundImage');
 			this.x = 0;
 			this.y = 0;
-			this.width = 1200;
-			this.height = 620;
+			this.width = gameWidth;
+			this.height = gameHeight;
 			this.speed = 3;
 		}
 		draw(context) {
@@ -369,8 +374,8 @@ window.addEventListener('load', function () {
 			this.x = 0;
 		}
 	}
-	class Enemy {
-		constructor(gameWidth, gameHeight, spawheigt) {
+	class Coin {
+		constructor(gameWidth, gameHeight) {
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
 			this.width = 160;
@@ -584,22 +589,23 @@ window.addEventListener('load', function () {
 	}
 
 	function handleCoins(deltaTime) {
-		if (enemyTimer > enemyInterval + randomEnemyInterval) {
-			enemies.push(new Enemy(canvas.width, canvas.height));
+		if (coinTimer > coinInterval + randomCoinInterval) {
+			coins.push(new Coin(canvas.width, canvas.height));
 			// console.log(enemies);
-			randomEnemyInterval = Math.random() * 1000 + 500;
-			enemyTimer = 0;
+			randomCoinInterval = Math.random() * 1000 + 500;
+			coinTimer = 0;
 		} else {
-			enemyTimer += deltaTime;
+			coinTimer += deltaTime;
 		}
 
-		enemies.forEach((enemy) => {
-			enemy.draw(ctx);
-			enemy.update();
+		coins.forEach((coin) => {
+			coin.draw(ctx);
+			coin.update();
 		});
-		enemies = enemies.filter((enemy) => !enemy.markedForDeletion);
+		coins = coins.filter((coin) => !coin.markedForDeletion);
 	}
-	let geistertyp = [
+
+	const geistertyp = [
 		new Geistertyp(3, 4, this.document.getElementById('ghost1Image'), 40),
 		new Geistertyp(1, 3, this.document.getElementById('ghost2Image'), 45),
 		new Geistertyp(3, 4, this.document.getElementById('ghost3Image'), 50),
@@ -662,10 +668,10 @@ window.addEventListener('load', function () {
 		// time
 		let minutes = Math.floor(gametimerstart / 60) % 60;
 		let seconds = Math.floor(gametimerstart) % 60;
-        
-        context.fillStyle = '40px CustomFont';
-        ctx.fillStyle = 'white';
-        //context.fillText('__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ', 1160,120);
+
+		context.fillStyle = '40px CustomFont';
+		ctx.fillStyle = 'white';
+		//context.fillText('__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ', 1160,120);
 
 		if (seconds < 10) {
 			seconds = `0${seconds}`;
@@ -702,10 +708,14 @@ window.addEventListener('load', function () {
 
 		// timer
 
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-            document.querySelector('body').style.overscrollBehaviorY = 'contain';
-            window.scrollTo(0,1);
-          }
+		if (
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent
+			)
+		) {
+			document.querySelector('body').style.overscrollBehaviorY = 'contain';
+			window.scrollTo(0, 1);
+		}
 
 		if (gameOver) {
 			let endscrem = document.getElementById('gameend');
@@ -713,16 +723,16 @@ window.addEventListener('load', function () {
 			var gameOverButton = document.getElementById('spenden');
 			gameOverButton.style.width = '375px';
 			gameOverButton.style.height = '300px';
-			
+
 			gameOverButton.style.display = 'block';
 
 			document.getElementById('hintergrunsound').pause();
 			//var restartbild = document.getElementById('restartbild');
 			//restartbild.style.display = 'block';
 			var restartButton = document.getElementById('restart');
-            restartButton.style.width = '170px';
-            restartButton.style.height = '50px';
-            
+			restartButton.style.width = '170px';
+			restartButton.style.height = '50px';
+
 			restartButton.style.display = 'block';
 
 			document.getElementById('restart').addEventListener(
@@ -763,7 +773,7 @@ window.addEventListener('load', function () {
 		timerInterval = setInterval(updateTimer, 1000);
 		player.restart();
 		background.restart();
-		enemies = [];
+		coins = [];
 		ghosts = [];
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
@@ -778,25 +788,24 @@ window.addEventListener('load', function () {
 	function updateTimer() {
 		console.log('tick');
 		gametimerstart++;
-		 gametimerstart = gametimerstart + 1;
-        if (geistertot >= 5) {
-            ghostInterval = 1000;
-            if (geistertot <= 15) {
-                ghostInterval = 50;
+		gametimerstart = gametimerstart + 1;
+		if (geistertot >= 5) {
+			ghostInterval = 1000;
+			if (geistertot <= 15) {
+				ghostInterval = 50;
+			}
+			if (geistertot >= 20) {
+				ghostInterval -= 400;
+			}
+			if (geistertot >= 50) {
+				ghostInterval -= 10000;
+				if (gameOver) {
+					ghostInterval = 0;
+				}
+			}
+		}
 
-            }
-            if (geistertot >= 20) {
-                ghostInterval -= 400;
-            }
-            if (geistertot >= 50) {
-                ghostInterval -= 10000;
-                if(gameOver){
-                    ghostInterval = 0;
-                }
-            }
-        }
-
-        //console.log("intervale: " + ghostInterval); 
+		//console.log("intervale: " + ghostInterval);
 	}
 	function showImageForSeconds(imageId, seconds) {
 		let steueranleitung = document.getElementById('steueranleitung');
@@ -811,9 +820,9 @@ window.addEventListener('load', function () {
 	const background = new Background(canvas.width, canvas.height);
 
 	let lastTime = 0;
-	let enemyTimer = 0;
-	let enemyInterval = 80;
-	let randomEnemyInterval = Math.random() * 1000 + 500;
+	let coinTimer = 0;
+	let coinInterval = 80;
+	let randomCoinInterval = Math.random() * 1000 + 500;
 	let ghostTimer = 0;
 	let ghostInterval = 2780;
 	let randomGhostInterval = Math.random() * 1080 + 470;
@@ -831,7 +840,7 @@ window.addEventListener('load', function () {
 		background.update(input);
 		bulletController.draw(ctx);
 		player.draw(ctx);
-		player.update(input, enemies);
+		player.update(input, coins);
 		ghosts.forEach((ghost) => {
 			if (bulletController.collideWith(ghost)) {
 				if (ghost.health <= 0) {
@@ -862,29 +871,24 @@ window.addEventListener('load', function () {
                 if (gameOver) {
                     endGame();
                 } */
-                setTimeout(function() {
-                   
-                    handleGhosts(deltaTime);
-            
-                  }, 5000);
-                  handleCoins(deltaTime);
+		setTimeout(function () {
+			handleGhosts(deltaTime);
+		}, 5000);
+		handleCoins(deltaTime);
 		if (!gameOver) requestAnimationFrame(animate);
 	}
-	
-	
+
 	// Apply the new size and position to the button
 	var starten = document.getElementById('startButton');
-	starten.style.width = (canvas.widthb * 0.2) + 'px';
-	starten.style.height = (canvas.height * 0.1) + 'px';
-	
+
 	document.getElementById('startButton').addEventListener('click', function () {
 		// Insert game start logic here
 		showImageForSeconds('steueranleitung');
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
-        
+
 		animate(0);
-        
+
 		timerInterval = setInterval(updateTimer, 1000);
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
