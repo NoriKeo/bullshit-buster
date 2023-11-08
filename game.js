@@ -512,7 +512,7 @@ window.addEventListener('load', function () {
 	}
 
 	class Bullet {
-		color = ['blue', 'purple', 'yellow', 'orange', 'pink'];
+		color = [ 'purple', 'yellow', 'orange', 'pink'];
 		constructor(x, y, speed, damage) {
 			this.x = x;
 			this.y = y;
@@ -527,14 +527,14 @@ window.addEventListener('load', function () {
 			
 			ctx.fillStyle = this.color;
 			this.x += this.speed;
-			ctx.shadowColor = 'black';
+			ctx.shadowColor = this.color;
 			ctx.shadowBlur = 10;
-			ctx.shadowOffsetX = 5;
-			ctx.shadowOffsetY = 5;
-			
+			/* ctx.shadowOffsetX = 5;
+			ctx.shadowOffsetY = 5; */
+			ctx.lineJoin = 'bevel';
 			ctx.fillRect(this.x, this.y, this.width, this.height);
-			ctx.shadowBlur = 0;
 			
+			ctx.shadowColor = "transparent";
 		}
 		collideWith(sprite) {
 			if (
@@ -670,6 +670,7 @@ window.addEventListener('load', function () {
 	}
 
 	function displayStatusText(context) {
+		
 		// ammo
 		drawFancyText('AMMO: ', 120, 50, 'left');
 
