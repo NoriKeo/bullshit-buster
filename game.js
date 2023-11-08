@@ -10,9 +10,10 @@ window.addEventListener('load', function () {
 	canvas.height = 620;
 
 	var timerInterval = null;
-
+	coinwert = 2;
 	steueranleitung.width = 350;
 	steueranleitung.height = 200;
+	//to do handy größe
 	gameend.weight = 350;
 	gameend.height = 300;
 	gameplay = false;
@@ -201,8 +202,8 @@ window.addEventListener('load', function () {
 				const dy = coin.y + coin.height / 4 - (this.y + this.height / 4);
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < coin.width / 4 + this.width / 4) {
-					score++;
-
+					score += coinwert;
+					console.log('ammo' + score);
 					document.getElementById('item').pause();
 					document.getElementById('item').currentTime = 0;
 					document.getElementById('item').play();
@@ -322,7 +323,7 @@ window.addEventListener('load', function () {
 		shoot() {
 			if (this.shootPressed) {
 				const speed = 5;
-				const delay = 2;
+				const delay = 1;
 				const damage = 1;
 				const bulletX = this.x + this.width;
 				const bulletY = this.y + this.height / 2;
@@ -503,6 +504,12 @@ window.addEventListener('load', function () {
            return false; 
        }  */
 	}
+	function drawbullets(ctx){
+		
+		
+			
+
+	}
 
 	class Bullet {
 		color = ['blue', 'purple', 'yellow', 'orange', 'pink'];
@@ -512,22 +519,22 @@ window.addEventListener('load', function () {
 			this.speed = speed;
 			this.damage = damage;
 
-			this.width = 15;
-			this.height = 5;
+			this.width = 25;
+			this.height = 10;
 			this.color = this.color[Math.floor(Math.random() * this.color.length)];
 		}
 		draw(ctx) {
+			
 			ctx.fillStyle = this.color;
 			this.x += this.speed;
-			/* ctx.shadowBlur = 20;
-            ctx.shadowColor = "red"; */
-
+			ctx.shadowColor = 'black';
+			ctx.shadowBlur = 10;
+			ctx.shadowOffsetX = 5;
+			ctx.shadowOffsetY = 5;
+			
 			ctx.fillRect(this.x, this.y, this.width, this.height);
-
-			/* ctx.shadowColor = "#d53";
-            ctx.shadowBlur = 20;
-            ctx.lineJoin = "bevel";
-            ctx.lineWidth = 2; */
+			ctx.shadowBlur = 0;
+			
 		}
 		collideWith(sprite) {
 			if (
@@ -553,8 +560,11 @@ window.addEventListener('load', function () {
 		shoot(x, y, speed, damage, delay) {
 			if (this.timerTillNextBullet <= 0) {
 				if (score > 0) {
+					if(this.bullets.length < 1){
 					this.bullets.push(new Bullet(x, y, speed, damage));
 					score -= 1;
+					}
+					
 				}
 
 				this.timerTillNextBullet = delay;
@@ -591,7 +601,7 @@ window.addEventListener('load', function () {
 			return bullet.y <= -bullet.height;
 		}
 	}
-
+	
 	function handleCoins(deltaTime) {
 		if (coinTimer > coinInterval + randomCoinInterval) {
 			coins.push(new Coin(canvas.width, canvas.height));
@@ -782,6 +792,7 @@ window.addEventListener('load', function () {
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
 		//document.getElementById('startsound').volume=50;
+		ghostInterval = 2780;
 		gametimerstart = 0;
 		score = 0;
 		life = 100;
@@ -791,24 +802,30 @@ window.addEventListener('load', function () {
 	}
 	function updateTimer() {
 		console.log('tick');
+		console.log('interval ' + ghostInterval);
 		gametimerstart++;
 		gametimerstart = gametimerstart + 1;
-		if (geistertot >= 5) {
+			if (geistertot >= 5 ) {
 			ghostInterval = 1000;
-			if (geistertot <= 15) {
-				ghostInterval = 50;
-			}
-			if (geistertot >= 20) {
-				ghostInterval -= 400;
-			}
-			if (geistertot >= 50) {
-				ghostInterval -= 10000;
-				if (gameOver) {
-					ghostInterval = 0;
+			if (geistertot >= 15) {
+				console.log('hiiii');
+				ghostInterval = 100;
+				if (geistertot >= 20 ) {
+					ghostInterval -= 200;
+					if (geistertot >= Math.random() * 18 + 78 ) {
+						console.log('yes');
+						ghostInterval -= 10000;
+						if (gameOver) {
+							ghostInterval = 0;
+						}
+					}
+				
 				}
 			}
+			
+		
 		}
-
+        
 		//console.log("intervale: " + ghostInterval);
 	}
 
@@ -894,14 +911,17 @@ window.addEventListener('load', function () {
 			steueranleitung.style.display = 'block';
 		}
 
-		document.getElementById('startsound').play();
-		document.getElementById('hintergrunsound').play();
+		
 
 		document.addEventListener('keydown', function (event) {
 			if (event.code === 'Enter') {
+				
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
 				if (gameplay == false) {
+					document.getElementById('startsound').play();
+				document.getElementById('hintergrunsound').play();
+				timerInterval = setInterval(updateTimer, 1000);
 					animate(0);
 				}
 			}
@@ -911,14 +931,18 @@ window.addEventListener('load', function () {
 			function (event) {
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
+				
 
 				if (gameplay == false) {
+					timerInterval = setInterval(updateTimer, 1000);
+				document.getElementById('startsound').play();
+				document.getElementById('hintergrunsound').play();
 					animate(0);
 				}
 			}.bind(this)
 		);
 
-		timerInterval = setInterval(updateTimer, 1000);
+		
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
 		this.style.display = 'none';
