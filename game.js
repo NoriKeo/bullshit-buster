@@ -14,8 +14,20 @@ window.addEventListener('load', function () {
 	steueranleitung.width = 350;
 	steueranleitung.height = 200;
 	//to do handy größe
-	gameend.weight = 350;
-	gameend.height = 300;
+	
+	if (
+		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+			navigator.userAgent
+		)
+	) {
+		gameend.weight = 150;
+	   gameend.height = 100;
+		
+	}else {
+		gameend.weight = 350;
+	   gameend.height = 300;
+	}
+
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
@@ -771,8 +783,21 @@ window.addEventListener('load', function () {
 			let endscrem = document.getElementById('gameend');
 			endscrem.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
-			gameOverButton.style.width = '375px';
-			gameOverButton.style.height = '300px';
+			if (
+				/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+					navigator.userAgent
+				)
+			) {
+				gameOverButton.style.width = '175px';
+				gameOverButton.style.height = '100px';
+				
+			}else{
+				gameOverButton.style.width = '375px';
+				gameOverButton.style.height = '300px';
+
+			}
+	
+			
 
 			gameOverButton.style.display = 'block';
 
@@ -780,6 +805,8 @@ window.addEventListener('load', function () {
 			//var restartbild = document.getElementById('restartbild');
 			//restartbild.style.display = 'block';
 			var restartButton = document.getElementById('restart');
+			
+	
 			restartButton.style.width = '170px';
 			restartButton.style.height = '50px';
 
