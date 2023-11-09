@@ -581,8 +581,10 @@ window.addEventListener('load', function () {
 		}
 
 		isBulletOffScreen(bullet) {
-			return bullet.y <= -bullet.height;
+			console.log(this.bullets.length);
+			return bullet.x >= canvas.width;
 		}
+		
 		draw(ctx) {
 			// console.log(this.bullets.length);
 			this.bullets.forEach((bullet) => {
@@ -604,9 +606,11 @@ window.addEventListener('load', function () {
 			});
 		}
 
-		isBulletOffScreen(bullet) {
-			return bullet.y <= -bullet.height;
-		}
+		/* isBulletOffScreen(bullet) {
+			console.log(this.bullets.length);
+			return bullet.x >= canvas.width;
+		} */
+		
 	}
 	
 	function handleCoins(deltaTime) {
@@ -729,11 +733,18 @@ window.addEventListener('load', function () {
 		context.strokeRect(242, 30, 104, 21);
 		context.fillStyle = '#867ade';
 		context.lineJoin = 'bevel';
-		if(score >= 104){
+		/* if(score >= 104){
 			context.fillRect(242, 30, 104, 20);
 		}else{
 			context.fillRect(242, 30, score, 20);
-		}
+		} */
+		const x = 242;
+		const y = 30;
+		const minWidth = 104;
+		const width = Math.min(minWidth, score);
+
+		context.fillRect(x, y, width, 20);
+
 		
 		window.addEventListener('blur', function() {
 		document.getElementById('startsound').pause();
