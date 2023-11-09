@@ -20,8 +20,8 @@ window.addEventListener('load', function () {
 			navigator.userAgent
 		)
 	) {
-		gameend.weight = 150;
-	   gameend.height = 100;
+		gameend.weight = 250;
+	   gameend.height = 200;
 		
 	}else {
 		gameend.weight = 350;
@@ -783,13 +783,14 @@ window.addEventListener('load', function () {
 			let endscrem = document.getElementById('gameend');
 			endscrem.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
+			gameOverButton.style.outline = 'transparent';
 			if (
 				/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 					navigator.userAgent
 				)
 			) {
-				gameOverButton.style.width = '175px';
-				gameOverButton.style.height = '100px';
+				gameOverButton.style.width = '245px';
+				gameOverButton.style.height = '200px';
 				
 			}else{
 				gameOverButton.style.width = '375px';
