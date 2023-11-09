@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
 	canvas.height = 620;
-
+	Audiomute = false;
 	var timerInterval = null;
 	coinwert = 2;
 	steueranleitung.width = 350;
@@ -77,7 +77,7 @@ window.addEventListener('load', function () {
 	let actions = {
 		run: false,
 		onGround: true,
-		shoot: false,
+  		shoot: false
 	};
 
 	class InputHandler {
@@ -98,9 +98,7 @@ window.addEventListener('load', function () {
 					this.keys.indexOf(e.key) === -1
 				) {
 					this.keys.push(e.key);
-				} else if (e.key === 'Enter' && gameOver) {
-					restartGame();
-				}
+				} 
 				// console.log(e.key, this.keys);
 			});
 			window.addEventListener('keyup', (e) => {
@@ -202,11 +200,15 @@ window.addEventListener('load', function () {
 				const dy = coin.y + coin.height / 4 - (this.y + this.height / 4);
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < coin.width / 4 + this.width / 4) {
-					score += coinwert;
+					console.log('schuss');
+					score ++;
+					score ++;
 					console.log('ammo' + score);
+					if(!Audiomute){
 					document.getElementById('item').pause();
 					document.getElementById('item').currentTime = 0;
 					document.getElementById('item').play();
+					}
 					console.log('munition' + score);
 					const index = coins.indexOf(coin);
 					coins.splice(index, 1);
@@ -222,9 +224,13 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < ghost.width / 12 + this.width / 12) {
 					life--;
+					if(!Audiomute){
 					document.getElementById('damage').play();
+					}
 					if (life == 0) {
+						if(!Audiomute){
 						document.getElementById('au').play();
+						}
 						gameOver = true;
 					}
 				}
@@ -323,7 +329,7 @@ window.addEventListener('load', function () {
 		shoot() {
 			if (this.shootPressed) {
 				const speed = 5;
-				const delay = 1;
+				const delay = 4;
 				const damage = 1;
 				const bulletX = this.x + this.width;
 				const bulletY = this.y + this.height / 2;
@@ -512,7 +518,7 @@ window.addEventListener('load', function () {
 	}
 
 	class Bullet {
-		color = [ 'purple', 'yellow', 'orange', 'pink'];
+		color = [  'yellow', 'orange', 'white'];
 		constructor(x, y, speed, damage) {
 			this.x = x;
 			this.y = y;
@@ -560,10 +566,11 @@ window.addEventListener('load', function () {
 		shoot(x, y, speed, damage, delay) {
 			if (this.timerTillNextBullet <= 0) {
 				if (score > 0) {
-					if(this.bullets.length < 1){
+					if(this.bullets.length < 3){
 					this.bullets.push(new Bullet(x, y, speed, damage));
-					score -= 1;
+					return;
 					}
+					score -= 1;
 					
 				}
 
@@ -653,6 +660,9 @@ window.addEventListener('load', function () {
 	//     context.fillStyle = 'red';
 	//     context.fillRect(0, 0, life, 10);
 	// }
+	
+
+
 
 	function drawFancyText(text, x, y, alignment) {
 		// ammo
@@ -719,8 +729,22 @@ window.addEventListener('load', function () {
 		context.strokeRect(242, 30, 104, 21);
 		context.fillStyle = '#867ade';
 		context.lineJoin = 'bevel';
-		context.fillRect(242, 30, score, 20);
-
+		if(score >= 104){
+			context.fillRect(242, 30, 104, 20);
+		}else{
+			context.fillRect(242, 30, score, 20);
+		}
+		
+		window.addEventListener('blur', function() {
+		document.getElementById('startsound').pause();
+		document.getElementById('au').pause();
+		document.getElementById('damage').pause();
+		document.getElementById('geistertot').pause();
+		document.getElementById('hintergrunsound').pause();
+		document.getElementById('item').pause();
+			
+		  });
+		  
 		// timer
 
 		if (
@@ -767,6 +791,29 @@ window.addEventListener('load', function () {
             context.fillText('GAME OVER', canvas.width / 2, 200); */
 		}
 	}
+	const button = document.getElementById("myButton");
+
+	button.addEventListener("click", function() {
+		Audiomute = true;
+		document.getElementById('startsound').pause();
+		document.getElementById('au').pause();
+		document.getElementById('damage').pause();
+		document.getElementById('geistertot').pause();
+		document.getElementById('hintergrunsound').pause();
+		document.getElementById('item').pause();
+		button.style.fontFamily = "CustomFont";
+		button.style.color = 'white';
+		button.style.fontSize = "10px";
+		button.innerHTML = "Sound: off";
+		button.style.fontFamily = "CustomFont3";
+		button.style.color = '#867ade';
+		button.style.fontSize = "10px";
+		button.innerHTML = "Sound: off";
+		button.style.fontFamily = "CustomFont2";
+		button.style.color = '#ae51b6';
+		button.style.fontSize = "10px";
+		button.innerHTML = "Sound: off";
+	});
 
 	/* function endGame() {
         if (score > highScore) {
@@ -790,6 +837,7 @@ window.addEventListener('load', function () {
 		background.restart();
 		coins = [];
 		ghosts = [];
+		Audiomute = false;
 		document.getElementById('startsound').play();
 		document.getElementById('hintergrunsound').play();
 		//document.getElementById('startsound').volume=50;
@@ -862,7 +910,9 @@ window.addEventListener('load', function () {
 				if (ghost.health <= 0) {
 					const index = ghosts.indexOf(ghost);
 					ghosts.splice(index, 1);
+					if(!Audiomute){
 					document.getElementById('geistertot').play();
+					}
 					geistertot++;
 				}
 			} else {
