@@ -138,13 +138,9 @@ window.addEventListener('load', function () {
 				if (gameOver) {
 					restartGame();
 				}
-
-				console.log('moving');
 			});
 
 			window.addEventListener('touchend', (e) => {
-				console.log(this.keys);
-				console.log('end');
 				this.keys.splice(this.keys.indexOf('swipe up'), 1);
 				this.keys.splice(this.keys.indexOf('swipe down'), 1);
 			});
@@ -194,7 +190,6 @@ window.addEventListener('load', function () {
 				this.width,
 				this.height
 			);
-			this.shoot();
 		}
 		update(input, coins) {
 			coins.forEach((coin) => {
@@ -203,17 +198,16 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < coin.width / 4 + this.width / 4) {
 					score += coinwert;
-					console.log('ammo' + score);
 					document.getElementById('item').pause();
 					document.getElementById('item').currentTime = 0;
 					document.getElementById('item').play();
-					console.log('munition' + score);
 					const index = coins.indexOf(coin);
 					coins.splice(index, 1);
 
 					//enemy.drawImage = false;
 					//removeImage();
 				}
+				this.shoot();
 			});
 
 			ghosts.forEach((ghost) => {
@@ -264,12 +258,7 @@ window.addEventListener('load', function () {
 
 
 
-            } */ else if (
-				input.keys.includes('e') ||
-				(input.keys.includes('e') && input.keys.includes(' ')) ||
-				(input.keys.indexOf('d') > -1 && input.keys.includes('e')) ||
-				(input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e'))
-			) {
+            } */ else if (input.keys.includes('e')) {
 				this.shootPressed = true;
 
 				if (score < 0) {
@@ -277,7 +266,6 @@ window.addEventListener('load', function () {
 				}
 			} else {
 				this.speed = 0;
-				this.shootPressed = false;
 
 				//this.vy = 0;
 			}
@@ -322,6 +310,7 @@ window.addEventListener('load', function () {
 		}
 		shoot() {
 			if (this.shootPressed) {
+				this.shootPressed = false;
 				const speed = 5;
 				const delay = 1;
 				const damage = 1;
@@ -504,15 +493,10 @@ window.addEventListener('load', function () {
            return false; 
        }  */
 	}
-	function drawbullets(ctx){
-		
-		
-			
-
-	}
+	function drawbullets(ctx) {}
 
 	class Bullet {
-		color = [ 'purple', 'yellow', 'orange', 'pink'];
+		color = ['purple', 'yellow', 'orange', 'pink'];
 		constructor(x, y, speed, damage) {
 			this.x = x;
 			this.y = y;
@@ -524,7 +508,6 @@ window.addEventListener('load', function () {
 			this.color = this.color[Math.floor(Math.random() * this.color.length)];
 		}
 		draw(ctx) {
-			
 			ctx.fillStyle = this.color;
 			this.x += this.speed;
 			ctx.shadowColor = this.color;
@@ -533,8 +516,8 @@ window.addEventListener('load', function () {
 			ctx.shadowOffsetY = 5; */
 			ctx.lineJoin = 'bevel';
 			ctx.fillRect(this.x, this.y, this.width, this.height);
-			
-			ctx.shadowColor = "transparent";
+
+			ctx.shadowColor = 'transparent';
 		}
 		collideWith(sprite) {
 			if (
@@ -558,13 +541,13 @@ window.addEventListener('load', function () {
 		}
 
 		shoot(x, y, speed, damage, delay) {
+			console.log(this.bullets.length + ' length');
 			if (this.timerTillNextBullet <= 0) {
 				if (score > 0) {
-					if(this.bullets.length < 1){
-					this.bullets.push(new Bullet(x, y, speed, damage));
-					score -= 1;
+					if (this.bullets.length < 1) {
+						this.bullets.push(new Bullet(x, y, speed, damage));
+						score -= 1;
 					}
-					
 				}
 
 				this.timerTillNextBullet = delay;
@@ -598,10 +581,11 @@ window.addEventListener('load', function () {
 		}
 
 		isBulletOffScreen(bullet) {
-			return bullet.y <= -bullet.height;
+			console.log(this.bullets.length);
+			return bullet.x >= canvas.width;
 		}
 	}
-	
+
 	function handleCoins(deltaTime) {
 		if (coinTimer > coinInterval + randomCoinInterval) {
 			coins.push(new Coin(canvas.width, canvas.height));
@@ -670,7 +654,6 @@ window.addEventListener('load', function () {
 	}
 
 	function displayStatusText(context) {
-		
 		// ammo
 		drawFancyText('AMMO: ', 120, 50, 'left');
 
@@ -802,31 +785,24 @@ window.addEventListener('load', function () {
 		animate(0);
 	}
 	function updateTimer() {
-		console.log('tick');
-		console.log('interval ' + ghostInterval);
 		gametimerstart++;
 		gametimerstart = gametimerstart + 1;
-			if (geistertot >= 5 ) {
+		if (geistertot >= 5) {
 			ghostInterval = 1000;
 			if (geistertot >= 15) {
-				console.log('hiiii');
 				ghostInterval = 100;
-				if (geistertot >= 20 ) {
+				if (geistertot >= 20) {
 					ghostInterval -= 200;
-					if (geistertot >= Math.random() * 18 + 78 ) {
-						console.log('yes');
+					if (geistertot >= Math.random() * 18 + 78) {
 						ghostInterval -= 10000;
 						if (gameOver) {
 							ghostInterval = 0;
 						}
 					}
-				
 				}
 			}
-			
-		
 		}
-        
+
 		//console.log("intervale: " + ghostInterval);
 	}
 
@@ -912,17 +888,14 @@ window.addEventListener('load', function () {
 			steueranleitung.style.display = 'block';
 		}
 
-		
-
 		document.addEventListener('keydown', function (event) {
 			if (event.code === 'Enter') {
-				
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
 				if (gameplay == false) {
 					document.getElementById('startsound').play();
-				document.getElementById('hintergrunsound').play();
-				timerInterval = setInterval(updateTimer, 1000);
+					document.getElementById('hintergrunsound').play();
+					timerInterval = setInterval(updateTimer, 1000);
 					animate(0);
 				}
 			}
@@ -932,19 +905,16 @@ window.addEventListener('load', function () {
 			function (event) {
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
-				
 
 				if (gameplay == false) {
 					timerInterval = setInterval(updateTimer, 1000);
-				document.getElementById('startsound').play();
-				document.getElementById('hintergrunsound').play();
+					document.getElementById('startsound').play();
+					document.getElementById('hintergrunsound').play();
 					animate(0);
 				}
 			}.bind(this)
 		);
 
-		
-		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
 		this.style.display = 'none';
 		if (startscreenhintergrund) {
