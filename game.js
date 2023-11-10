@@ -836,7 +836,7 @@ window.addEventListener('load', function () {
 	const soundbutton = document.getElementById("soundbutton");
 	soundbutton.style.position = 'absolute';
 	
-	soundbutton.style.display = 'block'
+	
 	
 	
     soundbutton.style.top = '27%';
@@ -851,7 +851,7 @@ window.addEventListener('load', function () {
 
 
 	
-
+	
 	soundbutton.addEventListener("click", function() {
 		Audiomute = true;
 		document.getElementById('startsound').pause();
@@ -865,7 +865,7 @@ window.addEventListener('load', function () {
 		
 		
 	});
-	
+   
 
 
 	/* function endGame() {
@@ -954,11 +954,13 @@ window.addEventListener('load', function () {
 		lastTime = timeStamp;
 		gameplay = true;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 		background.draw(ctx);
 		background.update(input);
 		bulletController.draw(ctx);
 		player.draw(ctx);
 		player.update(input, coins);
+		soundbutton.style.display = 'block'
 		ghosts.forEach((ghost) => {
 			if (bulletController.collideWith(ghost)) {
 				if (ghost.health <= 0) {
