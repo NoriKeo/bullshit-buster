@@ -1,7 +1,7 @@
 window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
-	
+	const restartButton = document.getElementById('restart');
 	const highScore = localStorage.getItem('highScore') || 0;
 	const ctx = canvas.getContext('2d');
 
@@ -23,8 +23,12 @@ window.addEventListener('load', function () {
 	) {
 		gameend.weight = 250;
 	   gameend.height = 200;
+	   restartButton.style.width = '70px';
+		restartButton.style.height = '20px';
 		
 	}else {
+		restartButton.style.width = '170px';
+		restartButton.style.height = '50px';
 		gameend.weight = 350;
 	   gameend.height = 300;
 	}
@@ -807,7 +811,7 @@ window.addEventListener('load', function () {
 			document.getElementById('hintergrunsound').pause();
 			//var restartbild = document.getElementById('restartbild');
 			//restartbild.style.display = 'block';
-			var restartButton = document.getElementById('restart');
+			
 			
 	
 			restartButton.style.width = '170px';
