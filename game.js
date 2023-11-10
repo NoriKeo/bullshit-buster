@@ -1,6 +1,7 @@
 window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
+	
 	const highScore = localStorage.getItem('highScore') || 0;
 	const ctx = canvas.getContext('2d');
 
@@ -33,6 +34,7 @@ window.addEventListener('load', function () {
 	//restartbild.height = 50;
 	startscreenhintergrund.style.width = canvas.width + 'px';
 	startscreenhintergrund.style.height = canvas.height + 'px';
+	
 	let coins = [];
 	let ghosts = [];
 
@@ -987,17 +989,24 @@ window.addEventListener('load', function () {
 	var starten = document.getElementById('startButton');
 
 	document.getElementById('startButton').addEventListener('click', function () {
-		// Insert game start logic here
 		let steueranleitung = document.getElementById('steueranleitung');
 		let steueranleitunghandy = document.getElementById('steueranleitunghandy');
-
+		
+		
+		// Insert game start logic here
+		
+		
 		if (
 			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 				navigator.userAgent
 			)
 		) {
+			background.draw(ctx);
+			background.update(input);
 			steueranleitunghandy.style.display = 'block';
 		} else {
+			background.draw(ctx);
+			background.update(input);
 			steueranleitung.style.display = 'block';
 		}
 
@@ -1005,7 +1014,7 @@ window.addEventListener('load', function () {
 
 		document.addEventListener('keydown', function (event) {
 			if (event.code === 'Enter') {
-				
+				steuerungbackground.style.display = 'none';
 				steueranleitung.style.display = 'none';
 				steueranleitunghandy.style.display = 'none';
 				if (gameplay == false) {

@@ -20,7 +20,8 @@ body {
 #playerImage,
 #backgroundImage,
 #enemyImage,
-#geldImage {
+#geldImage,
+#steuerungbackground {
 	display: none;
 }
 #ghost1Image,
