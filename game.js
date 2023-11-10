@@ -832,9 +832,27 @@ window.addEventListener('load', function () {
             context.fillText('GAME OVER', canvas.width / 2, 200); */
 		}
 	}
-	const button = document.getElementById("myButton");
+	
+	const soundbutton = document.getElementById("soundbutton");
+	soundbutton.style.position = 'absolute';
+	
+	soundbutton.style.display = 'block'
+	
+	
+    soundbutton.style.top = '27%';
+    soundbutton.style.left = '90%';
+    soundbutton.style.transform = 'translate(-50%, -50%)';
+	soundbutton.style.width = '70px';
+    soundbutton.style.height = '20px';
+	
+	soundbutton.style.fontFamily = "CustomFont3";
+	soundbutton.style.color = '#ae51b6';
+	soundbutton.style.fontSize = "10px";
 
-	button.addEventListener("click", function() {
+
+	
+
+	soundbutton.addEventListener("click", function() {
 		Audiomute = true;
 		document.getElementById('startsound').pause();
 		document.getElementById('au').pause();
@@ -842,19 +860,13 @@ window.addEventListener('load', function () {
 		document.getElementById('geistertot').pause();
 		document.getElementById('hintergrunsound').pause();
 		document.getElementById('item').pause();
-		button.style.fontFamily = "CustomFont";
-		button.style.color = 'white';
-		button.style.fontSize = "10px";
-		button.innerHTML = "Sound: off";
-		button.style.fontFamily = "CustomFont3";
-		button.style.color = '#867ade';
-		button.style.fontSize = "10px";
-		button.innerHTML = "Sound: off";
-		button.style.fontFamily = "CustomFont2";
-		button.style.color = '#ae51b6';
-		button.style.fontSize = "10px";
-		button.innerHTML = "Sound: off";
+		soundbutton.innerHTML = "Sound";
+		
+		
+		
 	});
+	
+
 
 	/* function endGame() {
         if (score > highScore) {
@@ -872,6 +884,7 @@ window.addEventListener('load', function () {
     }
      */
 	function restartGame() {
+		document.getElementById("soundbutton").disabled = false;
 		clearInterval(timerInterval);
 		timerInterval = setInterval(updateTimer, 1000);
 		player.restart();
