@@ -915,13 +915,13 @@ window.addEventListener('load', function () {
 				ghostInterval = 100;
 				if (geistertot >= 20 ) {
 					ghostInterval -= 200;
-					if (geistertot >= Math.random() * 18 + 78 ) {
+					/* if (geistertot >= Math.random() * 18 + 78 ) {
 						console.log('yes');
 						ghostInterval -= 10000;
 						if (gameOver) {
 							ghostInterval = 0;
 						}
-					}
+					} */
 				
 				}
 			}
