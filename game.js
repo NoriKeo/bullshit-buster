@@ -4,6 +4,9 @@ window.addEventListener('load', function () {
 	const restartButton = document.getElementById('restart');
 	const highScore = localStorage.getItem('highScore') || 0;
 	const ctx = canvas.getContext('2d');
+	const soundhintergrund = document.getElementById('hintergrunsound');
+	soundhintergrund.loop = true;
+    soundhintergrund.volume = 0.2;
 
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
@@ -769,7 +772,7 @@ window.addEventListener('load', function () {
 		document.getElementById('au').pause();
 		document.getElementById('damage').pause();
 		document.getElementById('geistertot').pause();
-		document.getElementById('hintergrunsound').pause();
+		soundhintergrund.pause();
 		document.getElementById('item').pause();
 			
 		  });
@@ -808,7 +811,7 @@ window.addEventListener('load', function () {
 
 			gameOverButton.style.display = 'block';
 
-			document.getElementById('hintergrunsound').pause();
+			soundhintergrund.pause();
 			//var restartbild = document.getElementById('restartbild');
 			//restartbild.style.display = 'block';
 			
@@ -862,7 +865,7 @@ window.addEventListener('load', function () {
 		document.getElementById('au').pause();
 		document.getElementById('damage').pause();
 		document.getElementById('geistertot').pause();
-		document.getElementById('hintergrunsound').pause();
+		soundhintergrund.pause();
 		document.getElementById('item').pause();
 		soundbutton.innerHTML = "Sound";
 		
@@ -897,7 +900,7 @@ window.addEventListener('load', function () {
 		ghosts = [];
 		Audiomute = false;
 		document.getElementById('startsound').play();
-		document.getElementById('hintergrunsound').play();
+		soundhintergrund.play();
 		//document.getElementById('startsound').volume=50;
 		ghostInterval = 2780;
 		gametimerstart = 0;
@@ -1038,7 +1041,7 @@ window.addEventListener('load', function () {
 				steueranleitunghandy.style.display = 'none';
 				if (gameplay == false) {
 					document.getElementById('startsound').play();
-				document.getElementById('hintergrunsound').play();
+					soundhintergrund.play();
 				timerInterval = setInterval(updateTimer, 1000);
 					animate(0);
 				}
@@ -1054,7 +1057,7 @@ window.addEventListener('load', function () {
 				if (gameplay == false) {
 					timerInterval = setInterval(updateTimer, 1000);
 				document.getElementById('startsound').play();
-				document.getElementById('hintergrunsound').play();
+				soundhintergrund.play();
 					animate(0);
 				}
 			}.bind(this)
