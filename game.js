@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
 	const startscreenhintergrund = document.getElementById('starthintergrund');
 	const restartButton = document.getElementById('restart');
 	const highScore = localStorage.getItem('highScore') || 0;
+	const countdownEl = document.getElementById('countdown');
 	const ctx = canvas.getContext('2d');
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
@@ -28,22 +29,33 @@ window.addEventListener('load', function () {
 	   gameend.height = 200;
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
+		startscreenhintergrund.style.width = '250';
+		startscreenhintergrund.style.width = '200';
 		
 	}else {
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
 	   gameend.height = 300;
+	   startscreenhintergrund.width = 1300;
+		startscreenhintergrund.height = 620;
+	   
 	}
 
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
-	startscreenhintergrund.style.width = canvas.width + 'px';
-	startscreenhintergrund.style.height = canvas.height + 'px';
+	//startscreenhintergrund.style.width = canvas.width + 'px';
+	//startscreenhintergrund.style.height = canvas.height + 'px';
 	
 	let coins = [];
 	let ghosts = [];
+	window.addEventListener('load', function() {
+		// Code to execute when the cell phone is turned on
+		console.log('Cell phone is turned on');
+	  });
+	  
+	  
 
 	const font = new FontFace(
 		'CustomFont',
@@ -88,7 +100,7 @@ window.addEventListener('load', function () {
 	let gametimer = 0;
 	let gametimerstart = gametimer * 60;
 
-	const countdownEl = document.getElementById('countdown');
+	
 
 	let score = 0;
 	let life = 100;
@@ -787,8 +799,50 @@ window.addEventListener('load', function () {
 			document.querySelector('body').style.overscrollBehaviorY = 'contain';
 			window.scrollTo(0, 1);
 		}
+		
+		function addName() {
+			var nameInput = document.getElementById("nameInput");
+			var nameList = document.getElementById("nameList");
+			
+			var name = nameInput.value;
+			var listItem = document.createElement("li");
+			listItem.textContent = name;
+			
+			nameList.appendChild(listItem);
+			nameInput.value = "";
+		  }
+		
+
+		const names = ['John', 'Jane', 'Alice', 'Bob'];
+	
+	// Function to display names graphically
+		function displayNames(names) {
+	  // Get the container element
+	  const container = document.getElementById('nameList');
+	
+	  // Clear the container
+	  container.innerHTML = '';
+	
+	  // Loop through the names array
+	  names.forEach(name => {
+		// Create a new element for each name
+		const nameElement = document.createElement('div');
+		nameElement.textContent = name;
+	
+		// Add a class to the element for styling
+		nameElement.classList.add('name');
+	
+		// Append the name element to the container
+		container.appendChild(nameElement);
+	  });
+	}
 
 		if (gameOver) {
+			document.getElementById('nameInput').addEventListener('click', function () {
+			addName();
+			})
+			displayNames(names);
+			console.log(displayNames);
 			let endscrem = document.getElementById('gameend');
 			endscrem.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
@@ -872,7 +926,9 @@ window.addEventListener('load', function () {
 		
 		
 	});
-   
+    
+	
+
 
 
 	/* function endGame() {

@@ -13,7 +13,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	outline: 5px solid white;
+	outline: 5px solid white; 
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -36,7 +36,7 @@ body {
 	display: none;
 }
 
-#steueranleitung, #steueranleitunghandy {
+#steueranleitung, #steueranleitunghandy,#startscreenhintergrund{
 	display: none;
 	position: absolute;
 	top: 50%;
