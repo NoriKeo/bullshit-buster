@@ -33,6 +33,7 @@ window.addEventListener('load', function () {
 	   gameend.height = 200;
 	   soundbutton.style.top = "10px";
 		soundbutton.style.left = "700px";
+		
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
@@ -54,6 +55,7 @@ window.addEventListener('load', function () {
 		soundbutton.style.width = '220px';
     	soundbutton.style.height = '30px';
 		soundbutton.style.fontSize = "30px";  
+		soundbutton.style.transform = 'translate(-50%, -50%)';
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
