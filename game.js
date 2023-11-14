@@ -2,13 +2,16 @@ window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
 	const restartButton = document.getElementById('restart');
+	const soundbutton = document.getElementById("soundbutton");
 	const highScore = localStorage.getItem('highScore') || 0;
 	const countdownEl = document.getElementById('countdown');
 	const ctx = canvas.getContext('2d');
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
     soundhintergrund.volume = 0.2;
-
+	soundbutton.style.position = "absolute";
+	
+	canvas.parentNode.appendChild(soundbutton);
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
@@ -25,14 +28,32 @@ window.addEventListener('load', function () {
 			navigator.userAgent
 		)
 	) {
+		canvas.style.outline = 'none';
 		gameend.weight = 250;
 	   gameend.height = 200;
+	   soundbutton.style.top = "10px";
+		soundbutton.style.left = "700px";
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
 		startscreenhintergrund.style.width = '200';
 		
+
+ 
+		/* soundbutton.style.width = '15px';
+    	soundbutton.style.height = '10px';
+		soundbutton.style.fontSize = "15px"; 
+		soundbutton.style.top = '5%';
+        soundbutton.style.left = '88%';    */
+		
 	}else {
+		canvas.style.border = '5px solid white';
+		canvas.style.color = 'white';
+		soundbutton.style.top = "130px";
+		soundbutton.style.left = "1200px";
+		soundbutton.style.width = '220px';
+    	soundbutton.style.height = '30px';
+		soundbutton.style.fontSize = "30px";  
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
@@ -41,7 +62,7 @@ window.addEventListener('load', function () {
 		startscreenhintergrund.height = 620;
 	   
 	}
-
+	
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
@@ -106,7 +127,7 @@ window.addEventListener('load', function () {
 	let life = 100;
 	let geistertot = 0;
 	let gameOver = false;
-
+		
 	let actions = {
 		run: false,
 		onGround: true,
@@ -234,9 +255,11 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < coin.width / 4 + this.width / 4) {
 					console.log('schuss');
+					if(score <= 100){
 					score ++;
 					score ++;
-					console.log('ammo' + score);
+					}
+					console.log('ammo: ' + score);
 					if(!Audiomute){
 					document.getElementById('item').pause();
 					document.getElementById('item').currentTime = 0;
@@ -894,35 +917,52 @@ window.addEventListener('load', function () {
 		}
 	}
 	
-	const soundbutton = document.getElementById("soundbutton");
-	soundbutton.style.position = 'absolute';
 	
+	/* soundbutton.style.position = 'absolute';
+	soundbutton.style.top = '50%';
+	soundbutton.style.left = '50%';
+	soundbutton.style.transform = 'translate(-50%, -50%)';
+	soundbutton.style.width = '120px';
+    	soundbutton.style.height = '30px';
 	
+	soundbutton.style.display = 'block';
+	 */
+   
 	
-	
-    soundbutton.style.top = '27%';
-    soundbutton.style.left = '90%';
-    soundbutton.style.transform = 'translate(-50%, -50%)';
-	soundbutton.style.width = '70px';
-    soundbutton.style.height = '20px';
-	
+	 soundbutton.style.border = 'none';
 	soundbutton.style.fontFamily = "CustomFont3";
 	soundbutton.style.color = '#ae51b6';
-	soundbutton.style.fontSize = "10px";
-
-
 	
+	
+
+	document.getElementById("soundbutton").addEventListener("keydown", function(event) {
+		event.preventDefault();
+	  });
+	  
 	
 	soundbutton.addEventListener("click", function() {
-		Audiomute = true;
+		
+		if(Audiomute){
+			document.getElementById('startsound').play();
+		document.getElementById('au').play();
+		document.getElementById('damage').play();
+		document.getElementById('geistertot').play();
+		soundhintergrund.play();
+		document.getElementById('item').play();
+		soundbutton.innerHTML = "Sound: on";
+        
+		} else {
+			
 		document.getElementById('startsound').pause();
 		document.getElementById('au').pause();
 		document.getElementById('damage').pause();
 		document.getElementById('geistertot').pause();
 		soundhintergrund.pause();
 		document.getElementById('item').pause();
-		soundbutton.innerHTML = "Sound";
-		
+		soundbutton.innerHTML = "Sound: off";
+
+		}
+		Audiomute = !Audiomute;
 		
 		
 	});
