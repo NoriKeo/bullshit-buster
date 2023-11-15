@@ -1137,11 +1137,11 @@ window.addEventListener('load', function () {
 		}
 
 			//to do
-			/* let storenbild = document.getElementById('storenbild');
+			 let storenbild = document.getElementById('storenbild');
 				
 			storenbild.weight = 250;
 			storenbild.height = 200;
-			storenbild.style.display = 'block'; */
+			storenbild.style.display = 'block'; 
 		
 
 		
