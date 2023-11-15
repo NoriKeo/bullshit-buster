@@ -22,7 +22,8 @@ body {
 #enemyImage,
 #geldImage,
 #steuerungbackground,
-#nameInput {
+#nameInput
+ {
 	display: none;
 }
 #ghost1Image,
@@ -51,7 +52,7 @@ body {
 	/*  justify-content: center;   
     align-items: center; */
 }
-#gameend {
+#gameend,#storenbild {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -87,14 +88,14 @@ body {
 #soundbutton{
 	display: none;
 	background-color: transparent;
-	
-	position: absolute;
-	top: 10px;
-	left: 10px;
-
-	transform: translate(-50%, -50%);
-	max-width: 100%;
-	max-height: 100%;  
+	width: 180px;
+	height: 30px;
+	position: fixed;
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+	max-height: 100%;
 }
 #restart {
 	background-color: transparent;

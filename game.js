@@ -1,6 +1,7 @@
 window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
+
 	const restartButton = document.getElementById('restart');
 	const soundbutton = document.getElementById("soundbutton");
 	const highScore = localStorage.getItem('highScore') || 0;
@@ -9,7 +10,7 @@ window.addEventListener('load', function () {
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
     soundhintergrund.volume = 0.2;
-	soundbutton.style.position = "absolute";
+	soundbutton.style.position = "fixed";
 	
 	canvas.parentNode.appendChild(soundbutton);
 	//canvas.width = window.innerWidth;
@@ -31,10 +32,7 @@ window.addEventListener('load', function () {
 		canvas.style.outline = 'none';
 		gameend.weight = 250;
 	   gameend.height = 200;
-	   soundbutton.style.top = "25px";
-		soundbutton.style.left = "700px";
-		soundbutton.style.fontSize = "15px";  
-		soundbutton.style.transform = 'translate(-50%, -50%)';
+	   
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
@@ -42,21 +40,12 @@ window.addEventListener('load', function () {
 		
 
  
-		/* soundbutton.style.width = '15px';
-    	soundbutton.style.height = '10px';
-		soundbutton.style.fontSize = "15px"; 
-		soundbutton.style.top = '5%';
-        soundbutton.style.left = '88%';    */
+		  
 		
 	}else {
 		canvas.style.border = '5px solid white';
 		canvas.style.color = 'white';
-		soundbutton.style.top = "135px";
-		soundbutton.style.left = "1200px";
-		soundbutton.style.width = '220px';
-    	soundbutton.style.height = '30px';
-		soundbutton.style.fontSize = "30px";  
-		soundbutton.style.transform = 'translate(-50%, -50%)';
+		
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
@@ -65,12 +54,29 @@ window.addEventListener('load', function () {
 		startscreenhintergrund.height = 620;
 	   
 	}
-	
+		
+		soundbutton.style.fontSize = "30px"; 
+		soundbutton.style.top = '21%';
+        soundbutton.style.left = '70%';  
+		soundbutton.style.transform = 'translate(-21%, -70%)';
+		const buttonWidth = canvas.width * 0.2; // Adjust the percentage as needed
+  		const buttonHeight = canvas.height * 0.1; // Adjust the percentage as needed
+  
+  // Set the button size using inline styles
+  soundbutton.style.width = buttonWidth + "px";
+  soundbutton.style.height = buttonHeight + "px";
+		
+		window.addEventListener('resize', () => {
+			soundbutton.style.top = '21%';
+			soundbutton.style.left = '70%';
+			soundbutton.style.transform = 'translate(-21%, -70%)';
+		  });
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	//startscreenhintergrund.style.width = canvas.width + 'px';
 	//startscreenhintergrund.style.height = canvas.height + 'px';
+	
 	
 	let coins = [];
 	let ghosts = [];
@@ -1099,6 +1105,14 @@ window.addEventListener('load', function () {
 		}, 5000);
 		handleCoins(deltaTime);
 		if (!gameOver) requestAnimationFrame(animate);
+	}
+
+	if(geistertot >= 5){
+		let storenbild = document.getElementById('storenbild');
+			
+		storenbild.weight = 250;
+		storenbild.height = 200;
+		storenbild.style.display = 'block';
 	}
 
 	// Apply the new size and position to the button
