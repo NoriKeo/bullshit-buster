@@ -10,9 +10,7 @@ window.addEventListener('load', function () {
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
     soundhintergrund.volume = 0.2;
-	soundbutton.style.position = "fixed";
 	
-	canvas.parentNode.appendChild(soundbutton);
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
@@ -37,15 +35,18 @@ window.addEventListener('load', function () {
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
 		startscreenhintergrund.style.width = '200';
-		
-
+		soundbutton.style.width = '100px';
+		soundbutton.style.height = '10px';
+		soundbutton.style.fontSize = '10px';
  
 		  
 		
 	}else {
 		canvas.style.border = '5px solid white';
 		canvas.style.color = 'white';
-		
+		soundbutton.style.width = '180px';
+		soundbutton.style.height = '30px';
+		soundbutton.style.fontSize = "30px";
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
@@ -54,23 +55,27 @@ window.addEventListener('load', function () {
 		startscreenhintergrund.height = 620;
 	   
 	}
-		
-		soundbutton.style.fontSize = "30px"; 
+	soundbutton.style.position = "fixed";
+	
+	    canvas.parentNode.appendChild(soundbutton);
+
+		 
 		soundbutton.style.top = '21%';
         soundbutton.style.left = '70%';  
 		soundbutton.style.transform = 'translate(-21%, -70%)';
-		const buttonWidth = canvas.width * 0.2; // Adjust the percentage as needed
-  		const buttonHeight = canvas.height * 0.1; // Adjust the percentage as needed
-  
-  // Set the button size using inline styles
-  soundbutton.style.width = buttonWidth + "px";
-  soundbutton.style.height = buttonHeight + "px";
+		soundbutton.style.border = 'none';
+		soundbutton.style.fontFamily = "CustomFont3";
+		soundbutton.style.color = '#ae51b6';
+		
 		
 		window.addEventListener('resize', () => {
 			soundbutton.style.top = '21%';
 			soundbutton.style.left = '70%';
 			soundbutton.style.transform = 'translate(-21%, -70%)';
 		  });
+
+		
+		
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
@@ -804,7 +809,6 @@ window.addEventListener('load', function () {
 			context.fillRect(192, 30, score, 20);
 		} 
 		
-
 		
 		window.addEventListener('blur', function() {
 		document.getElementById('startsound').pause();
@@ -933,9 +937,7 @@ window.addEventListener('load', function () {
 	 */
    
 	
-	 soundbutton.style.border = 'none';
-	soundbutton.style.fontFamily = "CustomFont3";
-	soundbutton.style.color = '#ae51b6';
+	
 	
 	
 
@@ -1107,13 +1109,7 @@ window.addEventListener('load', function () {
 		if (!gameOver) requestAnimationFrame(animate);
 	}
 
-	if(geistertot >= 5){
-		let storenbild = document.getElementById('storenbild');
-			
-		storenbild.weight = 250;
-		storenbild.height = 200;
-		storenbild.style.display = 'block';
-	}
+	
 
 	// Apply the new size and position to the button
 	var starten = document.getElementById('startButton');
@@ -1139,6 +1135,14 @@ window.addEventListener('load', function () {
 			background.update(input);
 			steueranleitung.style.display = 'block';
 		}
+
+			//to do
+			/* let storenbild = document.getElementById('storenbild');
+				
+			storenbild.weight = 250;
+			storenbild.height = 200;
+			storenbild.style.display = 'block'; */
+		
 
 		
 
