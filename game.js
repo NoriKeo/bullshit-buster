@@ -31,9 +31,10 @@ window.addEventListener('load', function () {
 		canvas.style.outline = 'none';
 		gameend.weight = 250;
 	   gameend.height = 200;
-	   soundbutton.style.top = "10px";
+	   soundbutton.style.top = "25px";
 		soundbutton.style.left = "700px";
-		
+		soundbutton.style.fontSize = "15px";  
+		soundbutton.style.transform = 'translate(-50%, -50%)';
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
@@ -50,7 +51,7 @@ window.addEventListener('load', function () {
 	}else {
 		canvas.style.border = '5px solid white';
 		canvas.style.color = 'white';
-		soundbutton.style.top = "130px";
+		soundbutton.style.top = "135px";
 		soundbutton.style.left = "1200px";
 		soundbutton.style.width = '220px';
     	soundbutton.style.height = '30px';
@@ -744,13 +745,13 @@ window.addEventListener('load', function () {
 	function displayStatusText(context) {
 		
 		// ammo
-		drawFancyText('AMMO: ', 120, 50, 'left');
+		drawFancyText('AMMO: ', 70, 50, 'left');
 
 		// health
-		drawFancyText('HEALTH: ', 120, 80, 'left');
+		drawFancyText('HEALTH: ', 70, 80, 'left');
 
 		// score
-		drawFancyText(`ENEMIES: ${geistertot}`, 1120, 50, 'right');
+		drawFancyText(`ENEMIES: ${geistertot}`, 900, 50, 'right');
 
 		// time
 		let minutes = Math.floor(gametimerstart / 60) % 60;
@@ -768,16 +769,16 @@ window.addEventListener('load', function () {
 			minutes = `0${minutes}`;
 		}
 
-		drawFancyText(`TIME: ${minutes}:${seconds}`, 700, 50, 'right');
+		drawFancyText(`TIME: ${minutes}:${seconds}`, 600, 50, 'right');
 
 		// health bar
 		context.lineJoin = 'bevel';
 		context.lineWidth = 3.5;
 		context.strokeStyle = 'white';
-		context.strokeRect(242, 60, 104, 21);
+		context.strokeRect(192, 60, 104, 21);
 		context.fillStyle = '#c18178';
 		context.lineJoin = 'bevel';
-		context.fillRect(242, 60, life, 20);
+		context.fillRect(192, 60, life, 20);
 
 		/*  context.fillStyle = 'white';
         context.clearRect(200, 48, 105, 25);   */
@@ -788,20 +789,15 @@ window.addEventListener('load', function () {
 		context.lineJoin = 'bevel';
 		context.lineWidth = 3.5;
 		context.strokeStyle = 'white';
-		context.strokeRect(242, 30, 104, 21);
+		context.strokeRect(192, 30, 104, 21);
 		context.fillStyle = '#867ade';
 		context.lineJoin = 'bevel';
-		/* if(score >= 104){
-			context.fillRect(242, 30, 104, 20);
+		if(score >= 104){
+			context.fillRect(192, 30, 104, 20);
 		}else{
-			context.fillRect(242, 30, score, 20);
-		} */
-		const x = 242;
-		const y = 30;
-		const minWidth = 104;
-		const width = Math.min(minWidth, score);
-
-		context.fillRect(x, y, width, 20);
+			context.fillRect(192, 30, score, 20);
+		} 
+		
 
 		
 		window.addEventListener('blur', function() {

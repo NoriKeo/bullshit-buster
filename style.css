@@ -21,7 +21,8 @@ body {
 #backgroundImage,
 #enemyImage,
 #geldImage,
-#steuerungbackground {
+#steuerungbackground,
+#nameInput {
 	display: none;
 }
 #ghost1Image,
