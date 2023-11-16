@@ -37,7 +37,9 @@ window.addEventListener('load', function () {
 		startscreenhintergrund.style.width = '200';
 		soundbutton.style.width = '100px';
 		soundbutton.style.height = '10px';
-		soundbutton.style.fontSize = '10px';
+		soundbutton.style.fontSize = '20px';
+		soundbutton.style.top = '1%';
+        soundbutton.style.left = '80%';   
  
 		  
 		
