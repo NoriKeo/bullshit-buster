@@ -69,9 +69,9 @@ window.addEventListener('load', function () {
 		
 		
 		window.addEventListener('resize', () => {
-			soundbutton.style.top = '21%';
+			soundbutton.style.top = '90%';
 			soundbutton.style.left = '70%';
-			soundbutton.style.transform = 'translate(-70%, -21%)';
+			soundbutton.style.transform = 'translate(-13 %, -80%)';
 		  });
 
 		
