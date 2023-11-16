@@ -60,9 +60,9 @@ window.addEventListener('load', function () {
 	    canvas.parentNode.appendChild(soundbutton);
 
 		 
-		soundbutton.style.top = '21%';
-        soundbutton.style.left = '70%';  
-		soundbutton.style.transform = 'translate(-21%, -70%)';
+		soundbutton.style.top = '13%';
+        soundbutton.style.left = '80%';   
+		
 		soundbutton.style.border = 'none';
 		soundbutton.style.fontFamily = "CustomFont3";
 		soundbutton.style.color = '#ae51b6';
@@ -71,7 +71,7 @@ window.addEventListener('load', function () {
 		window.addEventListener('resize', () => {
 			soundbutton.style.top = '21%';
 			soundbutton.style.left = '70%';
-			soundbutton.style.transform = 'translate(-21%, -70%)';
+			soundbutton.style.transform = 'translate(-70%, -21%)';
 		  });
 
 		
