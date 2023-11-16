@@ -55,13 +55,6 @@ window.addEventListener('load', function () {
 	   gameend.height = 300;
 	   startscreenhintergrund.width = 1300;
 		startscreenhintergrund.height = 620;
-	   
-	}
-	soundbutton.style.position = "fixed";
-	
-	    canvas.parentNode.appendChild(soundbutton);
-
-		 
 		soundbutton.style.top = '13%';
         soundbutton.style.left = '80%';   
 		
@@ -75,6 +68,14 @@ window.addEventListener('load', function () {
 			soundbutton.style.left = '70%';
 			soundbutton.style.transform = 'translate(-13 %, -80%)';
 		  });
+	   
+	}
+	soundbutton.style.position = "fixed";
+	
+	    canvas.parentNode.appendChild(soundbutton);
+
+		 
+		
 
 		
 		
@@ -1137,14 +1138,18 @@ window.addEventListener('load', function () {
 			background.update(input);
 			steueranleitung.style.display = 'block';
 		}
-
+		setTimeout(function() {
 			//to do
-			 let storenbild = document.getElementById('storenbild');
+			let storenbild = document.getElementById('storenbild');
 				
 			storenbild.weight = 250;
 			storenbild.height = 200;
 			storenbild.style.display = 'block'; 
 		
+			
+		  }, 60000);
+
+			
 
 		
 
