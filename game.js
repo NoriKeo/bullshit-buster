@@ -1060,6 +1060,9 @@ window.addEventListener('load', function () {
 	// video.onended = function() {
 	//     button.style.display = 'block';
 	// };
+	function pause(){
+		
+	}
 
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
@@ -1141,14 +1144,14 @@ window.addEventListener('load', function () {
 		setTimeout(function() {
 			//to do
 			let storenbild = document.getElementById('storenbild');
-				
+			
 			storenbild.weight = 250;
 			storenbild.height = 200;
 			storenbild.style.display = 'block'; 
 		
 			
-		  }, 60000);
-
+		  }, 10000);
+		  console.log('zeit'+ setTimeout);
 			
 
 		
