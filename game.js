@@ -1,7 +1,9 @@
 window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
-
+	const weiterspielen = document.getElementById('weiterspielen');
+	const spenden2 = this.document.getElementById('spenden2');
+	const storenbild = document.getElementById('storenbild');
 	const restartButton = document.getElementById('restart');
 	const soundbutton = document.getElementById("soundbutton");
 	const highScore = localStorage.getItem('highScore') || 0;
@@ -10,7 +12,7 @@ window.addEventListener('load', function () {
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
     soundhintergrund.volume = 0.2;
-	
+	var pauseGame = false;
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
@@ -30,6 +32,8 @@ window.addEventListener('load', function () {
 		canvas.style.outline = 'none';
 		gameend.weight = 250;
 	   gameend.height = 200;
+	   storenbild.weight = 150;
+			storenbild.height = 100;
 	   
 	   restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
@@ -58,9 +62,9 @@ window.addEventListener('load', function () {
 		soundbutton.style.top = '13%';
         soundbutton.style.left = '80%';   
 		
-		soundbutton.style.border = 'none';
-		soundbutton.style.fontFamily = "CustomFont3";
-		soundbutton.style.color = '#ae51b6';
+		
+		storenbild.weight = 250;
+			storenbild.height = 200;
 		
 		
 		window.addEventListener('resize', () => {
@@ -71,13 +75,13 @@ window.addEventListener('load', function () {
 	   
 	}
 	soundbutton.style.position = "fixed";
+	soundbutton.style.border = 'none';
+		soundbutton.style.fontFamily = "CustomFont3";
+		soundbutton.style.color = '#ae51b6';
 	
 	canvas.parentNode.appendChild(soundbutton);
 
-	function pauseCanvas(canvas) {
-		cancelAnimationFrame(canvas.animationFrameId);
-	  }
-		   
+	
 		
 
 		
@@ -1070,7 +1074,7 @@ window.addEventListener('load', function () {
 		const deltaTime = timeStamp - lastTime;
 		lastTime = timeStamp;
 		
-		
+
 		
 		gameplay = true;
 		
@@ -1118,7 +1122,7 @@ window.addEventListener('load', function () {
 			handleGhosts(deltaTime);
 		}, 5000);
 		handleCoins(deltaTime);
-		if (!gameOver) requestAnimationFrame(animate);
+		if (!gameOver && !pauseGame) requestAnimationFrame(animate);
 	}
 
 	
@@ -1147,21 +1151,30 @@ window.addEventListener('load', function () {
 			background.update(input);
 			steueranleitung.style.display = 'block';
 		}
-		setTimeout(function() {
-			var spielen = document.getElementById('weiterspielen');
+		function gamePause() {
+			pauseGame = true;
+			
 			//to do
-			let storenbild = document.getElementById('storenbild');
+			
+			
 			gameplay = false;
-			storenbild.weight = 250;
-			storenbild.height = 200;
+			
+			
+			weiterspielen.style.display = 'block';
+			spenden2.style.display = 'block';
 			storenbild.style.display = 'block'; 
-			spielen.style.display = 'block';
-			
-		
-			
-		  }, 10000);
-		 
-			
+
+			weiterspielen.addEventListener('click', function () {
+				weiterspielen.style.display = 'none';
+			storenbild.style.display = 'none'; 
+
+				pauseGame = false;
+				animate(0);
+			}, {once: true})
+		 }
+		 setTimeout(gamePause,70_000);
+		 setTimeout(gamePause,90_000);
+			 
 
 		
 

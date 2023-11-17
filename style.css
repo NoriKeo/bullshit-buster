@@ -74,6 +74,22 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
+#spenden2{
+	background-color: transparent;
+	display: none;
+	outline: none;
+	border: none;
+	position: absolute;
+	top: 58%;
+	left: 58%;
+	width: 170px;
+	height: 60px;
+
+	transform: translate(-58%, -58%);
+	max-width: 100%;
+	max-height: 100%;
+	
+}
 #restartbild {
 	display: none;
 	position: absolute;
@@ -124,12 +140,15 @@ body {
 	max-height: 100%;
 }
 #weiterspielen{
+	background-color: transparent;
 	border: none;
 	color: rgb(187, 29, 29);
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	width: 210px;
+	height: 50px;
+	top: 60%;
+	left: 43%;
+	transform: translate(-60%, -43%);
 	max-width: 100%;
 	max-height: 100%;
 
