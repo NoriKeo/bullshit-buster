@@ -959,22 +959,23 @@ window.addEventListener('load', function () {
 	soundbutton.addEventListener("click", function() {
 		
 		if(Audiomute){
-			document.getElementById('startsound').play();
-		document.getElementById('au').play();
-		document.getElementById('damage').play();
-		document.getElementById('geistertot').play();
-		soundhintergrund.play();
-		document.getElementById('item').play();
+			document.getElementById('startsound').volume = 0.1;
+		document.getElementById('au').volume = 0.5;
+		document.getElementById('damage').volume = 0.5;
+		document.getElementById('geistertot').volume = 0.5;
+		soundhintergrund.volume = 0.5;
+		document.getElementById('item').volume = 0.5;
 		soundbutton.innerHTML = "Sound: on";
         
 		} else {
 			
-		document.getElementById('startsound').pause();
-		document.getElementById('au').pause();
-		document.getElementById('damage').pause();
-		document.getElementById('geistertot').pause();
-		soundhintergrund.pause();
-		document.getElementById('item').pause();
+		document.getElementById('startsound').volume = 0;
+		
+		document.getElementById('au').volume = 0;
+		document.getElementById('damage').volume = 0;
+		document.getElementById('geistertot').volume = 0;
+		soundhintergrund.volume = 0;
+		document.getElementById('item').volume = 0;
 		soundbutton.innerHTML = "Sound: off";
 
 		}
@@ -1174,6 +1175,7 @@ window.addEventListener('load', function () {
 		 }
 		 setTimeout(gamePause,70_000);
 		 setTimeout(gamePause,90_000);
+		 setTimeout(gamePause,130_000);
 			 
 
 		
