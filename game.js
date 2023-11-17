@@ -72,9 +72,12 @@ window.addEventListener('load', function () {
 	}
 	soundbutton.style.position = "fixed";
 	
-	    canvas.parentNode.appendChild(soundbutton);
+	canvas.parentNode.appendChild(soundbutton);
 
-		 
+	function pauseCanvas(canvas) {
+		cancelAnimationFrame(canvas.animationFrameId);
+	  }
+		   
 		
 
 		
@@ -1060,14 +1063,17 @@ window.addEventListener('load', function () {
 	// video.onended = function() {
 	//     button.style.display = 'block';
 	// };
-	function pause(){
-		
-	}
+	
+	
 
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
 		lastTime = timeStamp;
+		
+		
+		
 		gameplay = true;
+		
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		background.draw(ctx);
@@ -1142,16 +1148,19 @@ window.addEventListener('load', function () {
 			steueranleitung.style.display = 'block';
 		}
 		setTimeout(function() {
+			var spielen = document.getElementById('weiterspielen');
 			//to do
 			let storenbild = document.getElementById('storenbild');
-			
+			gameplay = false;
 			storenbild.weight = 250;
 			storenbild.height = 200;
 			storenbild.style.display = 'block'; 
+			spielen.style.display = 'block';
+			
 		
 			
 		  }, 10000);
-		  console.log('zeit'+ setTimeout);
+		 
 			
 
 		
