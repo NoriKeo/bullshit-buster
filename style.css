@@ -13,7 +13,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	outline: 5px solid white; 
+	outline: 5px solid white;
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -22,8 +22,7 @@ body {
 #enemyImage,
 #geldImage,
 #steuerungbackground,
-#nameInput
- {
+#nameInput {
 	display: none;
 }
 #ghost1Image,
@@ -38,7 +37,9 @@ body {
 	display: none;
 }
 
-#steueranleitung, #steueranleitunghandy,#startscreenhintergrund{
+#steueranleitung,
+#steueranleitungHandy,
+#startscreenhintergrund {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -52,7 +53,8 @@ body {
 	/*  justify-content: center;   
     align-items: center; */
 }
-#gameend,#storenbild {
+#gameend,
+#storenbild {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -85,15 +87,15 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#soundbutton{
+#soundbutton {
 	display: none;
 	background-color: transparent;
-	
+
 	position: fixed;
 	top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* max-width: 100%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* max-width: 100%;
 	max-height: 100%; */
 }
 #restart {
@@ -123,7 +125,7 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#weiterspielen{
+#weiterspielen {
 	border: none;
 	color: rgb(187, 29, 29);
 	position: absolute;
@@ -132,7 +134,6 @@ body {
 	transform: translate(-50%, -50%);
 	max-width: 100%;
 	max-height: 100%;
-
 }
 
 #starthintergrund {

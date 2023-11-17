@@ -3,14 +3,14 @@ window.addEventListener('load', function () {
 	const startscreenhintergrund = document.getElementById('starthintergrund');
 
 	const restartButton = document.getElementById('restart');
-	const soundbutton = document.getElementById("soundbutton");
+	const soundbutton = document.getElementById('soundbutton');
 	const highScore = localStorage.getItem('highScore') || 0;
 	const countdownEl = document.getElementById('countdown');
 	const ctx = canvas.getContext('2d');
 	const soundhintergrund = document.getElementById('hintergrunsound');
 	soundhintergrund.loop = true;
-    soundhintergrund.volume = 0.2;
-	
+	soundhintergrund.volume = 0.2;
+
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
 	steueranleitung.width = 350;
 	steueranleitung.height = 200;
 	//to do handy größe
-	
+
 	if (
 		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 			navigator.userAgent
@@ -29,9 +29,9 @@ window.addEventListener('load', function () {
 	) {
 		canvas.style.outline = 'none';
 		gameend.weight = 250;
-	   gameend.height = 200;
-	   
-	   restartButton.style.width = '70px';
+		gameend.height = 200;
+
+		restartButton.style.width = '70px';
 		restartButton.style.height = '20px';
 		startscreenhintergrund.style.width = '250';
 		startscreenhintergrund.style.width = '200';
@@ -39,64 +39,52 @@ window.addEventListener('load', function () {
 		soundbutton.style.height = '10px';
 		soundbutton.style.fontSize = '20px';
 		soundbutton.style.top = '1%';
-        soundbutton.style.left = '80%';   
- 
-		  
-		
-	}else {
+		soundbutton.style.left = '80%';
+	} else {
 		canvas.style.border = '5px solid white';
 		canvas.style.color = 'white';
 		soundbutton.style.width = '180px';
 		soundbutton.style.height = '30px';
-		soundbutton.style.fontSize = "30px";
+		soundbutton.style.fontSize = '30px';
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
-	   gameend.height = 300;
-	   startscreenhintergrund.width = 1300;
+		gameend.height = 300;
+		startscreenhintergrund.width = 1300;
 		startscreenhintergrund.height = 620;
 		soundbutton.style.top = '13%';
-        soundbutton.style.left = '80%';   
-		
+		soundbutton.style.left = '80%';
+
 		soundbutton.style.border = 'none';
-		soundbutton.style.fontFamily = "CustomFont3";
+		soundbutton.style.fontFamily = 'CustomFont3';
 		soundbutton.style.color = '#ae51b6';
-		
-		
+
 		window.addEventListener('resize', () => {
 			soundbutton.style.top = '90%';
 			soundbutton.style.left = '70%';
 			soundbutton.style.transform = 'translate(-13 %, -80%)';
-		  });
-	   
+		});
 	}
-	soundbutton.style.position = "fixed";
-	
+	soundbutton.style.position = 'fixed';
+
 	canvas.parentNode.appendChild(soundbutton);
 
 	function pauseCanvas(canvas) {
 		cancelAnimationFrame(canvas.animationFrameId);
-	  }
-		   
-		
+	}
 
-		
-		
 	gameplay = false;
 	//restartbild.weight = 250;
 	//restartbild.height = 50;
 	//startscreenhintergrund.style.width = canvas.width + 'px';
 	//startscreenhintergrund.style.height = canvas.height + 'px';
-	
-	
+
 	let coins = [];
 	let ghosts = [];
-	window.addEventListener('load', function() {
+	window.addEventListener('load', function () {
 		// Code to execute when the cell phone is turned on
 		console.log('Cell phone is turned on');
-	  });
-	  
-	  
+	});
 
 	const font = new FontFace(
 		'CustomFont',
@@ -141,17 +129,15 @@ window.addEventListener('load', function () {
 	let gametimer = 0;
 	let gametimerstart = gametimer * 60;
 
-	
-
-	let score = 0;
+	let ammo = 0;
 	let life = 100;
 	let geistertot = 0;
 	let gameOver = false;
-		
+
 	let actions = {
 		run: false,
 		onGround: true,
-  		shoot: false
+		shoot: false,
 	};
 
 	class InputHandler {
@@ -172,7 +158,7 @@ window.addEventListener('load', function () {
 					this.keys.indexOf(e.key) === -1
 				) {
 					this.keys.push(e.key);
-				} 
+				}
 				// console.log(e.key, this.keys);
 			});
 			window.addEventListener('keyup', (e) => {
@@ -275,17 +261,17 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < coin.width / 4 + this.width / 4) {
 					console.log('schuss');
-					if(score <= 100){
-					score ++;
-					score ++;
+					if (ammo <= 100) {
+						ammo++;
+						ammo++;
 					}
-					console.log('ammo: ' + score);
-					if(!Audiomute){
-					document.getElementById('item').pause();
-					document.getElementById('item').currentTime = 0;
-					document.getElementById('item').play();
+					console.log('ammo: ' + ammo);
+					if (!Audiomute) {
+						document.getElementById('item').pause();
+						document.getElementById('item').currentTime = 0;
+						document.getElementById('item').play();
 					}
-					console.log('munition' + score);
+					console.log('munition' + ammo);
 					const index = coins.indexOf(coin);
 					coins.splice(index, 1);
 
@@ -300,12 +286,12 @@ window.addEventListener('load', function () {
 				const distance = Math.sqrt(dx * dx + dy * dy);
 				if (distance < ghost.width / 12 + this.width / 12) {
 					life--;
-					if(!Audiomute){
-					document.getElementById('damage').play();
+					if (!Audiomute) {
+						document.getElementById('damage').play();
 					}
 					if (life == 0) {
-						if(!Audiomute){
-						document.getElementById('au').play();
+						if (!Audiomute) {
+							document.getElementById('au').play();
 						}
 						gameOver = true;
 					}
@@ -346,20 +332,8 @@ window.addEventListener('load', function () {
 
 
 
-            } */ else if (
-				input.keys.includes('e') ||
-				(input.keys.includes('e') && input.keys.includes(' ')) ||
-				(input.keys.indexOf('d') > -1 && input.keys.includes('e')) ||
-				(input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e'))
-			) {
-				this.shootPressed = true;
-
-				if (score < 0) {
-					score = 0;
-				}
-			} else {
+            } */ else {
 				this.speed = 0;
-				this.shootPressed = false;
 
 				//this.vy = 0;
 			}
@@ -370,6 +344,10 @@ window.addEventListener('load', function () {
 					// Handle touchstart event for shooting
 				}.bind(this)
 			);
+
+			if (input.keys.includes('e')) {
+				this.shootPressed = true;
+			}
 
 			this.x += this.speed;
 			if (this.x < 0) this.x = 0;
@@ -404,6 +382,7 @@ window.addEventListener('load', function () {
 		}
 		shoot() {
 			if (this.shootPressed) {
+				this.shootPressed = false;
 				const speed = 5;
 				const delay = 4;
 				const damage = 1;
@@ -522,6 +501,7 @@ window.addEventListener('load', function () {
 
 	class Ghost {
 		constructor(gameWidth, gameHeight, geistertyp) {
+			this.maxHealth = geistertyp.health;
 			this.gameWidth = gameWidth;
 			this.gameHeight = gameHeight;
 			this.width = 160;
@@ -531,7 +511,7 @@ window.addEventListener('load', function () {
 			this.y = this.gameHeight - this.height - geistertyp.spanhoehe;
 			this.frameX = 0;
 			this.speed = geistertyp.speed;
-			this.health = geistertyp.health;
+			this.health = this.maxHealth;
 			this.markedForDeletion = false;
 			this.initialY = this.y;
 		}
@@ -547,6 +527,16 @@ window.addEventListener('load', function () {
 				this.width,
 				this.height
 			);
+
+			drawProgressBar(
+				this.x,
+				this.y - 30,
+				101,
+				21,
+				'#FF1C1C',
+				(this.health / this.maxHealth) * 100
+			);
+
 			if (this.health > 1) {
 				ctx.strockStyle = 'white';
 			} else {
@@ -586,15 +576,9 @@ window.addEventListener('load', function () {
            return false; 
        }  */
 	}
-	function drawbullets(ctx){
-		
-		
-			
-
-	}
 
 	class Bullet {
-		color = [  'yellow', 'orange', 'white'];
+		color = ['yellow', 'orange', 'white'];
 		constructor(x, y, speed, damage) {
 			this.x = x;
 			this.y = y;
@@ -606,7 +590,6 @@ window.addEventListener('load', function () {
 			this.color = this.color[Math.floor(Math.random() * this.color.length)];
 		}
 		draw(ctx) {
-			
 			ctx.fillStyle = this.color;
 			this.x += this.speed;
 			ctx.shadowColor = this.color;
@@ -615,8 +598,8 @@ window.addEventListener('load', function () {
 			ctx.shadowOffsetY = 5; */
 			ctx.lineJoin = 'bevel';
 			ctx.fillRect(this.x, this.y, this.width, this.height);
-			
-			ctx.shadowColor = "transparent";
+
+			ctx.shadowColor = 'transparent';
 		}
 		collideWith(sprite) {
 			if (
@@ -640,18 +623,18 @@ window.addEventListener('load', function () {
 		}
 
 		shoot(x, y, speed, damage, delay) {
-			if (this.timerTillNextBullet <= 0) {
-				if (score > 0) {
-					if(this.bullets.length < 3){
+			if (ammo > 0) {
+				if (this.bullets.length < 3) {
 					this.bullets.push(new Bullet(x, y, speed, damage));
 					return;
-					}
-					score -= 1;
-					
 				}
-
-				this.timerTillNextBullet = delay;
+				ammo -= 1;
+				if (ammo < 0) {
+					ammo = 0;
+				}
 			}
+
+			this.timerTillNextBullet = delay;
 
 			this.timerTillNextBullet--;
 		}
@@ -660,7 +643,7 @@ window.addEventListener('load', function () {
 			console.log(this.bullets.length);
 			return bullet.x >= canvas.width;
 		}
-		
+
 		draw(ctx) {
 			// console.log(this.bullets.length);
 			this.bullets.forEach((bullet) => {
@@ -686,9 +669,8 @@ window.addEventListener('load', function () {
 			console.log(this.bullets.length);
 			return bullet.x >= canvas.width;
 		} */
-		
 	}
-	
+
 	function handleCoins(deltaTime) {
 		if (coinTimer > coinInterval + randomCoinInterval) {
 			coins.push(new Coin(canvas.width, canvas.height));
@@ -707,14 +689,14 @@ window.addEventListener('load', function () {
 	}
 
 	const geistertyp = [
-		new Geistertyp(3, 4, this.document.getElementById('ghost1Image'), 40),
-		new Geistertyp(1, 3, this.document.getElementById('ghost2Image'), 45),
-		new Geistertyp(3, 4, this.document.getElementById('ghost3Image'), 50),
-		new Geistertyp(1, 10, this.document.getElementById('ghost4Image'), 60),
-		new Geistertyp(1, 6, this.document.getElementById('ghost5Image'), 43),
-		new Geistertyp(3, 4, this.document.getElementById('ghost6Image'), 51),
-		new Geistertyp(1, 1, this.document.getElementById('ghost7Image'), 75),
-		new Geistertyp(1, 2, this.document.getElementById('ghost8Image'), 55),
+		new Geistertyp(6, 4, this.document.getElementById('ghost1Image'), 40),
+		new Geistertyp(6, 3, this.document.getElementById('ghost2Image'), 45),
+		new Geistertyp(8, 4, this.document.getElementById('ghost3Image'), 50),
+		new Geistertyp(6, 10, this.document.getElementById('ghost4Image'), 60),
+		new Geistertyp(6, 6, this.document.getElementById('ghost5Image'), 43),
+		new Geistertyp(8, 4, this.document.getElementById('ghost6Image'), 51),
+		new Geistertyp(6, 1, this.document.getElementById('ghost7Image'), 75),
+		new Geistertyp(6, 2, this.document.getElementById('ghost8Image'), 55),
 	];
 
 	function handleGhosts(deltaTime) {
@@ -740,12 +722,8 @@ window.addEventListener('load', function () {
 	//     context.fillStyle = 'red';
 	//     context.fillRect(0, 0, life, 10);
 	// }
-	
-
-
 
 	function drawFancyText(text, x, y, alignment) {
-		// ammo
 		ctx.font = '30px CustomFont';
 		ctx.textAlign = alignment;
 		ctx.fillStyle = 'white';
@@ -759,8 +737,17 @@ window.addEventListener('load', function () {
 		ctx;
 	}
 
+	function drawProgressBar(x, y, width, height, fillColor, fillPercent) {
+		ctx.lineJoin = 'bevel';
+		ctx.lineWidth = 3.5;
+		ctx.strokeStyle = 'white';
+		ctx.strokeRect(x, y, width, height);
+		ctx.fillStyle = fillColor;
+		ctx.lineJoin = 'bevel';
+		ctx.fillRect(x, y, (fillPercent / 100) * width, height - 1);
+	}
+
 	function displayStatusText(context) {
-		
 		// ammo
 		drawFancyText('AMMO: ', 70, 50, 'left');
 
@@ -788,128 +775,40 @@ window.addEventListener('load', function () {
 
 		drawFancyText(`TIME: ${minutes}:${seconds}`, 600, 50, 'right');
 
-		// health bar
-		context.lineJoin = 'bevel';
-		context.lineWidth = 3.5;
-		context.strokeStyle = 'white';
-		context.strokeRect(192, 60, 104, 21);
-		context.fillStyle = '#c18178';
-		context.lineJoin = 'bevel';
-		context.fillRect(192, 60, life, 20);
-
-		/*  context.fillStyle = 'white';
-        context.clearRect(200, 48, 105, 25);   */
-		/* context.fillStyle = "white";
-        context.fillRect(200, 48, 105, 25); */
+		// health bar\
+		drawProgressBar(192, 60, 101, 21, '#c18178', life);
 
 		// ammo bar
-		context.lineJoin = 'bevel';
-		context.lineWidth = 3.5;
-		context.strokeStyle = 'white';
-		context.strokeRect(192, 30, 104, 21);
-		context.fillStyle = '#867ade';
-		context.lineJoin = 'bevel';
-		if(score >= 104){
-			context.fillRect(192, 30, 104, 20);
-		}else{
-			context.fillRect(192, 30, score, 20);
-		} 
-		
-		
-		window.addEventListener('blur', function() {
-		document.getElementById('startsound').pause();
-		document.getElementById('au').pause();
-		document.getElementById('damage').pause();
-		document.getElementById('geistertot').pause();
-		soundhintergrund.pause();
-		document.getElementById('item').pause();
-			
-		  });
-		  
+		drawProgressBar(192, 30, 101, 21, '#867ade', ammo <= 100 ? ammo : 100);
+
+		window.addEventListener('blur', function () {
+			document.getElementById('startsound').pause();
+			document.getElementById('au').pause();
+			document.getElementById('damage').pause();
+			document.getElementById('geistertot').pause();
+			soundhintergrund.pause();
+			document.getElementById('item').pause();
+		});
+
 		// timer
 
-		if (
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-				navigator.userAgent
-			)
-		) {
-			document.querySelector('body').style.overscrollBehaviorY = 'contain';
-			window.scrollTo(0, 1);
-		}
-		
-		function addName() {
-			var nameInput = document.getElementById("nameInput");
-			var nameList = document.getElementById("nameList");
-			
-			var name = nameInput.value;
-			var listItem = document.createElement("li");
-			listItem.textContent = name;
-			
-			nameList.appendChild(listItem);
-			nameInput.value = "";
-		  }
-		
-
-		const names = ['John', 'Jane', 'Alice', 'Bob'];
-	
-	// Function to display names graphically
-		function displayNames(names) {
-	  // Get the container element
-	  const container = document.getElementById('nameList');
-	
-	  // Clear the container
-	  container.innerHTML = '';
-	
-	  // Loop through the names array
-	  names.forEach(name => {
-		// Create a new element for each name
-		const nameElement = document.createElement('div');
-		nameElement.textContent = name;
-	
-		// Add a class to the element for styling
-		nameElement.classList.add('name');
-	
-		// Append the name element to the container
-		container.appendChild(nameElement);
-	  });
-	}
-
 		if (gameOver) {
-			document.getElementById('nameInput').addEventListener('click', function () {
-			addName();
-			})
+			document
+				.getElementById('nameInput')
+				.addEventListener('click', function () {
+					addName();
+				});
 			displayNames(names);
 			console.log(displayNames);
-			let endscrem = document.getElementById('gameend');
-			endscrem.style.display = 'block';
+			let endScreenImage = document.getElementById('gameend');
+			endScreenImage.style.display = 'block';
 			var gameOverButton = document.getElementById('spenden');
-			gameOverButton.style.outline = 'transparent';
-			if (
-				/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-					navigator.userAgent
-				)
-			) {
-				gameOverButton.style.width = '245px';
-				gameOverButton.style.height = '200px';
-				
-			}else{
-				gameOverButton.style.width = '375px';
-				gameOverButton.style.height = '300px';
-
-			}
-	
-			
 
 			gameOverButton.style.display = 'block';
 
 			soundhintergrund.pause();
 			//var restartbild = document.getElementById('restartbild');
 			//restartbild.style.display = 'block';
-			
-			
-	
-			restartButton.style.width = '170px';
-			restartButton.style.height = '50px';
 
 			restartButton.style.display = 'block';
 
@@ -919,7 +818,7 @@ window.addEventListener('load', function () {
 					restartGame();
 					restartButton.style.display = 'none';
 					restartbild.style.display = 'none';
-					endscrem.style.display = 'none';
+					endScreenImage.style.display = 'none';
 					gameOverButton.style.display = 'none';
 				},
 				{ once: true }
@@ -930,8 +829,7 @@ window.addEventListener('load', function () {
             context.fillText('GAME OVER', canvas.width / 2, 200); */
 		}
 	}
-	
-	
+
 	/* soundbutton.style.position = 'absolute';
 	soundbutton.style.top = '50%';
 	soundbutton.style.left = '50%';
@@ -941,47 +839,33 @@ window.addEventListener('load', function () {
 	
 	soundbutton.style.display = 'block';
 	 */
-   
-	
-	
-	
-	
 
-	document.getElementById("soundbutton").addEventListener("keydown", function(event) {
-		event.preventDefault();
-	  });
-	  
-	
-	soundbutton.addEventListener("click", function() {
-		
-		if(Audiomute){
+	document
+		.getElementById('soundbutton')
+		.addEventListener('keydown', function (event) {
+			event.preventDefault();
+		});
+
+	soundbutton.addEventListener('click', function () {
+		if (Audiomute) {
 			document.getElementById('startsound').play();
-		document.getElementById('au').play();
-		document.getElementById('damage').play();
-		document.getElementById('geistertot').play();
-		soundhintergrund.play();
-		document.getElementById('item').play();
-		soundbutton.innerHTML = "Sound: on";
-        
+			document.getElementById('au').play();
+			document.getElementById('damage').play();
+			document.getElementById('geistertot').play();
+			soundhintergrund.play();
+			document.getElementById('item').play();
+			soundbutton.innerHTML = 'Sound: on';
 		} else {
-			
-		document.getElementById('startsound').pause();
-		document.getElementById('au').pause();
-		document.getElementById('damage').pause();
-		document.getElementById('geistertot').pause();
-		soundhintergrund.pause();
-		document.getElementById('item').pause();
-		soundbutton.innerHTML = "Sound: off";
-
+			document.getElementById('startsound').pause();
+			document.getElementById('au').pause();
+			document.getElementById('damage').pause();
+			document.getElementById('geistertot').pause();
+			soundhintergrund.pause();
+			document.getElementById('item').pause();
+			soundbutton.innerHTML = 'Sound: off';
 		}
 		Audiomute = !Audiomute;
-		
-		
 	});
-    
-	
-
-
 
 	/* function endGame() {
         if (score > highScore) {
@@ -999,7 +883,7 @@ window.addEventListener('load', function () {
     }
      */
 	function restartGame() {
-		document.getElementById("soundbutton").disabled = false;
+		document.getElementById('soundbutton').disabled = false;
 		clearInterval(timerInterval);
 		timerInterval = setInterval(updateTimer, 1000);
 		player.restart();
@@ -1012,7 +896,7 @@ window.addEventListener('load', function () {
 		//document.getElementById('startsound').volume=50;
 		ghostInterval = 2780;
 		gametimerstart = 0;
-		score = 0;
+		ammo = 0;
 		life = 100;
 		geistertot = 0;
 		gameOver = false;
@@ -1023,12 +907,12 @@ window.addEventListener('load', function () {
 		console.log('interval ' + ghostInterval);
 		gametimerstart++;
 		gametimerstart = gametimerstart + 1;
-			if (geistertot >= 5 ) {
+		if (geistertot >= 5) {
 			ghostInterval = 1000;
 			if (geistertot >= 15) {
 				console.log('hiiii');
 				ghostInterval = 100;
-				if (geistertot >= 20 ) {
+				if (geistertot >= 20) {
 					ghostInterval -= 200;
 					/* if (geistertot >= Math.random() * 18 + 78 ) {
 						console.log('yes');
@@ -1037,13 +921,10 @@ window.addEventListener('load', function () {
 							ghostInterval = 0;
 						}
 					} */
-				
 				}
 			}
-			
-		
 		}
-        
+
 		//console.log("intervale: " + ghostInterval);
 	}
 
@@ -1063,17 +944,13 @@ window.addEventListener('load', function () {
 	// video.onended = function() {
 	//     button.style.display = 'block';
 	// };
-	
-	
 
 	function animate(timeStamp) {
 		const deltaTime = timeStamp - lastTime;
 		lastTime = timeStamp;
-		
-		
-		
+
 		gameplay = true;
-		
+
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		background.draw(ctx);
@@ -1081,14 +958,14 @@ window.addEventListener('load', function () {
 		bulletController.draw(ctx);
 		player.draw(ctx);
 		player.update(input, coins);
-		soundbutton.style.display = 'block'
+		soundbutton.style.display = 'block';
 		ghosts.forEach((ghost) => {
 			if (bulletController.collideWith(ghost)) {
 				if (ghost.health <= 0) {
 					const index = ghosts.indexOf(ghost);
 					ghosts.splice(index, 1);
-					if(!Audiomute){
-					document.getElementById('geistertot').play();
+					if (!Audiomute) {
+						document.getElementById('geistertot').play();
 					}
 					geistertot++;
 				}
@@ -1118,22 +995,18 @@ window.addEventListener('load', function () {
 			handleGhosts(deltaTime);
 		}, 5000);
 		handleCoins(deltaTime);
-		if (!gameOver) requestAnimationFrame(animate);
+		if (!gameOver || !pauseGame) requestAnimationFrame(animate);
 	}
-
-	
 
 	// Apply the new size and position to the button
 	var starten = document.getElementById('startButton');
 
 	document.getElementById('startButton').addEventListener('click', function () {
 		let steueranleitung = document.getElementById('steueranleitung');
-		let steueranleitunghandy = document.getElementById('steueranleitunghandy');
-		
-		
+		let steueranleitungHandy = document.getElementById('steueranleitungHandy');
+
 		// Insert game start logic here
-		
-		
+
 		if (
 			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 				navigator.userAgent
@@ -1141,39 +1014,30 @@ window.addEventListener('load', function () {
 		) {
 			background.draw(ctx);
 			background.update(input);
-			steueranleitunghandy.style.display = 'block';
+			steueranleitungHandy.style.display = 'block';
 		} else {
 			background.draw(ctx);
 			background.update(input);
 			steueranleitung.style.display = 'block';
 		}
-		setTimeout(function() {
-			var spielen = document.getElementById('weiterspielen');
-			//to do
-			let storenbild = document.getElementById('storenbild');
-			gameplay = false;
-			storenbild.weight = 250;
-			storenbild.height = 200;
-			storenbild.style.display = 'block'; 
-			spielen.style.display = 'block';
-			
-		
-			
-		  }, 10000);
-		 
-			
-
-		
+		// setTimeout(function () {
+		// 	var spielen = document.getElementById('weiterspielen');
+		// 	//to do
+		// 	let storenbild = document.getElementById('storenbild');
+		// 	gameplay = false;
+		// 	storenbild.style.display = 'block';
+		// 	spielen.style.display = 'block';
+		// }, 10000);
 
 		document.addEventListener('keydown', function (event) {
 			if (event.code === 'Enter') {
 				steuerungbackground.style.display = 'none';
 				steueranleitung.style.display = 'none';
-				steueranleitunghandy.style.display = 'none';
+				steueranleitungHandy.style.display = 'none';
 				if (gameplay == false) {
 					document.getElementById('startsound').play();
 					soundhintergrund.play();
-				timerInterval = setInterval(updateTimer, 1000);
+					timerInterval = setInterval(updateTimer, 1000);
 					animate(0);
 				}
 			}
@@ -1182,19 +1046,17 @@ window.addEventListener('load', function () {
 			'touchstart',
 			function (event) {
 				steueranleitung.style.display = 'none';
-				steueranleitunghandy.style.display = 'none';
-				
+				steueranleitungHandy.style.display = 'none';
 
 				if (gameplay == false) {
 					timerInterval = setInterval(updateTimer, 1000);
-				document.getElementById('startsound').play();
-				soundhintergrund.play();
+					document.getElementById('startsound').play();
+					soundhintergrund.play();
 					animate(0);
 				}
 			}.bind(this)
 		);
 
-		
 		console.log('Game Started!');
 		this.disabled = true; // Disables the button after one click
 		this.style.display = 'none';
