@@ -1174,8 +1174,8 @@ window.addEventListener('load', function () {
 			}, {once: true})
 		 }
 		 setTimeout(gamePause,70_000);
-		 setTimeout(gamePause,90_000);
-		 setTimeout(gamePause,130_000);
+		 setTimeout(gamePause,1200_000);
+		 setTimeout(gamePause,200_000);
 			 
 
 		
