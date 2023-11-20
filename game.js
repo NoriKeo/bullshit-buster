@@ -50,34 +50,31 @@ window.addEventListener('load', function () {
 	}else {
 		canvas.style.border = '5px solid white';
 		canvas.style.color = 'white';
-		soundbutton.style.width = '180px';
-		soundbutton.style.height = '30px';
-		soundbutton.style.fontSize = "30px";
+		soundbutton.style.fontSize = '30px';
 		restartButton.style.width = '170px';
 		restartButton.style.height = '50px';
 		gameend.weight = 350;
 	   gameend.height = 300;
 	   startscreenhintergrund.width = 1300;
 		startscreenhintergrund.height = 620;
-		soundbutton.style.top = '13%';
-        soundbutton.style.left = '80%';   
+		
 		
 		
 		storenbild.weight = 250;
 			storenbild.height = 200;
 		
 		
-		window.addEventListener('resize', () => {
+		/* window.addEventListener('resize', () => {
 			soundbutton.style.top = '90%';
 			soundbutton.style.left = '70%';
 			soundbutton.style.transform = 'translate(-13 %, -80%)';
-		  });
+		  }); */
 	   
 	}
-	soundbutton.style.position = "fixed";
+	
 	soundbutton.style.border = 'none';
-		soundbutton.style.fontFamily = "CustomFont3";
-		soundbutton.style.color = '#ae51b6';
+	soundbutton.style.fontFamily = "CustomFont3";
+	soundbutton.style.color = '#ae51b6'; 
 	
 	canvas.parentNode.appendChild(soundbutton);
 
