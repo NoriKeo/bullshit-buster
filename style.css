@@ -13,7 +13,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	outline: 5px solid white; 
+	outline: 5px solid white;
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -22,9 +22,7 @@ body {
 #background2Image,
 #enemyImage,
 #geldImage,
-#steuerungbackground,
-#nameInput
- {
+#steuerungbackground {
 	display: none;
 }
 #ghost1Image,
@@ -39,7 +37,9 @@ body {
 	display: none;
 }
 
-#steueranleitung, #steueranleitunghandy,#startscreenhintergrund{
+#steueranleitung,
+#steueranleitunghandy,
+#startscreenhintergrund {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -53,7 +53,8 @@ body {
 	/*  justify-content: center;   
     align-items: center; */
 }
-#gameend,#storenbild {
+#gameend,
+#storenbild {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -75,7 +76,7 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#spenden2{
+#spenden2 {
 	background-color: transparent;
 	display: none;
 	outline: none;
@@ -89,7 +90,6 @@ body {
 	transform: translate(-58%, -58%);
 	max-width: 100%;
 	max-height: 100%;
-	
 }
 #restartbild {
 	display: none;
@@ -102,7 +102,7 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#playerImage{
+#playerImage {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -112,9 +112,8 @@ body {
 
 	max-width: 100%;
 	max-height: 100%;
-
 }
-#playerImage2{
+#playerImage2 {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -124,18 +123,17 @@ body {
 
 	max-width: 100%;
 	max-height: 100%;
-
 }
-#soundbutton{
+#soundbutton {
 	display: none;
 	background-color: transparent;
-	
+
 	position: fixed;
 	top: 16%;
-  left: 84%;
-  transform: translate(-16%, -84%);
-  max-width: 100%;
-	max-height: 100%; 
+	left: 84%;
+	transform: translate(-16%, -84%);
+	max-width: 100%;
+	max-height: 100%;
 }
 #restart {
 	background-color: transparent;
@@ -164,7 +162,7 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#weiterspielen{
+#weiterspielen {
 	background-color: transparent;
 	border: none;
 	color: rgb(187, 29, 29);
@@ -176,7 +174,6 @@ body {
 	transform: translate(-57%, -43%);
 	max-width: 100%;
 	max-height: 100%;
-
 }
 
 #starthintergrund {
