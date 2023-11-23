@@ -295,10 +295,10 @@ window.addEventListener("load", function () {
       });
 
       ghosts.forEach((ghost) => {
-        const dx = ghost.x + ghost.width / 12 - (this.x + this.width / 12);
-        const dy = ghost.y + ghost.height / 12 - (this.y + this.height / 12);
+        const dx = ghost.x + ghost.width / 8 - (this.x + this.width / 8);
+        const dy = ghost.y + ghost.height / 8 - (this.y + this.height / 8);
         const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < ghost.width / 12 + this.width / 12) {
+        if (distance < ghost.width / 8 + this.width / 8) {
           playerHealth--;
           if (!Audiomute) {
             document.getElementById("damage").play();
@@ -917,6 +917,8 @@ window.addEventListener("load", function () {
         "click",
         function () {
           restartGame();
+          nameInputContainer.style.display = "none";
+          highscoreliste.style.display = "none";
           restartButton.style.display = "none";
           restartbild.style.display = "none";
           endscrem.style.display = "none";
@@ -1105,8 +1107,8 @@ window.addEventListener("load", function () {
       console.log("Level 2");
       backgroundlevel2.draw(ctx);
       backgroundlevel2.update(input);
-      coinInterval = 500;
-      ghostInterval = 50;
+      coinInterval = 2900;
+      ghostInterval = 1;
     } else {
       background.draw(ctx);
       background.update(input);
@@ -1185,10 +1187,15 @@ window.addEventListener("load", function () {
       //to do
 
       gameplay = false;
-
-      weiterspielen.style.display = "block";
-      spenden2.style.display = "block";
-      storenbild.style.display = "block";
+      if (gameOver) {
+        weiterspielen.style.display = "none";
+        spenden2.style.display = "none";
+        storenbild.style.display = "none";
+      } else {
+        weiterspielen.style.display = "block";
+        spenden2.style.display = "block";
+        storenbild.style.display = "block";
+      }
 
       weiterspielen.addEventListener(
         "click",
