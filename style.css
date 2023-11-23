@@ -2,11 +2,16 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+
 }
 
 body {
 	background: black;
+	overflow: hidden;
+
+	
 }
+
 
 #canvas1 {
 	position: absolute;
@@ -24,6 +29,8 @@ body {
 #geldImage,
 #steuerungbackground {
 	display: none;
+	max-width: 100%;
+	max-height: 100%;
 }
 #ghost1Image,
 #ghost2Image,
@@ -33,7 +40,8 @@ body {
 #ghost6Image,
 #ghost7Image,
 #ghost8Image {
-	animation: upAndDown 2s infinite;
+	
+	
 	display: none;
 }
 
@@ -71,6 +79,23 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
+
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+}
+#highscoreLinkButton{
+	background-color:#867ade;
+	display: none;
+	outline: #867ade;
+	z-index: 10;
+	font-family: 'CustomFont3';
+	width: 10rem;
+	height: 2rem;
+	
+	position: absolute;
+	top: 60%;
+	left: 70%;
 
 	transform: translate(-50%, -50%);
 	max-width: 100%;
@@ -175,9 +200,51 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
+/* #nameSubmit{
+	display: none;
+	top: 57%;
+	left: 43%;
+	transform: translate(-57%, -43%);
+	max-width: 100%;
+	max-height: 100%;
+}
+#nameInput{
+	display: none;
+	top: 57%;
+	left: 43%;
+	transform: translate(-57%, -43%);
+	max-width: 100%;
+	max-height: 100%;
+} */
+
+#inputContainer{
+	z-index: 10;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+
+	position: absolute;
+	top: 50%;
+	left: 70%;
+
+	transform: translate(-50%, -70%);
+
+}
+
+#nameInput{
+	margin: 1rem;
+	border: none;
+
+	font-size: 2rem;
+	width: 40%;
+}
+
+#nameInput:focus{
+	outline: none;
+}
 
 #starthintergrund {
-	opacity: 0.8;
+	z-index: 0;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -188,8 +255,21 @@ body {
 	max-height: 100%;
 }
 
-#highScoreDisplay {
-	font-size: 20px;
-	color: #ff0000;
-	font-weight: bold;
+
+#starthighscore{
+	position: absolute;
+	font-family: 'CustomFont3';
+	
+	top: 65%;
+	left: 75%;
+	z-index: 1;
+	color: rgb(255, 255, 255);
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #000000; 
+	font-size: 2rem; 
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+
 }
+

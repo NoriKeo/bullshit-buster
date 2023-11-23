@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="x-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>bullshit-busters</title>
-		<link rel="stylesheet" href="style.css" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-	</head>
-	<body>
-		<canvas id="canvas1"></canvas>
-		<img id="playerImage" src="img/ingo.png" />
-		<img id="playerImage2" src="img/Markusimg.png" />
-		<!-- hope funktioniert -->
-		<img id="backgroundImage" src="img/hintergrund7.png" />
-		<img
-			id="background2Image"
-			src="img/JEK2023_game_background_2nd-level_001"
-		/>
-		<img id="enemyImage" src="img/geld.png" />
-		<img id="steuerungbackground" src="img/hintergrund7.png" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bullshit-busters</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  </head>
+  <body>
+    <canvas id="canvas1"></canvas>
+    <img id="playerImage" src="img/ingo.png" />
+    <img id="playerImage2" src="img/Markusimg.png" />
+    <!-- hope funktioniert -->
+    <img id="backgroundImage" src="img/hintergrund7.png" />
+    <img
+      id="background2Image"
+      src="img/JEK2023_game_background_2nd-level_001"
+    />
+    <img id="enemyImage" src="img/geld.png" />
+    <img id="steuerungbackground" src="img/hintergrund7.png" />
 
-		<img id="ghost1Image" src="img/pileofshit_001.png" />
+    <img id="ghost1Image" src="img/pileofshit_001.png" />
 
-		<img id="ghost2Image" src="img/ghost_3.png" />
-		<img id="ghost3Image" src="img/ghost_4.png" />
-		<img id="ghost4Image" src="img/ghost_5.png" />
-		<img id="ghost5Image" src="img/ghost_6.png" />
-		<img id="ghost6Image" src="img/ghost_7.png" />
-		<img id="ghost7Image" src="img/ghost_8.png" />
-		<img id="ghost8Image" src="img/ghost_9.png" />
-		<img id="storenbild" src="img/JEK_2023_game_stoerer_005.jpg" />
-		<img id="steueranleitung" src="img/steueranleitung2.png" />
-		<img id="steueranleitunghandy" src="img/steuerhandy.png" />
-		<img id="gameend" src="img/JEK_2023_kampagne_gameover_002.png" />
-		<img id="restartbild" src="img/restart.png" />
-		<audio id="hintergrunsound" src="sound/8bit-sample-69080.mp3"></audio>
-		<audio id="au" src="sound/Wilhelm-scream-Sound.mp3"></audio>
-		<audio id="geistertot" src="sound/geisttot.mp3"></audio>
-		<audio id="startsound" src="sound/we came we saw we kicked.mp3"></audio>
-		<audio id="damage" src="sound/video-game-hit-noise-001-135821.mp3"></audio>
-		<audio id="item" src="sound/item-pick-up-38258.mp3"></audio>
+    <img id="ghost2Image" src="img/ghost_3.png" />
+    <img id="ghost3Image" src="img/ghost_4.png" />
+    <img id="ghost4Image" src="img/ghost_5.png" />
+    <img id="ghost5Image" src="img/ghost_6.png" />
+    <img id="ghost6Image" src="img/ghost_7.png" />
+    <img id="ghost7Image" src="img/ghost_8.png" />
+    <img id="ghost8Image" src="img/ghost_9.png" />
+    <img id="storenbild" src="img/JEK_2023_game_stoerer_005.jpg" />
+    <img id="steueranleitung" src="img/steueranleitung2.png" />
+    <img id="steueranleitunghandy" src="img/steuerhandy.png" />
+    <img id="gameend" src="img/JEK_2023_kampagne_gameover_002.png" />
+    <img id="restartbild" src="img/restart.png" />
+    <audio id="hintergrunsound" src="sound/8bit-sample-69080.mp3"></audio>
+    <audio id="au" src="sound/Wilhelm-scream-Sound.mp3"></audio>
+    <audio id="geistertot" src="sound/geisttot.mp3"></audio>
+    <audio id="startsound" src="sound/we came we saw we kicked.mp3"></audio>
+    <audio id="damage" src="sound/video-game-hit-noise-001-135821.mp3"></audio>
+    <audio id="item" src="sound/item-pick-up-38258.mp3"></audio>
 
-		<input type="text" id="nameInput" />
-		<input type="submit" id="nameSubmit" value="Submit" />
+    <div id="inputContainer">
+      <input type="text" id="nameInput" placeholder="Name" maxlength="8" />
+      <input type="submit" id="nameSubmit" value="Submit" />
+    </div>
 
-		<!-- <button >Add Name</button> -->
+    <!-- <button >Add Name</button> -->
 
-		<!--   <div class="video-container" >
+    <!--   <div class="video-container" >
         <video controls autoplay muted loop autop>
             <source src="your-video-source.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div> -->
-		<p id="countdown">00:00</p>
-		<img id="starthintergrund" src="img/startbildschierm2.png" />
-		<button id="startButton"></button>
-		<button
-			id="spenden"
-			onclick="window.location.href='https://netzpolitik.org/spenden/?via=gm'"
-		></button>
-		<button
-			id="soundbutton"
-			style="font-family: CustomFont"
-			class="custom-button"
-		>
-			Sound: on
-		</button>
-		<button id="weiterspielen"></button>
-		<button
-			id="spenden2"
-			onclick="window.location.href='https://netzpolitik.org/spenden/?via=gm'"
-		></button>
-		<input type="image" src="img/restart.png" id="restart" />
-		<input type="image" src="img/ingo.png" id="playerImage" />
-		<input type="image" src="img/Markusimg.png" id="playerImage2" />
-		<div id="highScoreDisplay"></div>
+    <p id="countdown">00:00</p>
+    <p id="starthighscore">HIGHSCORE</p>
+    <img id="starthintergrund" src="img/startbildschierm2.png" />
+    <button id="startButton"></button>
+    <button
+      id="spenden"
+      onclick="window.location.href='https://netzpolitik.org/spenden/?via=gm'"
+    ></button>
+    <a href="./highscore/index.php" id="" target="_blank" rel="noreferrer"
+      ><button id="highscoreLinkButton">Highscoreliste</button></a
+    >
+    <button
+      id="soundbutton"
+      style="font-family: CustomFont"
+      class="custom-button"
+    >
+      Sound: on
+    </button>
 
-		<script src="game.js"></script>
-	</body>
+    <button id="weiterspielen"></button>
+    <button
+      id="spenden2"
+      onclick="window.location.href='https://netzpolitik.org/spenden/?via=gm'"
+    ></button>
+    <input type="image" src="img/restart.png" id="restart" />
+    <input type="image" src="img/ingo.png" id="playerImage" />
+    <input type="image" src="img/Markusimg.png" id="playerImage2" />
+    <div id="highScoreDisplay"></div>
+
+    <script src="game.js"></script>
+  </body>
 </html>
