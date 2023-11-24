@@ -1099,6 +1099,8 @@ window.addEventListener("load", function () {
     lastTime = timeStamp;
 
     gameplay = true;
+    markusButton.style.display = "none";
+    ingoButton.style.display = "none";
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 

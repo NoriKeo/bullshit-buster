@@ -272,4 +272,8 @@ body {
 	max-height: 100%;
 
 }
-
+@media (max-width: 700px) {
+	body{   
+	  flex-direction: column;
+	}
+}

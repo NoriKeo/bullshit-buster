@@ -30,7 +30,9 @@ usort($data_arr, function ($a, $b) {
 </head>
 
 <body>
-	<table>
+
+	<table style=“text-align: center“>
+		
 		<tr>
 			<th>Username</th>
 			<th>Score</th>
@@ -46,6 +48,8 @@ usort($data_arr, function ($a, $b) {
 		<tr>
 		</tr>
 	</table>
+	
+	
 
 </body>
 
