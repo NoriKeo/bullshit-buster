@@ -109,7 +109,7 @@ body {
 	position: absolute;
 	top: 58%;
 	left: 58%;
-	width: 172px;
+	width: 210px;
 	height: 120px;
 
 	transform: translate(-58%, -58%);
@@ -275,5 +275,8 @@ body {
 @media (max-width: 700px) {
 	body{   
 	  flex-direction: column;
+	}
+	#startscreenhintergrund{
+		flex-direction: column;
 	}
 }
