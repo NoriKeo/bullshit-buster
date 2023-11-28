@@ -1042,14 +1042,12 @@ window.addEventListener("load", function () {
   const player = new Player(canvas.width, canvas.height, bulletController);
   const background = new Background(canvas.width, canvas.height);
   const backgroundlevel2 = new Background2(canvas.width, canvas.height);
-
-  ingoButton.addEventListener(
+  //charakterauswahl
+  /* ingoButton.addEventListener(
     "click",
     function () {
       player.setImage("img/ingo.png");
-      /* img.onload = function() {
-				ctx.drawImage(img, 0, 0);
-			} */
+      
 
       this.style.display = "none";
       markusButton.style.display = "none";
@@ -1067,9 +1065,7 @@ window.addEventListener("load", function () {
     "click",
     function () {
       player.setImage("img/Markusimg.png");
-      /* img.onload = function() {
-				ctx.drawImage(img, 0, 0);
-			} */
+      
 
       this.style.display = "none";
       ingoButton.style.display = "none";
@@ -1081,7 +1077,7 @@ window.addEventListener("load", function () {
       }
     },
     { once: true }
-  );
+  ); */
 
   copyButton.addEventListener("click", function () {
     var link = "https://netzpolitik.org/bullshit-busters"; // Replace with your desired link
@@ -1113,8 +1109,9 @@ window.addEventListener("load", function () {
     lastTime = timeStamp;
 
     gameplay = true;
-    markusButton.style.display = "none";
-    ingoButton.style.display = "none";
+    player.setImage("img/ingo.png");
+    /* markusButton.style.display = "none";
+    ingoButton.style.display = "none"; */
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1234,8 +1231,16 @@ window.addEventListener("load", function () {
         steuerungbackground.style.display = "none";
         steueranleitung.style.display = "none";
         steueranleitunghandy.style.display = "none";
-        ingoButton.style.display = "block";
-        markusButton.style.display = "block";
+        //charakterwahl
+        /*  ingoButton.style.display = "block";
+        markusButton.style.display = "block"; */
+        player.setImage("img/ingo.png");
+        if (gameplay == false) {
+          document.getElementById("startsound").play();
+          soundhintergrund.play();
+          timerInterval = setInterval(updateTimer, 1000);
+          animate(0);
+        }
       }
     });
     document.addEventListener(
@@ -1243,8 +1248,16 @@ window.addEventListener("load", function () {
       function (event) {
         steueranleitung.style.display = "none";
         steueranleitunghandy.style.display = "none";
-        ingoButton.style.display = "block";
-        markusButton.style.display = "block";
+        player.setImage("img/ingo.png");
+        if (gameplay == false) {
+          document.getElementById("startsound").play();
+          soundhintergrund.play();
+          timerInterval = setInterval(updateTimer, 1000);
+          animate(0);
+        }
+        //charakterwahl
+        /* ingoButton.style.display = "block";
+        markusButton.style.display = "block"; */
       }.bind(this)
     );
 
