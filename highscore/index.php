@@ -2,34 +2,38 @@
 header("Content-Security-Policy: script-src 'self'");
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
+if(!empty($post)){
+	if (ctype_alpha($data['name'])) {
+		echo ("The string consists only of letters.\n");
+	} else {
+		die("The string does not consist only of letters.\n");
+	}
+	
+	if (empty($data['name'])) {
+		die("Name cannot be empty.\n");
+	}
+	
+	if (strlen($data['name']) > 8) {
+		die("The name is too long.\n");
+	}
+	
+	if ($data['score'] < 0 || $data['score'] > 500) {
+		die("You can't score more than 500.\n");
+	}
 
-if (ctype_alpha($data)) {
-    echo ("The string consists only of letters.\n");
-} else {
-    die("The string does not consist only of letters.\n");
-}
-
-if (empty($data)) {
-    die("Name cannot be empty.\n");
-}
-
-if (strlen($data) > 8) {
-    die("The name is too long.\n");
-}
-
-if ($data < 0 || $data> 500) {
-    die("You can't score more than 500.\n");
+	if (isset($data['name']) && isset($data['score'])) {
+		file_put_contents("scoreDatabase.txt", $post . "\n", FILE_APPEND);
+	}
+	
 }
 
 
 
 // get data from post request
-if (isset($data['name']) && isset($data['score'])) {
-	file_put_contents("scoreDatabase.txt", $post . "\n", FILE_APPEND);
-}
 
 // read data from file into array
 $data_arr = file("scoreDatabase.txt");
+
 
 
 
