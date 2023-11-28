@@ -13,12 +13,20 @@ window.addEventListener("load", function () {
   let steueranleitung = document.getElementById("steueranleitung");
   let steueranleitunghandy = document.getElementById("steueranleitunghandy");
   const soundButton = document.getElementById("soundbutton");
+
   // const highScore = localStorage.getItem('highScore') || 0;
   const countdownEl = document.getElementById("countdown");
+  //sound
+  const itemsound = document.getElementById("item");
+  const damagesound = document.getElementById("damage");
+  const auersound = document.getElementById("au");
+  const startsound = document.getElementById("startsound");
+  const geistertotsound = document.getElementById("geistertot");
+  const soundhintergrund = document.getElementById("hintergrunsound");
 
   const ctx = canvas.getContext("2d");
   const bild = document.getElementById("image");
-  const soundhintergrund = document.getElementById("hintergrunsound");
+
   soundhintergrund.loop = true;
   soundhintergrund.volume = 0.2;
   var pauseGame = false;
@@ -281,9 +289,9 @@ window.addEventListener("load", function () {
           }
           console.log("ammo: " + ammo);
           if (!Audiomute) {
-            document.getElementById("item").pause();
-            document.getElementById("item").currentTime = 0;
-            document.getElementById("item").play();
+            itemsound.pause();
+            itemsound.currentTime = 0;
+            itemsound.play();
           }
           console.log("munition" + ammo);
           const index = coins.indexOf(coin);
@@ -301,11 +309,11 @@ window.addEventListener("load", function () {
         if (distance < ghost.width / 8 + this.width / 8) {
           playerHealth--;
           if (!Audiomute) {
-            document.getElementById("damage").play();
+            damagesound.play();
           }
           if (playerHealth == 0) {
             if (!Audiomute) {
-              document.getElementById("au").play();
+              auersound.play();
             }
             gameOver = true;
           }
@@ -844,12 +852,12 @@ window.addEventListener("load", function () {
     // Write the text on the canvas
 
     window.addEventListener("blur", function () {
-      document.getElementById("startsound").pause();
-      document.getElementById("au").pause();
-      document.getElementById("damage").pause();
-      document.getElementById("geistertot").pause();
+      startsound.pause();
+      auersound.pause();
+      damagesound.pause();
+      geistertotsound.pause();
       soundhintergrund.pause();
-      document.getElementById("item").pause();
+      itemsound.pause();
     });
 
     // timer
@@ -955,21 +963,21 @@ window.addEventListener("load", function () {
 
   soundButton.addEventListener("click", function () {
     if (Audiomute) {
-      document.getElementById("startsound").volume = 0.1;
-      document.getElementById("au").volume = 0.5;
-      document.getElementById("damage").volume = 0.5;
-      document.getElementById("geistertot").volume = 0.5;
+      startsound.volume = 0.1;
+      auersound.volume = 0.5;
+      damagesound.volume = 0.5;
+      geistertotsound.volume = 0.5;
       soundhintergrund.volume = 0.5;
-      document.getElementById("item").volume = 0.5;
+      itemsound.volume = 0.5;
       soundButton.innerHTML = "Sound: on";
     } else {
-      document.getElementById("startsound").volume = 0;
+      startsound.volume = 0;
 
-      document.getElementById("au").volume = 0;
-      document.getElementById("damage").volume = 0;
-      document.getElementById("geistertot").volume = 0;
+      auersound.volume = 0;
+      damagesound.volume = 0;
+      geistertotsound.volume = 0;
       soundhintergrund.volume = 0;
-      document.getElementById("item").volume = 0;
+      itemsound.volume = 0;
       soundButton.innerHTML = "Sound: off";
     }
     Audiomute = !Audiomute;
@@ -999,7 +1007,7 @@ window.addEventListener("load", function () {
     coins = [];
     ghosts = [];
     Audiomute = false;
-    document.getElementById("startsound").play();
+    startsound.play();
     soundhintergrund.play();
     //document.getElementById('startsound').volume=50;
     ghostInterval = 2780;
@@ -1052,7 +1060,7 @@ window.addEventListener("load", function () {
       this.style.display = "none";
       markusButton.style.display = "none";
       if (gameplay == false) {
-        document.getElementById("startsound").play();
+        startsound.play();
         soundhintergrund.play();
         timerInterval = setInterval(updateTimer, 1000);
         animate(0);
@@ -1070,7 +1078,7 @@ window.addEventListener("load", function () {
       this.style.display = "none";
       ingoButton.style.display = "none";
       if (gameplay == false) {
-        document.getElementById("startsound").play();
+        startsound.play();
         soundhintergrund.play();
         timerInterval = setInterval(updateTimer, 1000);
         animate(0);
@@ -1137,7 +1145,7 @@ window.addEventListener("load", function () {
           const index = ghosts.indexOf(ghost);
           ghosts.splice(index, 1);
           if (!Audiomute) {
-            document.getElementById("geistertot").play();
+            geistertotsound.play();
           }
           score++;
         }
@@ -1236,7 +1244,7 @@ window.addEventListener("load", function () {
         markusButton.style.display = "block"; */
         player.setImage("img/ingo.png");
         if (gameplay == false) {
-          document.getElementById("startsound").play();
+          startsound.play();
           soundhintergrund.play();
           timerInterval = setInterval(updateTimer, 1000);
           animate(0);
@@ -1250,7 +1258,7 @@ window.addEventListener("load", function () {
         steueranleitunghandy.style.display = "none";
         player.setImage("img/ingo.png");
         if (gameplay == false) {
-          document.getElementById("startsound").play();
+          startsound.play();
           soundhintergrund.play();
           timerInterval = setInterval(updateTimer, 1000);
           animate(0);

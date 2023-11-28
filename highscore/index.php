@@ -1,4 +1,5 @@
 <?php
+header("Content-Security-Policy: script-src 'self'");
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 
@@ -11,6 +12,18 @@ if (isset($data['name']) && isset($data['score'])) {
 
 // read data from file into array
 $data_arr = file("scoreDatabase.txt");
+
+
+if(empty($data['name'])) {
+	die("name darf nicht leer sein");
+  }
+if(strlen($data['name']) > 8) {
+	die("der name ist zu lang");
+  }
+if (0 > ($data['score']) ||($data['score']) > 500) {
+    $error = 'mehr als 500 schafst du nicht';
+}
+
 
 // sort array by score
 usort($data_arr, function ($a, $b) {
@@ -26,6 +39,9 @@ usort($data_arr, function ($a, $b) {
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
+
+
 	<title>Highscores</title>
 </head>
 
