@@ -3,17 +3,11 @@ header("Content-Security-Policy: script-src 'self'");
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 
-// get data from post request
-if (isset($data['name']) && isset($data['score'])) {
-
-
-	file_put_contents("scoreDatabase.txt", $post . "\n", FILE_APPEND);
+if (ctype_alpha($data['name'])) {
+	echo "Der String  besteht nur aus Buchstaben.\n";
+}else {
+	die("Der String  enthält nicht nur Buchstaben.\n");
 }
-
-// read data from file into array
-$data_arr = file("scoreDatabase.txt");
-
-
 if(empty($data['name'])) {
 	die("name darf nicht leer sein");
   }
@@ -21,8 +15,18 @@ if(strlen($data['name']) > 8) {
 	die("der name ist zu lang");
   }
 if (0 > ($data['score']) ||($data['score']) > 500) {
-    $error = 'mehr als 500 schafst du nicht';
+    die('mehr als 500 schafst du nicht');
 }
+
+// get data from post request
+if (isset($data['name']) && isset($data['score'])) {
+	file_put_contents("scoreDatabase.txt", $post . "\n", FILE_APPEND);
+}
+
+// read data from file into array
+$data_arr = file("scoreDatabase.txt");
+
+
 
 
 // sort array by score
