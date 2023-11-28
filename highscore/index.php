@@ -3,20 +3,26 @@ header("Content-Security-Policy: script-src 'self'");
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 
-if (ctype_alpha($data['name'])) {
+if (ctype_alpha($data['name'])){
 	echo "Der String  besteht nur aus Buchstaben.\n";
 }else {
 	die("Der String  enthält nicht nur Buchstaben.\n");
 }
-if(empty($data['name'])) {
+
+if(empty($data['name'])){
 	die("name darf nicht leer sein");
   }
-if(strlen($data['name']) > 8) {
+
+if(strlen($data['name']) > 8){
 	die("der name ist zu lang");
   }
-if (0 > ($data['score']) ||($data['score']) > 500) {
+
+if (0 > ($data['score']) ||($data['score']) > 500){
     die('mehr als 500 schafst du nicht');
 }
+
+   
+
 
 // get data from post request
 if (isset($data['name']) && isset($data['score'])) {

@@ -885,7 +885,7 @@ window.addEventListener("load", function () {
 
         // send name and score to database via POST request
 
-        fetch(`/highscore/index.php/`, {
+        fetch(`highscore/index.php`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -927,6 +927,7 @@ window.addEventListener("load", function () {
         "click",
         function () {
           restartGame();
+          copyButton.style.display = "none";
           nameInputContainer.style.display = "none";
           highscoreliste.style.display = "none";
           restartButton.style.display = "none";
@@ -1002,6 +1003,7 @@ window.addEventListener("load", function () {
     document.getElementById("soundbutton").disabled = false;
     clearInterval(timerInterval);
     timerInterval = setInterval(updateTimer, 1000);
+
     player.restart();
     background.restart();
     coins = [];
