@@ -55,7 +55,7 @@ usort($data_arr, function ($a, $b) {
 	<title>Highscores</title>
 </head>
 
-<body>
+<body style="background-color:#000000">
 
 	<table style=“text-align: center“>
 		
