@@ -3,25 +3,7 @@ header("Content-Security-Policy: script-src 'self'");
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 
-if (ctype_alpha($data['name'])){
-	echo "Der String  besteht nur aus Buchstaben.\n";
-}else {
-	die("Der String  enthält nicht nur Buchstaben.\n");
-}
 
-if(empty($data['name'])){
-	die("name darf nicht leer sein");
-  }
-
-if(strlen($data['name']) > 8){
-	die("der name ist zu lang");
-  }
-
-if (0 > ($data['score']) ||($data['score']) > 500){
-    die('mehr als 500 schafst du nicht');
-}
-
-   
 
 
 // get data from post request
@@ -32,7 +14,23 @@ if (isset($data['name']) && isset($data['score'])) {
 // read data from file into array
 $data_arr = file("scoreDatabase.txt");
 
+if (ctype_alpha($data['name'])) {
+    echo ("The string consists only of letters.\n");
+} else {
+    die("The string does not consist only of letters.\n");
+}
 
+if (empty($data['name'])) {
+    die("Name cannot be empty.\n");
+}
+
+if (strlen($data['name']) > 8) {
+    die("The name is too long.\n");
+}
+
+if ($data['score'] < 0 || $data['score'] > 500) {
+    die("You can't score more than 500.\n");
+}
 
 
 // sort array by score
@@ -40,7 +38,9 @@ usort($data_arr, function ($a, $b) {
 	return json_decode($b, true)["score"] - json_decode($a, true)["score"];
 });
 
-
+//fabe schwarz 
+// c46 schrift 
+// schrift weiß
 ?>
 
 <!DOCTYPE html>
