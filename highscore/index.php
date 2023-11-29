@@ -1,5 +1,6 @@
 <?php
 header("Content-Security-Policy: script-src 'self'");
+
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 if(!empty($post)){
@@ -53,34 +54,80 @@ usort($data_arr, function ($a, $b) {
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
+	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
 
-
+ -->
 	<title>Highscores</title>
+	<style>
+		
+		@import url('https://fonts.cdnfonts.com/css/commodore-64-pixelized');
+        body {
+            background-color: black;
+            color: white;
+			
+                                                
+			display: flex;
+            justify-content: center;
+            align-items: center;
+            
+			
+            
+        }
+		th{
+			font-size: 90px;
+			
+		}
+		th, td {
+		font-family: 'Commodore 64 Pixelized', sans-serif;
+        border-style: dashed;
+        border: dashed soid #a0a0a0;
+		
+		}
+		td{
+			font-size: 50px;
+			
+		}
+		.table {
+   			display: table;
+		}
+		.table-row {
+   			display: table-row;
+		}
+		.table-cell {
+   			display: table-cell;
+		}
+
+		
+		
+    </style>
 </head>
 
-<body style="background-color:#000000">
-
+<body>
+<link rel="stylesheet" href="path/to/font.css"><div class="table">
 	<table style=“text-align: center“>
-		
+	
+   
+   
+  <div class="table-row">
 		<tr>
-			<th>Username</th>
-			<th>Score</th>
+		<div class="table-cell thead"><th>Username</th></div>
+		<div class="table-cell thead"><th>Score</th></div>
 		</tr>
+		</div>
 		<?php foreach ($data_arr as $value) {
 		?>
 			<tr>
-				<td><?php echo json_decode($value, true)["name"]; ?></td>
-				<td><?php echo json_decode($value, true)["score"]; ?></td>
+			<div class="table-cell"><td><?php echo json_decode($value, true)["name"]; ?></td></div>
+			<div class="table-cell"><td><?php echo json_decode($value, true)["score"]; ?></td></div>
 			</tr>
 		<?php
 		} ?>
 		<tr>
 		</tr>
 	</table>
+	</div>
 	
-	
-	
+
 </body>
 
 </html>

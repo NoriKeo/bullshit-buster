@@ -48,15 +48,10 @@ window.addEventListener("load", function () {
     )
   ) {
     canvas.style.outline = "none";
-    gameend.weight = 250;
-    gameend.height = 200;
+
     storenbild.weight = 150;
     storenbild.height = 100;
 
-    restartButton.style.width = "70px";
-    restartButton.style.height = "20px";
-    startscreenhintergrund.style.width = "250";
-    startscreenhintergrund.style.width = "200";
     soundButton.style.width = "100px";
     soundButton.style.height = "10px";
     soundButton.style.fontSize = "20px";
@@ -67,10 +62,7 @@ window.addEventListener("load", function () {
     canvas.style.border = "5px solid white";
     canvas.style.color = "white";
     soundButton.style.fontSize = "30px";
-    restartButton.style.width = "170px";
-    restartButton.style.height = "50px";
-    gameend.weight = 350;
-    gameend.height = 300;
+
     startscreenhintergrund.width = 1300;
     startscreenhintergrund.height = 620;
 
@@ -875,6 +867,8 @@ window.addEventListener("load", function () {
       const nameInputContainer = document.getElementById("inputContainer");
       const submitButton = document.getElementById("nameSubmit");
       nameInputContainer.style.display = "flex";
+      weiterspielen.style.display = "none";
+      spenden2.style.display = "none";
       storenbild.style.display = "none";
       copyButton.style.display = "block";
 
@@ -917,9 +911,6 @@ window.addEventListener("load", function () {
       soundhintergrund.pause();
       //var restartbild = document.getElementById('restartbild');
       //restartbild.style.display = 'block';
-
-      restartButton.style.width = "170px";
-      restartButton.style.height = "50px";
 
       restartButton.style.display = "block";
 
