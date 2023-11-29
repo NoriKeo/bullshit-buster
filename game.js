@@ -65,6 +65,8 @@ window.addEventListener("load", function () {
 
     startscreenhintergrund.width = 1300;
     startscreenhintergrund.height = 620;
+    gameend.width = 1300;
+    gameend.height = 620;
 
     storenbild.weight = 250;
     storenbild.height = 200;
@@ -889,11 +891,12 @@ window.addEventListener("load", function () {
       });
 
       let endscrem = document.getElementById("gameend");
+
       endscrem.style.display = "block";
       var highscoreliste = document.getElementById("highscoreLinkButton");
       var gameOverButton = document.getElementById("spenden");
       gameOverButton.style.outline = "transparent";
-      if (
+      /* if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
         )
@@ -903,7 +906,7 @@ window.addEventListener("load", function () {
       } else {
         gameOverButton.style.width = "375px";
         gameOverButton.style.height = "300px";
-      }
+      } */
 
       gameOverButton.style.display = "block";
       highscoreliste.style.display = "block";

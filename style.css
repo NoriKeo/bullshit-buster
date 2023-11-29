@@ -66,8 +66,7 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 1300;
-	height: 620;
+	
 	
 	transform: translate(-50%, -50%);
 	max-width: 100%;
@@ -86,12 +85,15 @@ body {
 #spenden {
 	background-color: transparent;
 	display: none;
+	border: none;
 	outline: none;
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	top: 80%;
+	left: 65%;
+	width: 300px;
+	height: 70px;
 
-	transform: translate(-50%, -50%);
+	transform: translate(-65%, -80%);
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -176,12 +178,12 @@ body {
 	background-color: transparent;
 	display: none;
 	position: absolute;
-	top: 85%;
-	left: 40%;
+	top: 75%;
+	left: 45%;
 	width: 250px;
 	height: 70px;
 
-	transform: translate(-50%, -50%);
+	transform: translate(-75%, -45%);
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -325,7 +327,14 @@ body {
 	#startscreenhintergrund{
 		flex-direction: column;
 	}
+	
 }
+@media only screen and (max-width: 480px) {
+	#spenden {
+	  padding: 8px 16px;
+	  font-size: 14px;
+	}
+  }
 .blink {
 	animation: blink-animation 1s steps(20, start) infinite;
 	-webkit-animation: blink-animation 1s steps(20, start) infinite;
