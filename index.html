@@ -69,15 +69,26 @@
 		<!-- After GameOver -->
 		<div id="inputContainer" class="flexContainer">
 			<input type="text" id="nameInput" placeholder="Name" maxlength="8" />
-			<input type="submit" class="invisButton debug" id="nameSubmit" value="" />
+			<input
+				type="image"
+				src="img/enterScore.png"
+				class="invisButton"
+				id="nameSubmit"
+				value=""
+			/>
 
 			<a
 				href="./highscore/index.php"
 				id="highscoreLinkButton"
-				class="invisButton debug"
+				class="invisButton"
 				target="_blank"
 				rel="noreferrer"
 			>
+				<img
+					id="highscoreLinkButtonImage"
+					src="img/linkToScore.png"
+					alt="link to score"
+				/>
 			</a>
 		</div>
 
