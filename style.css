@@ -90,9 +90,7 @@ body {
 	position: absolute;
 	top: 80%;
 	left: 65%;
-	width: 300px;
-	height: 70px;
-
+	padding: 70px 300px;
 	transform: translate(-65%, -80%);
 	max-width: 100%;
 	max-height: 100%;
@@ -329,10 +327,18 @@ body {
 	}
 	
 }
-@media only screen and (max-width: 480px) {
-	#spenden {
+@media (max-width: 600px) {
+	.button {
 	  padding: 8px 16px;
 	  font-size: 14px;
+	}
+  }
+
+  /* Media query for larger screens */
+  @media (min-width: 1200px) {
+	.button {
+	  padding: 12px 24px;
+	  font-size: 18px;
 	}
   }
 .blink {
