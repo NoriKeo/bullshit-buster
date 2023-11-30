@@ -87,11 +87,17 @@ body {
 	display: none;
 	border: none;
 	outline: none;
-	position: absolute;
+	position: fixed;
+	flex-direction: column;
 	top: 80%;
 	left: 65%;
-	padding: 70px 300px;
-	transform: translate(-65%, -80%);
+	width: 250px;
+	height: 70px;
+	transform: translate(-80%, -65%);
+	-webkit-transform: translate(-80%, -65%);
+    -moz-transform: translate(-80%, -65%);
+    -o-transform: translate(-80%, -65%);
+    -ms-transform: translate(-80%, -65%);
 	max-width: 100%;
 	max-height: 100%;
 }
