@@ -332,10 +332,12 @@ body {
 	}
 	
 }
-@media {
-	
-}
-
+@media all and (max-width:30em){
+	 {
+	  
+	  margin:0.4em auto;
+	 }
+	} 
   
 .blink {
 	animation: blink-animation 1s steps(20, start) infinite;
