@@ -91,8 +91,8 @@ body {
 	flex-direction: column;
 	top: 80%;
 	left: 65%;
-	padding:0.35em 1.2em;
-	margin:0 0.3em 0.3em 0;
+	padding:15px 100px;
+
 	/* width: 270px;
 	height: 70px; */
 	transform: translate(-80%, -65%);
@@ -332,12 +332,26 @@ body {
 	}
 	
 }
-@media all and (max-width:30em){
-	 #spenden{
-	  	margin:0.4em auto;
-	 }
-	} 
+@media (max-width: 600px) {
+	#spenden {
+	  padding: 8px 16px;
+	  font-size: 14px;
+	}
+  }
   
+  /* Media query for screens smaller than 400px */
+  @media (max-width: 400px) {
+	#spenden  {
+	  padding: 6px 12px;
+	  font-size: 12px;
+	}
+  }
+  
+/* @media all and (max-width:30em){
+	 #spenden{
+	margin:0.4em auto;
+	 } 
+} */
 .blink {
 	animation: blink-animation 1s steps(20, start) infinite;
 	-webkit-animation: blink-animation 1s steps(20, start) infinite;
