@@ -1,6 +1,6 @@
 <?php
-header("Content-Security-Policy: script-src 'self'");
-
+ header("Content-Security-Policy: script-src 'self'");
+  
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
 if(!empty($post)){
@@ -62,7 +62,7 @@ usort($data_arr, function ($a, $b) {
 		
 		@import url('https://fonts.cdnfonts.com/css/commodore-64-pixelized');
         body {
-            background-color: black;
+            background-color: #483AAA;
             color: white;
 			
                                                 
@@ -70,17 +70,24 @@ usort($data_arr, function ($a, $b) {
             justify-content: center;
             align-items: center;
             
-			
+			top: 60%;
             
         }
+		img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+	  width: 30%;
+    }
 		th{
 			font-size: 90px;
 			
 		}
 		th, td {
 		font-family: 'Commodore 64 Pixelized', sans-serif;
-        border-style: dashed;
-        border: dashed soid #a0a0a0;
+       
+       
 		
 		}
 		td{
@@ -89,6 +96,14 @@ usort($data_arr, function ($a, $b) {
 		}
 		.table {
    			display: table;
+			width: 300px;
+			position: fixed;
+  			bottom: 0;
+  			width: 100%;
+			top: 40%;
+      		left: 50%;
+      		transform: translate(-50%, -50%);
+			border-collapse: collapse;
 		}
 		.table-row {
    			display: table-row;
@@ -100,18 +115,20 @@ usort($data_arr, function ($a, $b) {
 		
 		
     </style>
+
 </head>
 
 <body>
-<link rel="stylesheet" href="path/to/font.css"><div class="table">
+<img src="JEK_2023_kampagne_game_highscore_002.png" alt="HTML-Seminar">
+ <link rel="stylesheet" href="path/to/font.css"><div class="table">
 	<table style=“text-align: center“>
 	
    
    
   <div class="table-row">
 		<tr>
-		<div class="table-cell thead"><th>Username</th></div>
-		<div class="table-cell thead"><th>Score</th></div>
+		<div class="table-cell thead"><th></th></div>
+		<div class="table-cell thead"><th></th></div>
 		</tr>
 		</div>
 		<?php foreach ($data_arr as $value) {
@@ -124,10 +141,13 @@ usort($data_arr, function ($a, $b) {
 		} ?>
 		<tr>
 		</tr>
-	</table>
+	</table> 
 	</div>
+	<div class="header">
 	
-
+  </div>
+	
+	
 </body>
 
 </html>
