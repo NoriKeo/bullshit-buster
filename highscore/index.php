@@ -91,18 +91,18 @@ usort($data_arr, function ($a, $b) {
 		
 		}
 		td{
-			font-size: 50px;
+			font-size: 40px;
 			
 		}
 		.table {
    			display: table;
 			width: 300px;
-			position: fixed;
+			position: absolute;
   			bottom: 0;
-  			width: 100%;
+  			width: 10%;
 			top: 40%;
       		left: 50%;
-      		transform: translate(-50%, -50%);
+      		transform: translate(-40%, -50%);
 			border-collapse: collapse;
 		}
 		.table-row {
