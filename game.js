@@ -2,7 +2,6 @@ window.addEventListener('load', function () {
 	const canvas = document.getElementById('canvas1');
 	const highScorestart = this.document.getElementById('starthighscore');
 	const startscreenhintergrund = document.getElementById('starthintergrund');
-	const copyButton = document.getElementById('copyButton');
 	const weiterspielen = document.getElementById('weiterspielen');
 	const spenden2 = this.document.getElementById('spenden2');
 	const storenbild = document.getElementById('storenbild');
@@ -33,6 +32,7 @@ window.addEventListener('load', function () {
 	//canvas.width = window.innerWidth;
 	// canvas.height = window.innerHeight;
 	canvas.width = 1300;
+
 	canvas.height = 620;
 	Audiomute = false;
 	var timerInterval = null;
@@ -48,6 +48,8 @@ window.addEventListener('load', function () {
 		)
 	) {
 		canvas.style.outline = 'none';
+		// lock mobile screen to landscape
+		screen.orientation.lock('landscape');
 
 		storenbild.weight = 150;
 		storenbild.height = 100;
@@ -872,7 +874,6 @@ window.addEventListener('load', function () {
 			weiterspielen.style.display = 'none';
 			spenden2.style.display = 'none';
 			storenbild.style.display = 'none';
-			copyButton.style.display = 'block';
 
 			submitButton.addEventListener('click', () => {
 				let name = nameInput.value;
@@ -921,7 +922,6 @@ window.addEventListener('load', function () {
 				'click',
 				function () {
 					restartGame();
-					copyButton.style.display = 'none';
 					nameInputContainer.style.display = 'none';
 					highscoreliste.style.display = 'none';
 					restartButton.style.display = 'none';
@@ -1067,18 +1067,6 @@ window.addEventListener('load', function () {
     },
     { once: true }
   ); */
-
-	copyButton.addEventListener('click', function () {
-		var link = 'https://netzpolitik.org/bullshit-busters'; // Replace with your desired link
-		var text = 'Click here to visit the website mein score ' + score; // Replace with your desired associated text
-
-		var tempInput = document.createElement('input');
-		tempInput.value = text + ': ' + link;
-		document.body.appendChild(tempInput);
-		tempInput.select();
-		document.execCommand('copy');
-		document.body.removeChild(tempInput);
-	});
 
 	let lastTime = 0;
 	let coinTimer = 0;

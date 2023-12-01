@@ -21,15 +21,17 @@
 		<img id="enemyImage" src="img/geld.png" />
 		<img id="steuerungbackground" src="img/hintergrund7.png" />
 
-		<img id="ghost1Image" src="img/pileofshit_001.png" />
+		<div id="ghostImages" class="disabled">
+			<img id="ghost1Image" src="img/pileofshit_001.png" />
+			<img id="ghost2Image" src="img/ghost_3.png" />
+			<img id="ghost3Image" src="img/ghost_4.png" />
+			<img id="ghost4Image" src="img/ghost_5.png" />
+			<img id="ghost5Image" src="img/ghost_6.png" />
+			<img id="ghost6Image" src="img/ghost_7.png" />
+			<img id="ghost7Image" src="img/ghost_8.png" />
+			<img id="ghost8Image" src="img/ghost_9.png" />
+		</div>
 
-		<img id="ghost2Image" src="img/ghost_3.png" />
-		<img id="ghost3Image" src="img/ghost_4.png" />
-		<img id="ghost4Image" src="img/ghost_5.png" />
-		<img id="ghost5Image" src="img/ghost_6.png" />
-		<img id="ghost6Image" src="img/ghost_7.png" />
-		<img id="ghost7Image" src="img/ghost_8.png" />
-		<img id="ghost8Image" src="img/ghost_9.png" />
 		<img id="storenbild" src="img/JEK_2023_game_stoerer_005.jpg" />
 		<img id="steueranleitung" src="img/steueranleitung2.png" />
 		<img id="steueranleitunghandy" src="img/steuerhandy.png" />
@@ -93,12 +95,14 @@
 		</div>
 
 		<div id="gameOverSelectionContainer" class="flexContainer">
-			<button
-				class="debug basicButton"
+			<input
+				class="basicButton"
 				id="spenden"
+				type="image"
+				src="img/donateButton.png"
 				onclick="window.location.href='https://netzpolitik.org/spenden/?via=gm'"
-			></button>
-			<button class="debug" id="restart" />
+			/>
+			<input type="image" src="img/playAgainButton.png" id="restart" />
 		</div>
 
 		<input type="image" src="img/ingo.png" id="playerImage" />

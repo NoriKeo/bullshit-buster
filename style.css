@@ -22,6 +22,11 @@ body {
 	height: 100%;
 }
 
+.disabled {
+	pointer-events: none;
+	display: none;
+}
+
 .flexContainer {
 	display: flex;
 	flex-direction: row;
@@ -40,6 +45,15 @@ body {
 	z-index: 10;
 	width: 10rem;
 	height: 2rem;
+}
+
+#gameOverSelectionContainer {
+	z-index: 10;
+
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, -80%);
 }
 
 #canvas1 {
@@ -61,16 +75,6 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#ghost1Image,
-#ghost2Image,
-#ghost3Image,
-#ghost4Image,
-#ghost5Image,
-#ghost6Image,
-#ghost7Image,
-#ghost8Image {
-	display: none;
-}
 
 #steueranleitung,
 #steueranleitunghandy,
@@ -89,7 +93,7 @@ body {
     align-items: center; */
 }
 #gameend {
-	/* display: none; */
+	display: none;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -106,18 +110,6 @@ body {
 	left: 50%;
 
 	transform: translate(-50%, -50%);
-	max-width: 100%;
-	max-height: 100%;
-}
-
-#spenden {
-	background-color: transparent;
-	/* display: none; */
-	border: red solid 2px;
-	outline: none;
-
-	width: 10rem;
-	height: 2rem;
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -194,20 +186,16 @@ body {
 	max-width: 100%;
 	max-height: 100%;
 }
-#restart {
-	background-color: transparent;
-	display: none;
-	position: absolute;
-	top: 75%;
-	left: 45%;
-	width: 250px;
-	height: 70px;
-
-	transform: translate(-75%, -45%);
+#restart,
+#spenden {
+	margin: 1rem;
 	max-width: 100%;
 	max-height: 100%;
+
+	display: none;
 }
 #startButton {
+	z-index: 99;
 	background-color: transparent;
 	border: none;
 	color: rgb(187, 29, 29);
@@ -239,20 +227,23 @@ body {
 
 #inputContainer {
 	z-index: 10;
-	/* display: none; */
+	display: none;
 
 	position: absolute;
-	top: 55%;
+	top: 50%;
 }
 
 #nameInput {
+	font-family: 'CustomFont3';
 	margin: 1rem;
 	margin-left: auto;
-
-	border: none;
+	border-color: #c2c2c2;
+	border-style: outset;
+	border-width: 3px;
+	background-color: #b3b3b3;
 	max-width: 10rem;
 	min-width: 0;
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 #nameSubmit {
@@ -317,12 +308,16 @@ body {
 	max-height: 100%;
 }
 
-@media (max-width: 700px) {
+@media (max-height: 800px) {
 	body {
 		flex-direction: column;
 	}
 	#startscreenhintergrund {
 		flex-direction: column;
+	}
+
+	#gameOverSelectionContainer {
+		top: 80%;
 	}
 }
 @media (max-width: 600px) {
