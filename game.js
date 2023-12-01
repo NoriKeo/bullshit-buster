@@ -1,322 +1,322 @@
-window.addEventListener('load', function () {
-	const canvas = document.getElementById('canvas1');
-	const highScorestart = this.document.getElementById('starthighscore');
-	const startscreenhintergrund = document.getElementById('starthintergrund');
-	const weiterspielen = document.getElementById('weiterspielen');
-	const spenden2 = this.document.getElementById('spenden2');
-	const storenbild = document.getElementById('storenbild');
-	const restartButton = document.getElementById('restart');
-	// character select
-	const ingoButton = document.getElementById('playerImage');
-	const markusButton = document.getElementById('playerImage2');
-	let steueranleitung = document.getElementById('steueranleitung');
-	let steueranleitunghandy = document.getElementById('steueranleitunghandy');
-	const soundButton = document.getElementById('soundbutton');
+window.addEventListener("load", function () {
+  const canvas = document.getElementById("canvas1");
+  /* const highScorestart = this.document.getElementById('starthighscore'); */
+  const startscreenhintergrund = document.getElementById("starthintergrund");
+  const weiterspielen = document.getElementById("weiterspielen");
+  const spenden2 = this.document.getElementById("spenden2");
+  const storenbild = document.getElementById("storenbild");
+  const restartButton = document.getElementById("restart");
+  // character select
+  const ingoButton = document.getElementById("playerImage");
+  const markusButton = document.getElementById("playerImage2");
+  let steueranleitung = document.getElementById("steueranleitung");
+  let steueranleitunghandy = document.getElementById("steueranleitunghandy");
+  const soundButton = document.getElementById("soundbutton");
 
-	// const highScore = localStorage.getItem('highScore') || 0;
-	const countdownEl = document.getElementById('countdown');
-	//sound
-	const itemsound = document.getElementById('item');
-	const damagesound = document.getElementById('damage');
-	const auersound = document.getElementById('au');
-	const startsound = document.getElementById('startsound');
-	const geistertotsound = document.getElementById('geistertot');
-	const soundhintergrund = document.getElementById('hintergrunsound');
+  // const highScore = localStorage.getItem('highScore') || 0;
+  const countdownEl = document.getElementById("countdown");
+  //sound
+  const itemsound = document.getElementById("item");
+  const damagesound = document.getElementById("damage");
+  const auersound = document.getElementById("au");
+  const startsound = document.getElementById("startsound");
+  const geistertotsound = document.getElementById("geistertot");
+  const soundhintergrund = document.getElementById("hintergrunsound");
 
-	const ctx = canvas.getContext('2d');
-	const bild = document.getElementById('image');
+  const ctx = canvas.getContext("2d");
+  const bild = document.getElementById("image");
 
-	soundhintergrund.loop = true;
-	soundhintergrund.volume = 0.2;
-	var pauseGame = false;
-	//canvas.width = window.innerWidth;
-	// canvas.height = window.innerHeight;
-	canvas.width = 1300;
+  soundhintergrund.loop = true;
+  soundhintergrund.volume = 0.2;
+  var pauseGame = false;
+  //canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+  canvas.width = 1300;
 
-	canvas.height = 620;
-	Audiomute = false;
-	var timerInterval = null;
-	coinwert = 2;
-	steueranleitung.width = 350;
-	steueranleitung.height = 200;
-	//   highScorestart.style.display = "block";
-	//to do handy größe
+  canvas.height = 620;
+  Audiomute = false;
+  var timerInterval = null;
+  coinwert = 2;
+  steueranleitung.width = 350;
+  steueranleitung.height = 200;
+  //   highScorestart.style.display = "block";
+  //to do handy größe
 
-	if (
-		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-			navigator.userAgent
-		)
-	) {
-		canvas.style.outline = 'none';
-		// lock mobile screen to landscape
-		screen.orientation.lock('landscape');
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    canvas.style.outline = "none";
+    // lock mobile screen to landscape
+    screen.orientation.lock("landscape");
 
-		storenbild.weight = 150;
-		storenbild.height = 100;
+    storenbild.weight = 150;
+    storenbild.height = 100;
 
-		soundButton.style.width = '100px';
-		soundButton.style.height = '10px';
-		soundButton.style.fontSize = '20px';
-		/* soundbutton.style.top = '1%';
+    soundButton.style.width = "100px";
+    soundButton.style.height = "10px";
+    soundButton.style.fontSize = "20px";
+    /* soundbutton.style.top = '1%';
 		soundbutton.style.left = '80%';   
   */
-	} else {
-		canvas.style.border = '5px solid white';
-		canvas.style.color = 'white';
-		soundButton.style.fontSize = '30px';
+  } else {
+    canvas.style.border = "5px solid white";
+    canvas.style.color = "white";
+    soundButton.style.fontSize = "30px";
 
-		startscreenhintergrund.width = 1300;
-		startscreenhintergrund.height = 620;
-		gameend.width = 1300;
-		gameend.height = 620;
+    startscreenhintergrund.width = 1300;
+    startscreenhintergrund.height = 620;
+    gameend.width = 1300;
+    gameend.height = 620;
 
-		storenbild.weight = 250;
-		storenbild.height = 200;
+    storenbild.weight = 250;
+    storenbild.height = 200;
 
-		/* window.addEventListener('resize', () => {
+    /* window.addEventListener('resize', () => {
 			soundbutton.style.top = '90%';
 			soundbutton.style.left = '70%';
 			soundbutton.style.transform = 'translate(-13 %, -80%)';
 		  }); */
-	}
+  }
 
-	soundButton.style.border = 'none';
-	soundButton.style.fontFamily = 'CustomFont3';
-	soundButton.style.color = '#ae51b6';
+  soundButton.style.border = "none";
+  soundButton.style.fontFamily = "CustomFont3";
+  soundButton.style.color = "#ae51b6";
 
-	gameplay = false;
-	//restartbild.weight = 250;
-	//restartbild.height = 50;
-	//startscreenhintergrund.style.width = canvas.width + 'px';
-	//startscreenhintergrund.style.height = canvas.height + 'px';
+  gameplay = false;
+  //restartbild.weight = 250;
+  //restartbild.height = 50;
+  //startscreenhintergrund.style.width = canvas.width + 'px';
+  //startscreenhintergrund.style.height = canvas.height + 'px';
 
-	let coins = [];
-	let ghosts = [];
-	window.addEventListener('load', function () {
-		// Code to execute when the cell phone is turned on
-		console.log('Cell phone is turned on');
-	});
+  let coins = [];
+  let ghosts = [];
+  window.addEventListener("load", function () {
+    // Code to execute when the cell phone is turned on
+    console.log("Cell phone is turned on");
+  });
 
-	const font = new FontFace(
-		'CustomFont',
-		'url(PixelGamer/Web-TT/PixelGamer-Extrude.woff2)'
-	);
-	font
-		.load()
-		.then(() => {
-			document.fonts.add(font);
-			// console.log('Font loaded successfully!');
-		})
-		.catch((error) => {
-			console.log('Error loading font:', error);
-		});
-	const font2 = new FontFace(
-		'CustomFont2',
-		'url(PixelGamer/Web-TT/PixelGamer-Half.woff2)'
-	);
-	font2
-		.load()
-		.then(() => {
-			document.fonts.add(font2);
-			console.log('Font loaded successfully!');
-		})
-		.catch((error) => {
-			console.log('Error loading font:', error);
-		});
-	const font3 = new FontFace(
-		'CustomFont3',
-		'url(PixelGamer/Web-TT/PixelGamer-Regular.woff2)'
-	);
-	font3
-		.load()
-		.then(() => {
-			document.fonts.add(font3);
-			console.log('Font loaded successfully!');
-		})
-		.catch((error) => {
-			console.log('Error loading font:', error);
-		});
+  const font = new FontFace(
+    "CustomFont",
+    "url(PixelGamer/Web-TT/PixelGamer-Extrude.woff2)"
+  );
+  font
+    .load()
+    .then(() => {
+      document.fonts.add(font);
+      // console.log('Font loaded successfully!');
+    })
+    .catch((error) => {
+      console.log("Error loading font:", error);
+    });
+  const font2 = new FontFace(
+    "CustomFont2",
+    "url(PixelGamer/Web-TT/PixelGamer-Half.woff2)"
+  );
+  font2
+    .load()
+    .then(() => {
+      document.fonts.add(font2);
+      console.log("Font loaded successfully!");
+    })
+    .catch((error) => {
+      console.log("Error loading font:", error);
+    });
+  const font3 = new FontFace(
+    "CustomFont3",
+    "url(PixelGamer/Web-TT/PixelGamer-Regular.woff2)"
+  );
+  font3
+    .load()
+    .then(() => {
+      document.fonts.add(font3);
+      console.log("Font loaded successfully!");
+    })
+    .catch((error) => {
+      console.log("Error loading font:", error);
+    });
 
-	let gametimer = 0;
-	let gametimerstart = gametimer * 60;
+  let gametimer = 0;
+  let gametimerstart = gametimer * 60;
 
-	let ammo = 0;
-	// TODO
-	var playerHealth = 100;
-	let score = 0;
-	let gameOver = false;
+  let ammo = 0;
+  // TODO
+  var playerHealth = 100;
+  let score = 0;
+  let gameOver = false;
 
-	let actions = {
-		run: false,
-		onGround: true,
-		shoot: false,
-	};
+  let actions = {
+    run: false,
+    onGround: true,
+    shoot: false,
+  };
 
-	class InputHandler {
-		constructor() {
-			this.keys = [];
-			this.touchY = '';
-			this.touchTreshold = 30;
-			window.addEventListener('keydown', (e) => {
-				if (
-					(e.key === 's' ||
-						e.key === ' ' ||
-						e.key === 'a' ||
-						e.key === 'd' ||
-						e.key === 'e' ||
-						e.key === 'ArrowRight' ||
-						e.key === 'ArrowLeft' ||
-						e.key === 'Enter') &&
-					this.keys.indexOf(e.key) === -1
-				) {
-					this.keys.push(e.key);
-				}
-				// console.log(e.key, this.keys);
-			});
-			window.addEventListener('keyup', (e) => {
-				if (
-					e.key === 's' ||
-					e.key === ' ' ||
-					e.key === 'a' ||
-					e.key === 'd' ||
-					e.key === 'e' ||
-					e.key === 'ArrowRight' ||
-					e.key === 'ArrowLeft' ||
-					e.key === 'Enter'
-				) {
-					this.keys.splice(this.keys.indexOf(e.key), 1);
-				}
-				// console.log(e.key, this.keys);
-			});
-			window.addEventListener('touchstart', (e) => {
-				// console.log('start');
-				this.touchY = e.changedTouches[0].pageY;
-			});
-			window.addEventListener('touchmove', (e) => {
-				const swipeDistance = e.changedTouches[0].pageY - this.touchY;
-				if (
-					swipeDistance < -this.touchTreshold &&
-					this.keys.indexOf('swipe up ') === -1
-				)
-					this.keys.splice(this.keys.indexOf('swipe up'), 1, 'swipe up');
-				else if (
-					swipeDistance > this.touchTreshold &&
-					this.keys.indexOf('swipe down ') === -1
-				)
-					this.keys.splice(this.keys.indexOf('swipe down'), 1, 'swipe down');
+  class InputHandler {
+    constructor() {
+      this.keys = [];
+      this.touchY = "";
+      this.touchTreshold = 30;
+      window.addEventListener("keydown", (e) => {
+        if (
+          (e.key === "s" ||
+            e.key === " " ||
+            e.key === "a" ||
+            e.key === "d" ||
+            e.key === "e" ||
+            e.key === "ArrowRight" ||
+            e.key === "ArrowLeft" ||
+            e.key === "Enter") &&
+          this.keys.indexOf(e.key) === -1
+        ) {
+          this.keys.push(e.key);
+        }
+        // console.log(e.key, this.keys);
+      });
+      window.addEventListener("keyup", (e) => {
+        if (
+          e.key === "s" ||
+          e.key === " " ||
+          e.key === "a" ||
+          e.key === "d" ||
+          e.key === "e" ||
+          e.key === "ArrowRight" ||
+          e.key === "ArrowLeft" ||
+          e.key === "Enter"
+        ) {
+          this.keys.splice(this.keys.indexOf(e.key), 1);
+        }
+        // console.log(e.key, this.keys);
+      });
+      window.addEventListener("touchstart", (e) => {
+        // console.log('start');
+        this.touchY = e.changedTouches[0].pageY;
+      });
+      window.addEventListener("touchmove", (e) => {
+        const swipeDistance = e.changedTouches[0].pageY - this.touchY;
+        if (
+          swipeDistance < -this.touchTreshold &&
+          this.keys.indexOf("swipe up ") === -1
+        )
+          this.keys.splice(this.keys.indexOf("swipe up"), 1, "swipe up");
+        else if (
+          swipeDistance > this.touchTreshold &&
+          this.keys.indexOf("swipe down ") === -1
+        )
+          this.keys.splice(this.keys.indexOf("swipe down"), 1, "swipe down");
 
-				if (gameOver) {
-					restartGame();
-				}
+        if (gameOver) {
+          restartGame();
+        }
 
-				console.log('moving');
-			});
+        console.log("moving");
+      });
 
-			window.addEventListener('touchend', (e) => {
-				console.log(this.keys);
-				console.log('end');
-				this.keys.splice(this.keys.indexOf('swipe up'), 1);
-				this.keys.splice(this.keys.indexOf('swipe down'), 1);
-			});
-		}
-	}
+      window.addEventListener("touchend", (e) => {
+        console.log(this.keys);
+        console.log("end");
+        this.keys.splice(this.keys.indexOf("swipe up"), 1);
+        this.keys.splice(this.keys.indexOf("swipe down"), 1);
+      });
+    }
+  }
 
-	class Player {
-		constructor(gameWidth, gameHeight, bulletController) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
-			this.width = 200;
-			this.height = 200;
-			this.x = 0;
-			this.y = this.gameHeight - this.height;
-			this.bulletController = bulletController;
-			this.img = new Image();
+  class Player {
+    constructor(gameWidth, gameHeight, bulletController) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
+      this.width = 200;
+      this.height = 200;
+      this.x = 0;
+      this.y = this.gameHeight - this.height;
+      this.bulletController = bulletController;
+      this.img = new Image();
 
-			this.frameX = 0;
-			//this.maxFrame = 8;
-			this.frameY = 0;
-			//this.fps = 20;
-			// this.frameTimer = 0;
-			// this.frameInterval = 1000/this.fps;
-			this.speed = 0;
-			this.vy = 0;
-			this.weight = 0.5;
-		}
-		restart() {
-			this.x = 100;
-			this.y = this.gameHeight - this.height;
-		}
+      this.frameX = 0;
+      //this.maxFrame = 8;
+      this.frameY = 0;
+      //this.fps = 20;
+      // this.frameTimer = 0;
+      // this.frameInterval = 1000/this.fps;
+      this.speed = 0;
+      this.vy = 0;
+      this.weight = 0.5;
+    }
+    restart() {
+      this.x = 100;
+      this.y = this.gameHeight - this.height;
+    }
 
-		setImage(image) {
-			this.img.src = image;
-		}
-		draw(context) {
-			/* context.strokeStyle = 'pink';
+    setImage(image) {
+      this.img.src = image;
+    }
+    draw(context) {
+      /* context.strokeStyle = 'pink';
 			context.strokeRect(this.x,this.y, this.width, this.height);
 			context.beginPath();
 			context.arc(this.x + this.width/2, this.y + this.height/2, this.width/2, 0, Math.PI * 2);
 			context.stroke(); */
-			//context.drawImage(this.image, 0 * this.width, 0 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+      //context.drawImage(this.image, 0 * this.width, 0 * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
 
-			//für frames animierte bewegung
-			context.drawImage(
-				this.img,
-				this.frameX * this.width,
-				this.frameY * this.height,
-				this.width,
-				this.height,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-			this.shoot();
-		}
-		update(input, coins) {
-			coins.forEach((coin) => {
-				const dx = coin.x + coin.width / 4 - (this.x + this.width / 4);
-				const dy = coin.y + coin.height / 4 - (this.y + this.height / 4);
-				const distance = Math.sqrt(dx * dx + dy * dy);
-				if (distance < coin.width / 4 + this.width / 4) {
-					console.log('schuss');
-					if (ammo <= 100) {
-						ammo++;
-						ammo++;
-					}
-					console.log('ammo: ' + ammo);
-					if (!Audiomute) {
-						itemsound.pause();
-						itemsound.currentTime = 0;
-						itemsound.play();
-					}
-					console.log('munition' + ammo);
-					const index = coins.indexOf(coin);
-					coins.splice(index, 1);
+      //für frames animierte bewegung
+      context.drawImage(
+        this.img,
+        this.frameX * this.width,
+        this.frameY * this.height,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+      this.shoot();
+    }
+    update(input, coins) {
+      coins.forEach((coin) => {
+        const dx = coin.x + coin.width / 4 - (this.x + this.width / 4);
+        const dy = coin.y + coin.height / 4 - (this.y + this.height / 4);
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < coin.width / 4 + this.width / 4) {
+          console.log("schuss");
+          if (ammo <= 100) {
+            ammo++;
+            ammo++;
+          }
+          console.log("ammo: " + ammo);
+          if (!Audiomute) {
+            itemsound.pause();
+            itemsound.currentTime = 0;
+            itemsound.play();
+          }
+          console.log("munition" + ammo);
+          const index = coins.indexOf(coin);
+          coins.splice(index, 1);
 
-					//enemy.drawImage = false;
-					//removeImage();
-				}
-			});
+          //enemy.drawImage = false;
+          //removeImage();
+        }
+      });
 
-			ghosts.forEach((ghost) => {
-				const dx = ghost.x + ghost.width / 8 - (this.x + this.width / 8);
-				const dy = ghost.y + ghost.height / 8 - (this.y + this.height / 8);
-				const distance = Math.sqrt(dx * dx + dy * dy);
-				if (distance < ghost.width / 8 + this.width / 8) {
-					playerHealth--;
-					if (!Audiomute) {
-						damagesound.play();
-					}
-					if (playerHealth == 0) {
-						if (!Audiomute) {
-							auersound.play();
-						}
-						gameOver = true;
-					}
-				}
-			});
+      ghosts.forEach((ghost) => {
+        const dx = ghost.x + ghost.width / 8 - (this.x + this.width / 8);
+        const dy = ghost.y + ghost.height / 8 - (this.y + this.height / 8);
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < ghost.width / 8 + this.width / 8) {
+          playerHealth--;
+          if (!Audiomute) {
+            damagesound.play();
+          }
+          if (playerHealth == 0) {
+            if (!Audiomute) {
+              auersound.play();
+            }
+            gameOver = true;
+          }
+        }
+      });
 
-			/*  if(this.frameTimer > this.frameInterval){
+      /*  if(this.frameTimer > this.frameInterval){
 				 if(this.frameX >= this.maxFrame)this.frameX = 0;
 				 else this.frameX++;
 				 this.frameTimer = 0;
@@ -324,22 +324,22 @@ window.addEventListener('load', function () {
 				 this.frameTimer += deltaTime;
 			 } */
 
-			if (
-				input.keys.indexOf('d') > -1 ||
-				input.keys.indexOf('ArrowRight') > -1
-			) {
-				this.speed = 3;
-			} else if (
-				input.keys.indexOf('a') > -1 ||
-				input.keys.indexOf('ArrowLeft') > -1
-			) {
-				this.speed = -3;
-				//&& this.onGround()
-			} else if (input.keys.indexOf('s') > -1) {
-				this.vy = this.vy + 1;
+      if (
+        input.keys.indexOf("d") > -1 ||
+        input.keys.indexOf("ArrowRight") > -1
+      ) {
+        this.speed = 3;
+      } else if (
+        input.keys.indexOf("a") > -1 ||
+        input.keys.indexOf("ArrowLeft") > -1
+      ) {
+        this.speed = -3;
+        //&& this.onGround()
+      } else if (input.keys.indexOf("s") > -1) {
+        this.vy = this.vy + 1;
 
-				// && score > 0
-			} /* else if (input.keys.indexOf('e') > - 1 || input.keys.indexOf('touchstart') > - 1) {
+        // && score > 0
+      } /* else if (input.keys.indexOf('e') > - 1 || input.keys.indexOf('touchstart') > - 1) {
                 this.shootPressed = true;
                 //score -= 1;
                 //score--;
@@ -351,80 +351,80 @@ window.addEventListener('load', function () {
 
 
             } */ else if (
-				input.keys.includes('e') ||
-				(input.keys.includes('e') && input.keys.includes(' ')) ||
-				(input.keys.indexOf('d') > -1 && input.keys.includes('e')) ||
-				(input.keys.indexOf('ArrowRight') > -1 && input.keys.includes('e'))
-			) {
-				this.shootPressed = true;
+        input.keys.includes("e") ||
+        (input.keys.includes("e") && input.keys.includes(" ")) ||
+        (input.keys.indexOf("d") > -1 && input.keys.includes("e")) ||
+        (input.keys.indexOf("ArrowRight") > -1 && input.keys.includes("e"))
+      ) {
+        this.shootPressed = true;
 
-				if (ammo < 0) {
-					ammo = 0;
-				}
-			} else {
-				this.speed = 0;
-				this.shootPressed = false;
+        if (ammo < 0) {
+          ammo = 0;
+        }
+      } else {
+        this.speed = 0;
+        this.shootPressed = false;
 
-				//this.vy = 0;
-			}
-			document.addEventListener(
-				'touchstart',
-				function (event) {
-					this.shootPressed = true;
-					// Handle touchstart event for shooting
-				}.bind(this)
-			);
+        //this.vy = 0;
+      }
+      document.addEventListener(
+        "touchstart",
+        function (event) {
+          this.shootPressed = true;
+          // Handle touchstart event for shooting
+        }.bind(this)
+      );
 
-			this.x += this.speed;
-			if (this.x < 0) this.x = 0;
-			//verschwindet wenn er an denn rechten rand kommt
-			else if (this.x > this.gameWidth - this.width)
-				this.x = this.gameWidth - this.width;
-			// spirngen
-			//this.y += this.vy;
-			if (!this.onGround()) {
-				this.vy += this.weight;
-				this.maxFrame = 5;
-			} else if (
-				input.keys.indexOf(' ') > -1 ||
-				(input.keys.indexOf('swipe up') > -1 && this.onGround())
-			) {
-				this.vy -= 20;
-			} else {
-				this.vy = 0;
-				this.maxFrame = 8;
-			}
+      this.x += this.speed;
+      if (this.x < 0) this.x = 0;
+      //verschwindet wenn er an denn rechten rand kommt
+      else if (this.x > this.gameWidth - this.width)
+        this.x = this.gameWidth - this.width;
+      // spirngen
+      //this.y += this.vy;
+      if (!this.onGround()) {
+        this.vy += this.weight;
+        this.maxFrame = 5;
+      } else if (
+        input.keys.indexOf(" ") > -1 ||
+        (input.keys.indexOf("swipe up") > -1 && this.onGround())
+      ) {
+        this.vy -= 20;
+      } else {
+        this.vy = 0;
+        this.maxFrame = 8;
+      }
 
-			// else if(this.onGround() && input.keys.indexOf('w') > -1){
-			//     this.vy -= 20;
-			if (this.y > this.gameHeight - this.height)
-				this.y = this.gameHeight - this.height;
-			//console.log('vy', this.vy);
-			this.y += this.vy;
-		}
-		onGround() {
-			return this.y >= this.gameHeight - this.height;
-			//console.log("du hurensohn");
-		}
-		shoot() {
-			if (this.shootPressed) {
-				const speed = 5;
-				const delay = 4;
-				const damage = 1;
-				const bulletX = this.x + this.width;
-				const bulletY = this.y + this.height / 2;
+      // else if(this.onGround() && input.keys.indexOf('w') > -1){
+      //     this.vy -= 20;
+      if (this.y > this.gameHeight - this.height)
+        this.y = this.gameHeight - this.height;
+      //console.log('vy', this.vy);
+      this.y += this.vy;
+    }
+    onGround() {
+      return this.y >= this.gameHeight - this.height;
+      //console.log("du hurensohn");
+    }
+    shoot() {
+      if (this.shootPressed) {
+        const speed = 5;
+        const delay = 4;
+        const damage = 1;
+        const bulletX = this.x + this.width;
+        const bulletY = this.y + this.height / 2;
 
-				this.bulletController.shoot(bulletX, bulletY, speed, damage, delay);
-			}
-			/*  if(this.score > 0 ){
+        this.bulletController.shoot(bulletX, bulletY, speed, damage, delay);
+      }
+      /*  if(this.score > 0 ){
 				 this.shootPressed = true;
 			 }
 			 
 			 else {
 				 console.log("You can't shoot because your score is zero or below.");
 			  */
-		}
-		/* collideWith(sprite){
+    }
+    /* collideWith(sprite){
 			return this.player.some(player =>{
 				if(player.collideWith(sprite)){
 					this.player.splice(this.player.indexOf(player),1);
@@ -434,112 +434,112 @@ window.addEventListener('load', function () {
 			});
 		}
 			*/
-	}
+  }
 
-	class Background {
-		constructor(gameWidth, gameHeight) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
+  class Background {
+    constructor(gameWidth, gameHeight) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
 
-			this.image = document.getElementById('backgroundImage');
+      this.image = document.getElementById("backgroundImage");
 
-			this.x = 0;
-			this.y = 0;
-			this.width = gameWidth;
-			this.height = gameHeight;
-			this.speed = 3;
-		}
-		draw(context) {
-			context.drawImage(this.image, this.x, this.y, this.width, this.height);
-			context.drawImage(
-				this.image,
-				this.x + this.width - this.speed,
-				this.y,
-				this.width,
-				this.height
-			);
-		}
-		update() {
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) this.x = 0;
-		}
-		restart() {
-			this.x = 0;
-		}
-	}
-	class Background2 {
-		constructor(gameWidth, gameHeight) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
+      this.x = 0;
+      this.y = 0;
+      this.width = gameWidth;
+      this.height = gameHeight;
+      this.speed = 3;
+    }
+    draw(context) {
+      context.drawImage(this.image, this.x, this.y, this.width, this.height);
+      context.drawImage(
+        this.image,
+        this.x + this.width - this.speed,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
+    update() {
+      this.x -= this.speed;
+      if (this.x < 0 - this.width) this.x = 0;
+    }
+    restart() {
+      this.x = 0;
+    }
+  }
+  class Background2 {
+    constructor(gameWidth, gameHeight) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
 
-			this.image = new Image();
+      this.image = new Image();
 
-			this.image.src = 'img/JEK2023_game_background_2nd-level_001.png';
+      this.image.src = "img/JEK2023_game_background_2nd-level_001.png";
 
-			this.x = 0;
-			this.y = 0;
-			this.width = gameWidth;
-			this.height = gameHeight;
-			this.speed = 3;
-		}
-		draw(context) {
-			context.drawImage(this.image, this.x, this.y, this.width, this.height);
-			context.drawImage(
-				this.image,
-				this.x + this.width - this.speed,
-				this.y,
-				this.width,
-				this.height
-			);
-		}
-		update() {
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) this.x = 0;
-		}
-		restart() {
-			this.x = 0;
-		}
-	}
-	class Coin {
-		constructor(gameWidth, gameHeight) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
-			this.width = 160;
-			this.height = 170;
-			this.image = document.getElementById('enemyImage');
-			this.x = this.gameWidth;
-			this.y = this.gameHeight - this.height - Math.random() * 467;
-			this.frameX = 0;
-			this.speed = 4;
-			this.markedForDeletion = false;
-		}
-		draw(context) {
-			/* context.strokeStyle = 'white';
+      this.x = 0;
+      this.y = 0;
+      this.width = gameWidth;
+      this.height = gameHeight;
+      this.speed = 3;
+    }
+    draw(context) {
+      context.drawImage(this.image, this.x, this.y, this.width, this.height);
+      context.drawImage(
+        this.image,
+        this.x + this.width - this.speed,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
+    update() {
+      this.x -= this.speed;
+      if (this.x < 0 - this.width) this.x = 0;
+    }
+    restart() {
+      this.x = 0;
+    }
+  }
+  class Coin {
+    constructor(gameWidth, gameHeight) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
+      this.width = 160;
+      this.height = 170;
+      this.image = document.getElementById("enemyImage");
+      this.x = this.gameWidth;
+      this.y = this.gameHeight - this.height - Math.random() * 467;
+      this.frameX = 0;
+      this.speed = 4;
+      this.markedForDeletion = false;
+    }
+    draw(context) {
+      /* context.strokeStyle = 'white';
 			context.strokeRect(this.x, this.y, this.width, this.height );
 			context.beginPath();
 			context.arc(this.x + this.width/2, this.y + this.height/2, this.width/2, 0, Math.PI * 2);
 			context.stroke(); */
-			context.drawImage(
-				this.image,
-				this.frameX * this.width,
-				0,
-				this.width,
-				this.height,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-		}
-		update() {
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) {
-				this.markedForDeletion = true;
-				// console.log('markedForDeletion ' + this.markedForDeletion);
-				//score++;
-			}
-		}
-		/* collideWith(sprite){
+      context.drawImage(
+        this.image,
+        this.frameX * this.width,
+        0,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
+    update() {
+      this.x -= this.speed;
+      if (this.x < 0 - this.width) {
+        this.markedForDeletion = true;
+        // console.log('markedForDeletion ' + this.markedForDeletion);
+        //score++;
+      }
+    }
+    /* collideWith(sprite){
 			if(this.x < sprite.x + sprite.width &&
 				this.x + this.width > sprite.x &&
 				this.y < sprite.y + sprite.height &&
@@ -548,71 +548,71 @@ window.addEventListener('load', function () {
 				}
 				return false;
 		}  */
-	}
+  }
 
-	class Geistertyp {
-		constructor(health, speed, image, spanhoehe) {
-			this.health = health;
-			this.speed = speed;
-			this.spanhoehe = spanhoehe;
-			this.image = image;
-		}
-	}
+  class Geistertyp {
+    constructor(health, speed, image, spanhoehe) {
+      this.health = health;
+      this.speed = speed;
+      this.spanhoehe = spanhoehe;
+      this.image = image;
+    }
+  }
 
-	class Ghost {
-		constructor(gameWidth, gameHeight, geistertyp) {
-			this.gameWidth = gameWidth;
-			this.gameHeight = gameHeight;
-			this.width = 160;
-			this.height = 150;
-			this.image = geistertyp.image;
-			this.x = this.gameWidth;
-			this.y = this.gameHeight - this.height - geistertyp.spanhoehe;
-			this.frameX = 0;
-			this.speed = geistertyp.speed;
-			this.health = geistertyp.health;
-			this.markedForDeletion = false;
-			this.initialY = this.y;
-		}
-		draw(context) {
-			context.drawImage(
-				this.image,
-				this.frameX * this.width,
-				0,
-				this.width,
-				this.height,
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			);
-			if (this.health > 1) {
-				ctx.strockStyle = 'white';
-			} else {
-				ctx.strockStyle = this.color;
-			}
-		}
-		update() {
-			this.initialY = this.initialY;
-			// var step = -1
-			this.x -= this.speed;
-			if (this.x < 0 - this.width) {
-				this.markedForDeletion = true;
-				// console.log('markedForDeletion2 ' + this.markedForDeletion);
-				//score++;
-			}
+  class Ghost {
+    constructor(gameWidth, gameHeight, geistertyp) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
+      this.width = 160;
+      this.height = 150;
+      this.image = geistertyp.image;
+      this.x = this.gameWidth;
+      this.y = this.gameHeight - this.height - geistertyp.spanhoehe;
+      this.frameX = 0;
+      this.speed = geistertyp.speed;
+      this.health = geistertyp.health;
+      this.markedForDeletion = false;
+      this.initialY = this.y;
+    }
+    draw(context) {
+      context.drawImage(
+        this.image,
+        this.frameX * this.width,
+        0,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+      if (this.health > 1) {
+        ctx.strockStyle = "white";
+      } else {
+        ctx.strockStyle = this.color;
+      }
+    }
+    update() {
+      this.initialY = this.initialY;
+      // var step = -1
+      this.x -= this.speed;
+      if (this.x < 0 - this.width) {
+        this.markedForDeletion = true;
+        // console.log('markedForDeletion2 ' + this.markedForDeletion);
+        //score++;
+      }
 
-			// console.log('y: ' + this.y);
+      // console.log('y: ' + this.y);
 
-			//self.y = -self.y;
-			this.y = this.initialY + Math.sin(this.x / 200) * 25;
-		}
+      //self.y = -self.y;
+      this.y = this.initialY + Math.sin(this.x / 200) * 25;
+    }
 
-		takeDamage(damage) {
-			this.health -= damage;
-		}
+    takeDamage(damage) {
+      this.health -= damage;
+    }
 
-		/* collideWith(sprite){
+    /* collideWith(sprite){
 		   if(
 			   this.x < sprite.x + sprite.width &&
 			   this.x + this.width > sprite.x &&
@@ -624,280 +624,283 @@ window.addEventListener('load', function () {
 		   }
 		   return false; 
 	   }  */
-	}
-	function drawbullets(ctx) {}
+  }
+  function drawbullets(ctx) {}
 
-	class Bullet {
-		color = ['yellow', 'orange', 'white'];
-		constructor(x, y, speed, damage) {
-			this.x = x;
-			this.y = y;
-			this.speed = speed;
-			this.damage = damage;
+  class Bullet {
+    color = ["yellow", "orange", "white"];
+    constructor(x, y, speed, damage) {
+      this.x = x;
+      this.y = y;
+      this.speed = speed;
+      this.damage = damage;
 
-			this.width = 25;
-			this.height = 10;
-			this.color = this.color[Math.floor(Math.random() * this.color.length)];
-		}
-		draw(ctx) {
-			ctx.fillStyle = this.color;
-			this.x += this.speed;
-			ctx.shadowColor = this.color;
-			ctx.shadowBlur = 10;
-			/* ctx.shadowOffsetX = 5;
+      this.width = 25;
+      this.height = 10;
+      this.color = this.color[Math.floor(Math.random() * this.color.length)];
+    }
+    draw(ctx) {
+      ctx.fillStyle = this.color;
+      this.x += this.speed;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 10;
+      /* ctx.shadowOffsetX = 5;
 			ctx.shadowOffsetY = 5; */
-			ctx.lineJoin = 'bevel';
-			ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.lineJoin = "bevel";
+      ctx.fillRect(this.x, this.y, this.width, this.height);
 
-			ctx.shadowColor = 'transparent';
-		}
-		collideWith(sprite) {
-			if (
-				this.x < sprite.x + sprite.width &&
-				this.x + this.width > sprite.x &&
-				this.y < sprite.y + sprite.height &&
-				this.y + this.height > sprite.y
-			) {
-				sprite.takeDamage(this.damage);
-				return true;
-			}
-			return false;
-		}
-	}
+      ctx.shadowColor = "transparent";
+    }
+    collideWith(sprite) {
+      if (
+        this.x < sprite.x + sprite.width &&
+        this.x + this.width > sprite.x &&
+        this.y < sprite.y + sprite.height &&
+        this.y + this.height > sprite.y
+      ) {
+        sprite.takeDamage(this.damage);
+        return true;
+      }
+      return false;
+    }
+  }
 
-	class BulletController {
-		bullets = [];
-		timerTillNextBullet = 0;
-		constructor(canvas) {
-			this.canvas = canvas;
-		}
+  class BulletController {
+    bullets = [];
+    timerTillNextBullet = 0;
+    constructor(canvas) {
+      this.canvas = canvas;
+    }
 
-		shoot(x, y, speed, damage, delay) {
-			if (this.timerTillNextBullet <= 0) {
-				if (ammo > 0) {
-					if (this.bullets.length < 3) {
-						this.bullets.push(new Bullet(x, y, speed, damage));
-						return;
-					}
-					ammo -= 1;
-				}
+    shoot(x, y, speed, damage, delay) {
+      if (this.timerTillNextBullet <= 0) {
+        if (ammo > 0) {
+          if (this.bullets.length < 3) {
+            this.bullets.push(new Bullet(x, y, speed, damage));
+            return;
+          }
+          ammo -= 1;
+        }
 
-				this.timerTillNextBullet = delay;
-			}
+        this.timerTillNextBullet = delay;
+      }
 
-			this.timerTillNextBullet--;
-		}
+      this.timerTillNextBullet--;
+    }
 
-		isBulletOffScreen(bullet) {
-			console.log(this.bullets.length);
-			return bullet.x >= canvas.width;
-		}
+    isBulletOffScreen(bullet) {
+      console.log(this.bullets.length);
+      return bullet.x >= canvas.width;
+    }
 
-		draw(ctx) {
-			// console.log(this.bullets.length);
-			this.bullets.forEach((bullet) => {
-				if (this.isBulletOffScreen(bullet)) {
-					const index = this.bullets.indexOf(bullet);
-					this.bullets.splice(index, 1);
-				}
-				bullet.draw(ctx);
-			});
-		}
+    draw(ctx) {
+      // console.log(this.bullets.length);
+      this.bullets.forEach((bullet) => {
+        if (this.isBulletOffScreen(bullet)) {
+          const index = this.bullets.indexOf(bullet);
+          this.bullets.splice(index, 1);
+        }
+        bullet.draw(ctx);
+      });
+    }
 
-		collideWith(sprite) {
-			return this.bullets.some((bullet) => {
-				if (bullet.collideWith(sprite)) {
-					this.bullets.splice(this.bullets.indexOf(bullet), 1);
-					return true;
-				}
-				return false;
-			});
-		}
+    collideWith(sprite) {
+      return this.bullets.some((bullet) => {
+        if (bullet.collideWith(sprite)) {
+          this.bullets.splice(this.bullets.indexOf(bullet), 1);
+          return true;
+        }
+        return false;
+      });
+    }
 
-		/* isBulletOffScreen(bullet) {
+    /* isBulletOffScreen(bullet) {
 			console.log(this.bullets.length);
 			return bullet.x >= canvas.width;
 		} */
-	}
+  }
 
-	function handleCoins(deltaTime) {
-		if (coinTimer > coinInterval + randomCoinInterval) {
-			coins.push(new Coin(canvas.width, canvas.height));
-			// console.log(enemies);
-			randomCoinInterval = Math.random() * 1000 + 500;
-			coinTimer = 0;
-		} else {
-			coinTimer += deltaTime;
-		}
+  function handleCoins(deltaTime) {
+    if (coinTimer > coinInterval + randomCoinInterval) {
+      coins.push(new Coin(canvas.width, canvas.height));
+      // console.log(enemies);
+      randomCoinInterval = Math.random() * 1000 + 500;
+      coinTimer = 0;
+    } else {
+      coinTimer += deltaTime;
+    }
 
-		coins.forEach((coin) => {
-			coin.draw(ctx);
-			coin.update();
-		});
-		coins = coins.filter((coin) => !coin.markedForDeletion);
-	}
+    coins.forEach((coin) => {
+      coin.draw(ctx);
+      coin.update();
+    });
+    coins = coins.filter((coin) => !coin.markedForDeletion);
+  }
 
-	const geistertyp = [
-		new Geistertyp(3, 4, this.document.getElementById('ghost1Image'), 40),
-		new Geistertyp(1, 3, this.document.getElementById('ghost2Image'), 45),
-		new Geistertyp(3, 4, this.document.getElementById('ghost3Image'), 50),
-		new Geistertyp(1, 10, this.document.getElementById('ghost4Image'), 60),
-		new Geistertyp(1, 6, this.document.getElementById('ghost5Image'), 43),
-		new Geistertyp(3, 4, this.document.getElementById('ghost6Image'), 51),
-		new Geistertyp(1, 1, this.document.getElementById('ghost7Image'), 75),
-		new Geistertyp(1, 2, this.document.getElementById('ghost8Image'), 55),
-	];
+  const geistertyp = [
+    new Geistertyp(3, 4, this.document.getElementById("ghost1Image"), 40),
+    new Geistertyp(1, 3, this.document.getElementById("ghost2Image"), 45),
+    new Geistertyp(3, 4, this.document.getElementById("ghost3Image"), 50),
+    new Geistertyp(1, 10, this.document.getElementById("ghost4Image"), 60),
+    new Geistertyp(1, 6, this.document.getElementById("ghost5Image"), 43),
+    new Geistertyp(3, 4, this.document.getElementById("ghost6Image"), 51),
+    new Geistertyp(1, 1, this.document.getElementById("ghost7Image"), 75),
+    new Geistertyp(1, 2, this.document.getElementById("ghost8Image"), 55),
+  ];
 
-	function handleGhosts(deltaTime) {
-		if (ghostTimer > ghostInterval + randomGhostInterval) {
-			ghosts.push(
-				new Ghost(
-					canvas.width,
-					canvas.height,
-					geistertyp[Math.floor(Math.random() * geistertyp.length)]
-				)
-			);
-			// console.log(ghosts);
-			randomGhostInterval = Math.random() * 1000 + 500;
-			ghostTimer = 0;
-		} else {
-			ghostTimer += deltaTime;
-		}
+  function handleGhosts(deltaTime) {
+    if (ghostTimer > ghostInterval + randomGhostInterval) {
+      ghosts.push(
+        new Ghost(
+          canvas.width,
+          canvas.height,
+          geistertyp[Math.floor(Math.random() * geistertyp.length)]
+        )
+      );
+      // console.log(ghosts);
+      randomGhostInterval = Math.random() * 1000 + 500;
+      ghostTimer = 0;
+    } else {
+      ghostTimer += deltaTime;
+    }
 
-		ghosts = ghosts.filter((ghost) => !ghost.markedForDeletion);
-	}
+    ghosts = ghosts.filter((ghost) => !ghost.markedForDeletion);
+  }
 
-	function drawFancyText(text, x, y, alignment) {
-		// ammo
-		ctx.font = '30px CustomFont';
-		ctx.textAlign = alignment;
-		ctx.fillStyle = 'white';
-		ctx.fillText(text, x, y);
-		ctx.font = '30px CustomFont3';
-		ctx.fillStyle = '#867ade';
-		ctx.fillText(text, x, y);
-		ctx.font = '30px CustomFont2';
-		ctx.fillStyle = '#ae51b6';
-		ctx.fillText(text, x, y);
-		ctx;
-	}
+  function drawFancyText(text, x, y, alignment) {
+    // ammo
+    ctx.font = "30px CustomFont";
+    ctx.textAlign = alignment;
+    ctx.fillStyle = "white";
+    ctx.fillText(text, x, y);
+    ctx.font = "30px CustomFont3";
+    ctx.fillStyle = "#867ade";
+    ctx.fillText(text, x, y);
+    ctx.font = "30px CustomFont2";
+    ctx.fillStyle = "#ae51b6";
+    ctx.fillText(text, x, y);
+    ctx;
+  }
 
-	function highscoregrafik() {}
+  function highscoregrafik() {}
 
-	function displayStatusText(context) {
-		// ammo
-		drawFancyText('AMMO: ', 70, 50, 'left');
+  function displayStatusText(context) {
+    // ammo
+    drawFancyText("AMMO: ", 70, 50, "left");
 
-		// health
-		drawFancyText('HEALTH: ', 70, 80, 'left');
+    // health
+    drawFancyText("HEALTH: ", 70, 80, "left");
 
-		// score
-		drawFancyText(`ENEMIES: ${score}`, 900, 50, 'right');
+    // score
+    drawFancyText(`ENEMIES: ${score}`, 900, 50, "right");
 
-		// time
-		let minutes = Math.floor(gametimerstart / 60) % 60;
-		let seconds = Math.floor(gametimerstart) % 60;
+    // time
+    let minutes = Math.floor(gametimerstart / 60) % 60;
+    let seconds = Math.floor(gametimerstart) % 60;
 
-		context.fillStyle = '40px CustomFont';
-		ctx.fillStyle = 'white';
-		//context.fillText('__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ', 1160,120);
+    context.fillStyle = "40px CustomFont";
+    ctx.fillStyle = "white";
+    //context.fillText('__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ', 1160,120);
 
-		if (seconds < 10) {
-			seconds = `0${seconds}`;
-		}
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
 
-		if (minutes < 10) {
-			minutes = `0${minutes}`;
-		}
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
 
-		drawFancyText(`TIME: ${minutes}:${seconds}`, 600, 50, 'right');
+    drawFancyText(`TIME: ${minutes}:${seconds}`, 600, 50, "right");
 
-		// health bar
-		context.lineJoin = 'bevel';
-		context.lineWidth = 3.5;
-		context.strokeStyle = 'white';
-		context.strokeRect(192, 60, 104, 21);
-		context.fillStyle = '#c18178';
-		context.lineJoin = 'bevel';
-		context.fillRect(192, 60, playerHealth, 20);
+    // health bar
+    context.lineJoin = "bevel";
+    context.lineWidth = 3.5;
+    context.strokeStyle = "white";
+    context.strokeRect(192, 60, 104, 21);
+    context.fillStyle = "#c18178";
+    context.lineJoin = "bevel";
+    context.fillRect(192, 60, playerHealth, 20);
 
-		/*  context.fillStyle = 'white';
+    /*  context.fillStyle = 'white';
 		context.clearRect(200, 48, 105, 25);   */
-		/* context.fillStyle = "white";
+    /* context.fillStyle = "white";
 		context.fillRect(200, 48, 105, 25); */
 
-		// ammo bar
-		context.lineJoin = 'bevel';
-		context.lineWidth = 3.5;
-		context.strokeStyle = 'white';
-		context.strokeRect(192, 30, 104, 21);
-		context.fillStyle = '#867ade';
-		context.lineJoin = 'bevel';
-		if (ammo >= 104) {
-			context.fillRect(192, 30, 104, 20);
-		} else {
-			context.fillRect(192, 30, ammo, 20);
-		}
-		if (score == 80) {
-			context.font = '30px CustomFont3';
-			context.fillStyle = '#ae51b6';
-			context.fillText('Level 2', 730, 170);
+    // ammo bar
+    context.lineJoin = "bevel";
+    context.lineWidth = 3.5;
+    context.strokeStyle = "white";
+    context.strokeRect(192, 30, 104, 21);
+    context.fillStyle = "#867ade";
+    context.lineJoin = "bevel";
+    if (ammo >= 104) {
+      context.fillRect(192, 30, 104, 20);
+    } else {
+      context.fillRect(192, 30, ammo, 20);
+    }
+    if (score == 80) {
+      context.font = "30px CustomFont3";
+      context.fillStyle = "#ae51b6";
+      context.fillText("Level 2", 730, 170);
 
-			console.log('Show text only for 10 seconds');
-		}
-		// Write the text on the canvas
+      console.log("Show text only for 10 seconds");
+    }
+    // Write the text on the canvas
 
-		window.addEventListener('blur', function () {
-			startsound.pause();
-			auersound.pause();
-			damagesound.pause();
-			geistertotsound.pause();
-			soundhintergrund.pause();
-			itemsound.pause();
-		});
+    window.addEventListener("blur", function () {
+      startsound.pause();
+      auersound.pause();
+      damagesound.pause();
+      geistertotsound.pause();
+      soundhintergrund.pause();
+      itemsound.pause();
+    });
 
-		// timer
+    // timer
 
-		if (
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-				navigator.userAgent
-			)
-		) {
-			document.querySelector('body').style.overscrollBehaviorY = 'contain';
-			window.scrollTo(0, 1);
-		}
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      document.querySelector("body").style.overscrollBehaviorY = "contain";
+      window.scrollTo(0, 1);
+    }
 
-		if (gameOver) {
-			const nameInputContainer = document.getElementById('inputContainer');
-			const submitButton = document.getElementById('nameSubmit');
-			nameInputContainer.style.display = 'flex';
-			weiterspielen.style.display = 'none';
-			spenden2.style.display = 'none';
-			storenbild.style.display = 'none';
+    if (gameOver) {
+      const nameInputContainer = document.getElementById("inputContainer");
+      const submitButton = document.getElementById("nameSubmit");
 
-			submitButton.addEventListener('click', () => {
-				let name = nameInput.value;
+      nameInputContainer.style.display = "flex";
+      weiterspielen.style.display = "none";
+      spenden2.style.display = "none";
+      storenbild.style.display = "none";
 
-				console.log(name, ammo);
+      submitButton.addEventListener("click", () => {
+        let name = nameInput.value;
 
-				// send name and score to database via POST request
+        console.log(name, ammo);
 
-				fetch(`highscore/index.php`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ name, score }),
-				});
-			});
+        // send name and score to database via POST request
 
-			let endscrem = document.getElementById('gameend');
+        fetch(`highscore/index.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, score }),
+        });
+        submitButton.style.filter = "brightness(80%)";
+        this.disabled = true;
+      });
 
-			endscrem.style.display = 'block';
-			var highscoreliste = document.getElementById('highscoreLinkButton');
-			var gameOverButton = document.getElementById('spenden');
-			gameOverButton.style.outline = 'transparent';
-			/* if (
+      let endscrem = document.getElementById("gameend");
+
+      endscrem.style.display = "block";
+      var highscoreliste = document.getElementById("highscoreLinkButton");
+      var gameOverButton = document.getElementById("spenden");
+      gameOverButton.style.outline = "transparent";
+      /* if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
         )
@@ -909,38 +912,38 @@ window.addEventListener('load', function () {
         gameOverButton.style.height = "300px";
       } */
 
-			gameOverButton.style.display = 'block';
-			highscoreliste.style.display = 'block';
+      gameOverButton.style.display = "block";
+      highscoreliste.style.display = "block";
 
-			soundhintergrund.pause();
-			//var restartbild = document.getElementById('restartbild');
-			//restartbild.style.display = 'block';
+      soundhintergrund.pause();
+      //var restartbild = document.getElementById('restartbild');
+      //restartbild.style.display = 'block';
 
-			restartButton.style.display = 'block';
+      restartButton.style.display = "block";
 
-			document.getElementById('restart').addEventListener(
-				'click',
-				function () {
-					restartGame();
-					nameInputContainer.style.display = 'none';
-					highscoreliste.style.display = 'none';
-					restartButton.style.display = 'none';
-					restartbild.style.display = 'none';
-					endscrem.style.display = 'none';
-					gameOverButton.style.display = 'none';
-				},
-				{ once: true }
-			);
+      document.getElementById("restart").addEventListener(
+        "click",
+        function () {
+          restartGame();
+          nameInputContainer.style.display = "none";
+          highscoreliste.style.display = "none";
+          restartButton.style.display = "none";
+          restartbild.style.display = "none";
+          endscrem.style.display = "none";
+          gameOverButton.style.display = "none";
+        },
+        { once: true }
+      );
 
-			/* context.textAlign = 'center';
+      /* context.textAlign = 'center';
 			context.fillStyle = 'white';
 			context.fillText('GAME OVER', canvas.width / 2, 200); */
-		}
-	}
+    }
+  }
 
-	// Save data to file
+  // Save data to file
 
-	/* soundbutton.style.position = 'absolute';
+  /* soundbutton.style.position = 'absolute';
 	soundbutton.style.top = '50%';
 	soundbutton.style.left = '50%';
 	soundbutton.style.transform = 'translate(-50%, -50%)';
@@ -950,89 +953,89 @@ window.addEventListener('load', function () {
 	soundbutton.style.display = 'block';
 	 */
 
-	document
-		.getElementById('soundbutton')
-		.addEventListener('keydown', function (event) {
-			event.preventDefault();
-		});
+  document
+    .getElementById("soundbutton")
+    .addEventListener("keydown", function (event) {
+      event.preventDefault();
+    });
 
-	soundButton.addEventListener('click', function () {
-		if (Audiomute) {
-			startsound.volume = 0.1;
-			auersound.volume = 0.5;
-			damagesound.volume = 0.5;
-			geistertotsound.volume = 0.5;
-			soundhintergrund.volume = 0.5;
-			itemsound.volume = 0.5;
-			soundButton.innerHTML = 'Sound: on';
-		} else {
-			startsound.volume = 0;
+  soundButton.addEventListener("click", function () {
+    if (Audiomute) {
+      startsound.volume = 0.1;
+      auersound.volume = 0.5;
+      damagesound.volume = 0.5;
+      geistertotsound.volume = 0.5;
+      soundhintergrund.volume = 0.5;
+      itemsound.volume = 0.5;
+      soundButton.innerHTML = "Sound: on";
+    } else {
+      startsound.volume = 0;
 
-			auersound.volume = 0;
-			damagesound.volume = 0;
-			geistertotsound.volume = 0;
-			soundhintergrund.volume = 0;
-			itemsound.volume = 0;
-			soundButton.innerHTML = 'Sound: off';
-		}
-		Audiomute = !Audiomute;
-	});
+      auersound.volume = 0;
+      damagesound.volume = 0;
+      geistertotsound.volume = 0;
+      soundhintergrund.volume = 0;
+      itemsound.volume = 0;
+      soundButton.innerHTML = "Sound: off";
+    }
+    Audiomute = !Audiomute;
+  });
 
-	function restartGame() {
-		document.getElementById('soundbutton').disabled = false;
-		clearInterval(timerInterval);
-		timerInterval = setInterval(updateTimer, 1000);
+  function restartGame() {
+    document.getElementById("soundbutton").disabled = false;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(updateTimer, 1000);
 
-		player.restart();
-		background.restart();
-		coins = [];
-		ghosts = [];
-		Audiomute = false;
-		startsound.play();
-		soundhintergrund.play();
-		//document.getElementById('startsound').volume=50;
-		ghostInterval = 2780;
-		gametimerstart = 0;
-		ammo = 0;
-		playerHealth = 100;
-		score = 0;
-		gameOver = false;
-		animate(0);
-	}
-	function updateTimer(context) {
-		console.log('tick');
-		console.log('interval ' + ghostInterval);
-		gametimerstart++;
-		gametimerstart = gametimerstart + 1;
+    player.restart();
+    background.restart();
+    coins = [];
+    ghosts = [];
+    Audiomute = false;
+    startsound.play();
+    soundhintergrund.play();
+    //document.getElementById('startsound').volume=50;
+    ghostInterval = 2780;
+    gametimerstart = 0;
+    ammo = 0;
+    playerHealth = 100;
+    score = 0;
+    gameOver = false;
+    animate(0);
+  }
+  function updateTimer(context) {
+    console.log("tick");
+    console.log("interval " + ghostInterval);
+    gametimerstart++;
+    gametimerstart = gametimerstart + 1;
 
-		if (score >= 5) {
-			ghostInterval = 1000;
-			if (score >= 15) {
-				console.log('hiiii');
-				ghostInterval = 100;
-				if (score >= 20) {
-					ghostInterval -= 200;
-					/* if (geistertot >= Math.random() * 18 + 78 ) {
+    if (score >= 5) {
+      ghostInterval = 1000;
+      if (score >= 15) {
+        console.log("hiiii");
+        ghostInterval = 100;
+        if (score >= 20) {
+          ghostInterval -= 200;
+          /* if (geistertot >= Math.random() * 18 + 78 ) {
 						console.log('yes');
 						ghostInterval -= 10000;
 						if (gameOver) {
 							ghostInterval = 0;
 						}
 					} */
-				}
-			}
-		}
+        }
+      }
+    }
 
-		//console.log("intervale: " + ghostInterval);
-	}
+    //console.log("intervale: " + ghostInterval);
+  }
 
-	const input = new InputHandler();
-	const bulletController = new BulletController(canvas);
-	const player = new Player(canvas.width, canvas.height, bulletController);
-	const background = new Background(canvas.width, canvas.height);
-	const backgroundlevel2 = new Background2(canvas.width, canvas.height);
-	//charakterauswahl
-	/* ingoButton.addEventListener(
+  const input = new InputHandler();
+  const bulletController = new BulletController(canvas);
+  const player = new Player(canvas.width, canvas.height, bulletController);
+  const background = new Background(canvas.width, canvas.height);
+  const backgroundlevel2 = new Background2(canvas.width, canvas.height);
+  //charakterauswahl
+  /* ingoButton.addEventListener(
     "click",
     function () {
       player.setImage("img/ingo.png");
@@ -1068,63 +1071,63 @@ window.addEventListener('load', function () {
     { once: true }
   ); */
 
-	let lastTime = 0;
-	let coinTimer = 0;
-	let coinInterval = 80;
-	let randomCoinInterval = Math.random() * 1000 + 500;
-	let ghostTimer = 0;
-	let ghostInterval = 2780;
-	let randomGhostInterval = Math.random() * 1080 + 470;
+  let lastTime = 0;
+  let coinTimer = 0;
+  let coinInterval = 80;
+  let randomCoinInterval = Math.random() * 1000 + 500;
+  let ghostTimer = 0;
+  let ghostInterval = 2780;
+  let randomGhostInterval = Math.random() * 1080 + 470;
 
-	// video.onended = function() {
-	//     button.style.display = 'block';
-	// };
-	highscoregrafik(ctx);
+  // video.onended = function() {
+  //     button.style.display = 'block';
+  // };
+  highscoregrafik(ctx);
 
-	function animate(timeStamp) {
-		const deltaTime = timeStamp - lastTime;
-		lastTime = timeStamp;
+  function animate(timeStamp) {
+    const deltaTime = timeStamp - lastTime;
+    lastTime = timeStamp;
 
-		gameplay = true;
-		player.setImage('img/ingo.png');
-		/* markusButton.style.display = "none";
+    gameplay = true;
+    player.setImage("img/ingo.png");
+    /* markusButton.style.display = "none";
     ingoButton.style.display = "none"; */
 
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		if (score >= 80) {
-			// background.style.display = 'none';
-			console.log('Level 2');
-			backgroundlevel2.draw(ctx);
-			backgroundlevel2.update(input);
-			coinInterval = 2900;
-			ghostInterval = 1;
-		} else {
-			background.draw(ctx);
-			background.update(input);
-		}
+    if (score >= 80) {
+      // background.style.display = 'none';
+      console.log("Level 2");
+      backgroundlevel2.draw(ctx);
+      backgroundlevel2.update(input);
+      coinInterval = 2900;
+      ghostInterval = 1;
+    } else {
+      background.draw(ctx);
+      background.update(input);
+    }
 
-		bulletController.draw(ctx);
-		player.draw(ctx);
-		player.update(input, coins);
-		soundButton.style.display = 'block';
-		ghosts.forEach((ghost) => {
-			if (bulletController.collideWith(ghost)) {
-				if (ghost.health <= 0) {
-					const index = ghosts.indexOf(ghost);
-					ghosts.splice(index, 1);
-					if (!Audiomute) {
-						geistertotsound.play();
-					}
-					score++;
-				}
-			} else {
-				ghost.draw(ctx);
-				ghost.update();
-			}
-		});
+    bulletController.draw(ctx);
+    player.draw(ctx);
+    player.update(input, coins);
+    soundButton.style.display = "block";
+    ghosts.forEach((ghost) => {
+      if (bulletController.collideWith(ghost)) {
+        if (ghost.health <= 0) {
+          const index = ghosts.indexOf(ghost);
+          ghosts.splice(index, 1);
+          if (!Audiomute) {
+            geistertotsound.play();
+          }
+          score++;
+        }
+      } else {
+        ghost.draw(ctx);
+        ghost.update();
+      }
+    });
 
-		/* enemies.forEach(enemy => {
+    /* enemies.forEach(enemy => {
 		   if(player.collideWith(enemy)){
 			const index = enemies.indexOf(enemy)
 			enemies.splice(index,1);
@@ -1135,114 +1138,114 @@ window.addEventListener('load', function () {
     
 		}); */
 
-		displayStatusText(ctx);
-		/* setInterval
+    displayStatusText(ctx);
+    /* setInterval
 				if (gameOver) {
 					endGame();
 				} */
-		setTimeout(function () {
-			handleGhosts(deltaTime);
-		}, 5000);
-		handleCoins(deltaTime);
-		if (!gameOver && !pauseGame) requestAnimationFrame(animate);
-	}
+    setTimeout(function () {
+      handleGhosts(deltaTime);
+    }, 5000);
+    handleCoins(deltaTime);
+    if (!gameOver && !pauseGame) requestAnimationFrame(animate);
+  }
 
-	// Apply the new size and position to the button
-	var starten = document.getElementById('startButton');
+  // Apply the new size and position to the button
+  var starten = document.getElementById("startButton");
 
-	document.getElementById('startButton').addEventListener('click', function () {
-		// to do charakterauswahl
+  document.getElementById("startButton").addEventListener("click", function () {
+    // to do charakterauswahl
 
-		// Insert game start logic here
+    // Insert game start logic here
 
-		if (
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-				navigator.userAgent
-			)
-		) {
-			background.draw(ctx);
-			background.update(input);
-			highScorestart.style.display = 'none';
-			steueranleitunghandy.style.display = 'block';
-		} else {
-			background.draw(ctx);
-			background.update(input);
-			highScorestart.style.display = 'none';
-			steueranleitung.style.display = 'block';
-		}
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      background.draw(ctx);
+      background.update(input);
 
-		function gamePause() {
-			pauseGame = true;
+      steueranleitunghandy.style.display = "block";
+    } else {
+      background.draw(ctx);
+      background.update(input);
 
-			//to do
+      steueranleitung.style.display = "block";
+    }
 
-			gameplay = false;
-			if (gameOver) {
-				weiterspielen.style.display = 'none';
-				spenden2.style.display = 'none';
-				storenbild.style.display = 'none';
-			} else {
-				weiterspielen.style.display = 'block';
-				spenden2.style.display = 'block';
-				storenbild.style.display = 'block';
-			}
+    function gamePause() {
+      pauseGame = true;
 
-			weiterspielen.addEventListener(
-				'click',
-				function () {
-					weiterspielen.style.display = 'none';
-					storenbild.style.display = 'none';
+      //to do
 
-					pauseGame = false;
-					animate(0);
-				},
-				{ once: true }
-			);
-		}
-		setTimeout(gamePause, 70_000);
-		setTimeout(gamePause, 1200_000);
-		setTimeout(gamePause, 200_000);
+      gameplay = false;
+      if (gameOver) {
+        weiterspielen.style.display = "none";
+        spenden2.style.display = "none";
+        storenbild.style.display = "none";
+      } else {
+        weiterspielen.style.display = "block";
+        spenden2.style.display = "block";
+        storenbild.style.display = "block";
+      }
 
-		document.addEventListener('keydown', function (event) {
-			if (event.code === 'Enter') {
-				steuerungbackground.style.display = 'none';
-				steueranleitung.style.display = 'none';
-				steueranleitunghandy.style.display = 'none';
-				//charakterwahl
-				/*  ingoButton.style.display = "block";
+      weiterspielen.addEventListener(
+        "click",
+        function () {
+          weiterspielen.style.display = "none";
+          storenbild.style.display = "none";
+
+          pauseGame = false;
+          animate(0);
+        },
+        { once: true }
+      );
+    }
+    setTimeout(gamePause, 70_000);
+    setTimeout(gamePause, 1200_000);
+    setTimeout(gamePause, 200_000);
+
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Enter") {
+        steuerungbackground.style.display = "none";
+        steueranleitung.style.display = "none";
+        steueranleitunghandy.style.display = "none";
+        //charakterwahl
+        /*  ingoButton.style.display = "block";
         markusButton.style.display = "block"; */
-				player.setImage('img/ingo.png');
-				if (gameplay == false) {
-					startsound.play();
-					soundhintergrund.play();
-					timerInterval = setInterval(updateTimer, 1000);
-					animate(0);
-				}
-			}
-		});
-		document.addEventListener(
-			'touchstart',
-			function (event) {
-				steueranleitung.style.display = 'none';
-				steueranleitunghandy.style.display = 'none';
-				player.setImage('img/ingo.png');
-				if (gameplay == false) {
-					startsound.play();
-					soundhintergrund.play();
-					timerInterval = setInterval(updateTimer, 1000);
-					animate(0);
-				}
-				//charakterwahl
-				/* ingoButton.style.display = "block";
+        player.setImage("img/ingo.png");
+        if (gameplay == false) {
+          startsound.play();
+          soundhintergrund.play();
+          timerInterval = setInterval(updateTimer, 1000);
+          animate(0);
+        }
+      }
+    });
+    document.addEventListener(
+      "touchstart",
+      function (event) {
+        steueranleitung.style.display = "none";
+        steueranleitunghandy.style.display = "none";
+        player.setImage("img/ingo.png");
+        if (gameplay == false) {
+          startsound.play();
+          soundhintergrund.play();
+          timerInterval = setInterval(updateTimer, 1000);
+          animate(0);
+        }
+        //charakterwahl
+        /* ingoButton.style.display = "block";
         markusButton.style.display = "block"; */
-			}.bind(this)
-		);
+      }.bind(this)
+    );
 
-		console.log('Game Started!');
-		this.disabled = true; // Disables the button after one click
-		this.style.display = 'none';
-		if (startscreenhintergrund) {
-			startscreenhintergrund.style.display = 'none'; // This will make the image disappear entirely
-		}
-	});
+    console.log("Game Started!");
+    this.disabled = true; // Disables the button after one click
+    this.style.display = "none";
+    if (startscreenhintergrund) {
+      startscreenhintergrund.style.display = "none"; // This will make the image disappear entirely
+    }
+  });
 });

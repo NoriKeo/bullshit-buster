@@ -1,23 +1,23 @@
 <?php
-header("Content-Security-Policy: script-src 'self'");
-
+ header("Content-Security-Policy: script-src 'self'");
+  
 $post = file_get_contents("php://input");
 $data = json_decode($post, true);
-if (!empty($post)) {
+if(!empty($post)){
 	if (ctype_alpha($data['name'])) {
 		echo ("The string consists only of letters.\n");
 	} else {
 		die("The string does not consist only of letters.\n");
 	}
-
+	
 	if (empty($data['name'])) {
 		die("Name cannot be empty.\n");
 	}
-
+	
 	if (strlen($data['name']) > 8) {
 		die("The name is too long.\n");
 	}
-
+	
 	if ($data['score'] < 0 || $data['score'] > 500) {
 		die("You can't score more than 500.\n");
 	}
@@ -25,6 +25,7 @@ if (!empty($post)) {
 	if (isset($data['name']) && isset($data['score'])) {
 		file_put_contents("scoreDatabase.txt", $post . "\n", FILE_APPEND);
 	}
+	
 }
 
 
@@ -58,88 +59,95 @@ usort($data_arr, function ($a, $b) {
  -->
 	<title>Highscores</title>
 	<style>
+		
 		@import url('https://fonts.cdnfonts.com/css/commodore-64-pixelized');
-
-		body {
-			background-color: black;
-			color: white;
-
-
+        body {
+            background-color: #483AAA;
+            color: white;
+			
+                                                
 			display: flex;
-			justify-content: center;
-			align-items: center;
-
-
-
-		}
-
-		th {
+            justify-content: center;
+            align-items: center;
+            
+			top: 60%;
+            
+        }
+		img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+	  width: 30%;
+    }
+		th{
 			font-size: 90px;
-
+			
 		}
-
-		th,
-		td {
-			font-family: 'Commodore 64 Pixelized', sans-serif;
-			border-style: dashed;
-			border: dashed soid #a0a0a0;
-
+		th, td {
+		font-family: 'Commodore 64 Pixelized', sans-serif;
+       
+       
+		
 		}
-
-		td {
+		td{
 			font-size: 50px;
-
+			
 		}
-
 		.table {
-			display: table;
+   			display: table;
+			width: 300px;
+			position: fixed;
+  			bottom: 0;
+  			width: 100%;
+			top: 40%;
+      		left: 50%;
+      		transform: translate(-50%, -50%);
+			border-collapse: collapse;
 		}
-
 		.table-row {
-			display: table-row;
+   			display: table-row;
+		}
+		.table-cell {
+   			display: table-cell;
 		}
 
-		.table-cell {
-			display: table-cell;
-		}
-	</style>
+		
+		
+    </style>
+
 </head>
 
 <body>
-	<link rel="stylesheet" href="path/to/font.css">
-	<div class="table">
-		<table style=“text-align: center“>
-
-
-
-			<div class="table-row">
-				<tr>
-					<div class="table-cell thead">
-						<th>Username</th>
-					</div>
-					<div class="table-cell thead">
-						<th>Score</th>
-					</div>
-				</tr>
-			</div>
-			<?php foreach ($data_arr as $value) {
-			?>
-				<tr>
-					<div class="table-cell">
-						<td><?php echo json_decode($value, true)["name"]; ?></td>
-					</div>
-					<div class="table-cell">
-						<td><?php echo json_decode($value, true)["score"]; ?></td>
-					</div>
-				</tr>
-			<?php
-			} ?>
+<img src="JEK_2023_kampagne_game_highscore_002.png" alt="HTML-Seminar">
+ <link rel="stylesheet" href="path/to/font.css"><div class="table">
+	<table style=“text-align: center“>
+	
+   
+   
+  <div class="table-row">
+		<tr>
+		<div class="table-cell thead"><th></th></div>
+		<div class="table-cell thead"><th></th></div>
+		</tr>
+		</div>
+		<?php foreach ($data_arr as $value) {
+		?>
 			<tr>
+			<div class="table-cell"><td><?php echo json_decode($value, true)["name"]; ?></td></div>
+			<div class="table-cell"><td><?php echo json_decode($value, true)["score"]; ?></td></div>
 			</tr>
-		</table>
+		<?php
+		} ?>
+		<tr>
+		</tr>
+	</table> 
 	</div>
-
-
+	<div class="header">
+	
+  </div>
+	
+	
 </body>
 
 </html>
