@@ -983,6 +983,7 @@ window.addEventListener("load", function () {
   });
 
   function restartGame() {
+    submitButton.disabled = false;
     document.getElementById("soundbutton").disabled = false;
     clearInterval(timerInterval);
     timerInterval = setInterval(updateTimer, 1000);
