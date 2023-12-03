@@ -891,7 +891,8 @@ window.addEventListener("load", function () {
           body: JSON.stringify({ name, score }),
         });
         submitButton.style.filter = "brightness(80%)";
-        this.disabled = true;
+
+        submitButton.disabled = true;
       });
 
       let endscrem = document.getElementById("gameend");

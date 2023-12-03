@@ -86,7 +86,7 @@ usort($data_arr, function ($a, $b) {
 		}
 		th, td {
 		font-family: 'Commodore 64 Pixelized', sans-serif;
-       
+		padding: 8px;
        
 		
 		}
@@ -95,11 +95,13 @@ usort($data_arr, function ($a, $b) {
 			
 		}
 		.table {
-   			display: table;
+			margin-top: 20px;
+			display: table;
 			width: 300px;
 			position: absolute;
   			bottom: 0;
   			width: 10%;
+			height: 200px;
 			top: 40%;
       		left: 50%;
       		transform: translate(-40%, -50%);
@@ -143,9 +145,6 @@ usort($data_arr, function ($a, $b) {
 		</tr>
 	</table> 
 	</div>
-	<div class="header">
-	
-  </div>
 	
 	
 </body>
