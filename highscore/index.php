@@ -129,15 +129,15 @@ usort($data_arr, function ($a, $b) {
    
   <div class="table-row">
 		<tr>
-		<div class="table-cell thead"><th></th></div>
-		<div class="table-cell thead"><th></th></div>
+		<th class="table-cell thead"></th></div>
+		<th class="table-cell thead"></th>
 		</tr>
 		</div>
 		<?php foreach ($data_arr as $value) {
 		?>
 			<tr>
-			<div class="table-cell"><td><?php echo json_decode($value, true)["name"]; ?></td></div>
-			<div class="table-cell"><td><?php echo json_decode($value, true)["score"]; ?></td></div>
+			<td class="table-cell"><?php echo json_decode($value, true)["name"]; ?></td>
+			<td class="table-cell"><?php echo json_decode($value, true)["score"]; ?></td>
 			</tr>
 		<?php
 		} ?>
