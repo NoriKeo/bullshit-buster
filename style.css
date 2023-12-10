@@ -245,6 +245,13 @@ body {
 	min-width: 0;
 	font-size: 1.5rem;
 }
+#nameInput:disabled{
+	background-color: transparent;
+	outline: none;
+	color: white;
+	border: none
+	;
+}
 
 #nameSubmit {
 	margin: 1rem;
@@ -272,21 +279,32 @@ body {
 	max-height: 100%;
 }
 
-#starthighscore {
+#scoretext{
+	display: none;
+	z-index: 10;
 	position: absolute;
+	font-size: 45px;
+	color: #ffffff;
 	font-family: 'CustomFont3';
-
-	top: 65%;
-	left: 75%;
-	z-index: 1;
-	color: rgb(255, 255, 255);
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #000000;
-	font-size: 2rem;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
 	max-width: 100%;
 	max-height: 100%;
+
 }
+#scoreeingetragen{
+	display: none;
+	z-index: 10;
+	position: absolute;
+	font-size: 20px;
+	color: #bdbdbd;
+	font-family: 'CustomFont3';
+	top: 55%;
+	left: 20%;
+	
+}
+
 
 @media (max-height: 800px) {
 	body {

@@ -870,17 +870,22 @@ window.addEventListener("load", function () {
     if (gameOver) {
       const nameInputContainer = document.getElementById("inputContainer");
       const submitButton = document.getElementById("nameSubmit");
-
+      const scoreanzeige = document.getElementById("scoretext");
+      const nameInput = document.getElementById("nameInput");
+      nameInput.value = "";
       nameInputContainer.style.display = "flex";
       weiterspielen.style.display = "none";
       spenden2.style.display = "none";
       storenbild.style.display = "none";
-
+      scoreanzeige.style.display = "block";
+      scoreanzeige.innerHTML += score;
       submitButton.addEventListener("click", () => {
         let name = nameInput.value;
 
         console.log(name, ammo);
-
+        nameInput.disabled = true;
+        nameInput.value = "";
+        nameInput.placeholder = "gespeichert";
         // send name and score to database via POST request
 
         fetch(`highscore/index.php`, {
