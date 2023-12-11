@@ -18,8 +18,8 @@ if (!empty($post)) {
 		die("The name is too long.\n");
 	}
 
-	if ($data['score'] < 0 || $data['score'] > 500) {
-		die("You can't score more than 500.\n");
+	if ($data['score'] < 0 || $data['score'] > 1000) {
+		die("You can't score more than 1000.\n");
 	}
 
 	if (isset($data['name']) && isset($data['score'])) {
