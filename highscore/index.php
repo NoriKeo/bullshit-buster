@@ -130,11 +130,11 @@ usort($data_arr, function ($a, $b) {
 			<?php foreach ($data_arr as $value) { ?>
 				<tr>
 					<td>
-						<?php echo json_decode($value, true)["name"]; ?>
+						<?php echo htmlspecialchars(json_decode($value, true)["name"]); ?>
 					</td>
 	</div>
 
-	<td><?php echo json_decode($value, true)["score"]; ?></td>
+	<td><?php echo htmlspecialchars(json_decode($value, true)["score"]); ?></td>
 	</div>
 	</tr>
 <?php
