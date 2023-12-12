@@ -873,6 +873,9 @@ window.addEventListener("load", function () {
       const scoreanzeige = document.getElementById("scoretext");
       const nameInput = document.getElementById("nameInput");
       nameInput.value = "";
+      nameInput.disabled = false;
+      submitButton.disabled = false;
+      nameInput.placeholder = "name";
       nameInputContainer.style.display = "flex";
       weiterspielen.style.display = "none";
       spenden2.style.display = "none";
@@ -927,14 +930,15 @@ window.addEventListener("load", function () {
 
       restartButton.style.display = "block";
 
-      document.getElementById("restart").addEventListener(
+      restartButton.addEventListener(
         "click",
         function () {
+          console.log("restart");
           restartGame();
           nameInputContainer.style.display = "none";
           highscoreliste.style.display = "none";
           restartButton.style.display = "none";
-          restartbild.style.display = "none";
+          scoretext.style.display = "none";
           endscrem.style.display = "none";
           gameOverButton.style.display = "none";
         },
@@ -988,7 +992,8 @@ window.addEventListener("load", function () {
   });
 
   function restartGame() {
-    submitButton.disabled = false;
+    //submitButton.disabled = false;
+    gameOver = false;
     document.getElementById("soundbutton").disabled = false;
     clearInterval(timerInterval);
     timerInterval = setInterval(updateTimer, 1000);
