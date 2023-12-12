@@ -60,15 +60,14 @@ usort($data_arr, function ($a, $b) {
 	<style>
 		@import url('https://fonts.cdnfonts.com/css/commodore-64-pixelized');
 
+		
 		body {
 			background-color: #483AAA;
 			color: white;
 		}
 
-
 		th {
 			font-size: 90px;
-
 		}
 
 		table {
@@ -79,23 +78,18 @@ usort($data_arr, function ($a, $b) {
 		td {
 			font-family: 'Commodore 64 Pixelized', sans-serif;
 			padding: 8px;
-			text-align: center;
-
-
-
-			border-style: ;
-
-
-
 		}
 
 		td {
 			font-size: 40px;
 			/* border without gap */
 			border-collapse: collapse;
-			width: 20rem;
+			width: 20%;
+		}
 
-
+		td:first-child {
+			padding-left: 5rem;
+			width: 37%;
 		}
 
 		.table {
@@ -103,14 +97,7 @@ usort($data_arr, function ($a, $b) {
 			justify-content: start;
 			align-items: center;
 			flex-direction: column;
-			/* border without gap */
-
-
-
-
-
 			margin-top: 20px;
-
 		}
 
 		.table>img {
@@ -118,6 +105,11 @@ usort($data_arr, function ($a, $b) {
 			height: auto;
 			margin-bottom: 20px;
 		}
+
+		.table>table {
+			width: 60rem;
+		}
+
 	</style>
 
 </head>
