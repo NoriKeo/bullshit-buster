@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
   const bild = document.getElementById("image");
 
   soundhintergrund.loop = true;
-  soundhintergrund.volume = 0.2;
+  soundhintergrund.volume = 0.9;
   var pauseGame = false;
   //canvas.width = window.innerWidth;
   // canvas.height = window.innerHeight;
@@ -1101,7 +1101,7 @@ window.addEventListener("load", function () {
     lastTime = timeStamp;
 
     gameplay = true;
-    player.setImage("img/ingo.png");
+    player.setImage("img/ingo2.png");
     /* markusButton.style.display = "none";
     ingoButton.style.display = "none"; */
 
