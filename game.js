@@ -879,6 +879,8 @@ window.addEventListener("load", function () {
       storenbild.style.display = "none";
       scoreanzeige.style.display = "block";
       scoreanzeige.innerHTML += score;
+      submitButton.disabled = true;
+      nameInput.disabled = true;
       submitButton.addEventListener("click", () => {
         let name = nameInput.value;
 
@@ -896,8 +898,6 @@ window.addEventListener("load", function () {
           body: JSON.stringify({ name, score }),
         });
         submitButton.style.filter = "brightness(80%)";
-
-        submitButton.disabled = true;
       });
 
       let endscrem = document.getElementById("gameend");
